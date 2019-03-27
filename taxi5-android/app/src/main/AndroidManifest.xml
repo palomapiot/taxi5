@@ -9,6 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <activity android:name=".ChangePasswordActivity"
+            android:label="@string/activity_label_change_password" />
+
+        <activity android:name=".EditProfileActivity"
+            android:label="@string/activity_label_edit_profile" />
+
+        <activity android:name=".ProfileActivity"
+            android:label="@string/activity_label_profile" />
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
