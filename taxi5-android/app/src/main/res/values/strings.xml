@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Taxi5</string>
+
+    <string name="title_activity_home">Taxi5</string>
+    <string name="title_activity_search">Buscar</string>
+
+    <string name="action_view_profile">Perfil</string>
+    <string name="action_view_history">Histórico</string>
+    <string name="action_log_out">Desconectarse</string>
+
+    <string name="search_button">Buscar</string>
+
+    <string name="til_origin">Origen</string>
+    <string name="til_detination">Destino</string>
+    <string name="request_a_taxi_button">Solicitar taxi</string>
+
 </resources>
