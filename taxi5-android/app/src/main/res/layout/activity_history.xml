@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ui.HistoryActivity">
+
+
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Tabla"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:stretchColumns="1">
+
+            <TableRow
+                android:id="@+id/Cabecera"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/ColumnaFecha"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5px"
+                    android:text="Fecha"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="26sp" />
+
+                <TextView
+                    android:id="@+id/ColumnaOrigen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="5px"
+                    android:text="Origen"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="26sp" />
+
+                <TextView
+                    android:id="@+id/ColumnaDestino"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5px"
+                    android:text="Destino"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="26sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/SeparadorCabecera"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/LineaCabecera"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2px"
+                    android:layout_span="6"
+                    android:background="#FFFFFF"></FrameLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/Fila1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Fecha1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="24-3-2019"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/Origen1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Marineda"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/Destino1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Maria Pita"
+                    android:textSize="20sp" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/Fila2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/Fecha2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="19-2-2019"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/Origen2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Puerto"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/Destino2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Riazor"
+                    android:textSize="20sp" />
+            </TableRow>
+
+
+        </TableLayout>
+
+
+</LinearLayout>

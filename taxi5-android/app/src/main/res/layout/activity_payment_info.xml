@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".ui.PaymentInfoActivity">
+
+    <TableLayout
+        android:id="@+id/Tabla"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:stretchColumns="1"
+        tools:layout_editor_absoluteY="699dp">
+
+        <TableRow
+            android:id="@+id/Cabecera"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ColumnaFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5px"
+                android:text="Fecha"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/ColumnaOrigen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5px"
+                android:text="Origen"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/ColumnaDestino"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5px"
+                android:text="Destino"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="26sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/SeparadorCabecera"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/LineaCabecera"
+                android:layout_width="fill_parent"
+                android:layout_height="2px"
+                android:layout_span="6"
+                android:background="#FFFFFF"></FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/Fila1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Fecha1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="24-3-2019"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/Origen1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Marineda"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/Destino1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Maria Pita"
+                android:textSize="20sp" />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <TableLayout
+        android:id="@+id/TablaPago"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:stretchColumns="1"
+        tools:layout_editor_absoluteY="699dp">
+
+        <TableRow
+            android:id="@+id/Cabecera2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/ColumnaPrecio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5px"
+                android:text="Precio"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="26sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/SeparadorCabecera2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/LineaCabecera2"
+                android:layout_width="fill_parent"
+                android:layout_height="2px"
+                android:layout_span="6"
+                android:background="#FFFFFF"></FrameLayout>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/FilaP1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/Pago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="5,50€"
+                android:textSize="50sp" />
+        </TableRow>
+
+
+    </TableLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.MainActivity">
+
+        <Button
+            android:id="@+id/btnPagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/btn_rounded"
+            android:onClick="onClickBtnPagar"
+            android:radius="20sp"
+            android:text="@string/pagar"
+            android:textColor="@android:color/white"
+            android:typeface="sans"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteX="32dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+</LinearLayout>

@@ -22,4 +22,8 @@
     <string name="prompt_lastname">Apellidos</string>
     <string name="prompt_samePassword">Repita la contraseña</string>
     <string name="register_form">Formulario de registro</string>
+
+    <!-- Strings related to informacion pago -->
+    <string name="pagar">Realizar Pago</string>
+
 </resources>
