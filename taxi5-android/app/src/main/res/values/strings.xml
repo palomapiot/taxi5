@@ -15,5 +15,6 @@
     <string name="change_password_new">Nueva contraseña</string>
     <string name="change_password_confirm_new">Confirmar nueva contraseña</string>
     <string name="change_password_update">Actualizar contraseña</string>
+    <string name="perfil_del_usuario">Perfil del usuario</string>
 
 </resources>
