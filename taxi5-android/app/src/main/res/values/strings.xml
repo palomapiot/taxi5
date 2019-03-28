@@ -22,9 +22,17 @@
     <string name="prompt_lastname">Apellidos</string>
     <string name="prompt_samePassword">Repita la contraseña</string>
     <string name="register_form">Formulario de registro</string>
-
-
-    <string name="location">5 km</string>
-    <string name="location_destino">10 min</string>
-
+    <string name="activity_label_profile">Mi perfil</string>
+    <string name="activity_label_change_password">Cambiar contraseña</string>
+    <string name="activity_label_edit_profile">Editar perfil</string>
+    <string name="default_name_surname">NOMBRE APELLIDOS</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="edit_profile_phone">Teléfono</string>
+    <string name="confirm_changes">Confirmar cambios</string>
+    <string name="change_password">Cambiar contraseña</string>
+    <string name="change_password_current">Contraseña actual</string>
+    <string name="change_password_new">Nueva contraseña</string>
+    <string name="change_password_confirm_new">Confirmar nueva contraseña</string>
+    <string name="change_password_update">Actualizar contraseña</string>
+    <string name="perfil_del_usuario">Perfil del usuario</string>
 </resources>
