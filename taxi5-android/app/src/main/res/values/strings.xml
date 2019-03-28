@@ -16,6 +16,21 @@
     <string name="error_field_required">Este campo es obligatorio</string>
     <string name="permission_rationale">"Los permisos de los contactos son necesarios para autocompletar el correo electrónico."
     </string>
+
+    <string name="title_activity_home">Taxi5</string>
+    <string name="title_activity_search">Buscar</string>
+
+    <string name="action_view_profile">Perfil</string>
+    <string name="action_view_history">Histórico</string>
+    <string name="action_log_out">Desconectarse</string>
+
+    <string name="search_button">Buscar</string>
+
+    <string name="til_origin">Origen</string>
+    <string name="til_detination">Destino</string>
+    <string name="request_a_taxi_button">Solicitar taxi</string>
+
+
     <string name="iniciar_sesion_google">Iniciar Sesión con Google</string>
     <string name="title_activity_register">Registrarse</string>
     <string name="prompt_name">Nombre</string>
