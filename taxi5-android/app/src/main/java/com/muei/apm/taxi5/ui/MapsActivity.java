@@ -21,7 +21,6 @@ import com.muei.apm.taxi5.SearchActivity;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-
     private static final String TAG = MapsActivity.class.getSimpleName();
     private static GoogleMap mMap;
 
@@ -61,7 +60,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
     }
 
-
     public void onDirectionsClick(View view) {
         Log.d(TAG, "Boton direceciones pulsado en Maps");
         Intent intent = new Intent(MapsActivity.this, SearchActivity.class);
@@ -79,7 +77,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         switch (item.getItemId()) {
             case R.id.action_view_profile:
-                Toast.makeText(this, "Ver perfil", Toast.LENGTH_SHORT).show();
+                Intent intentProfile = new Intent(MapsActivity.this, ProfileActivity.class);
+                startActivity(intentProfile);
                 return true;
 
             case R.id.action_view_history:
@@ -87,8 +86,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_log_out:
-                Intent intent = new Intent(MapsActivity.this, MainActivity.class);
-                startActivity(intent);
+                Intent intentLogout = new Intent(MapsActivity.this, MainActivity.class);
+                startActivity(intentLogout);
                 return true;
 
             default:
@@ -97,10 +96,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-
     public void onClickViewProfile(View view) {
         Toast.makeText(this, "Ver perfil", Toast.LENGTH_SHORT).show();
-
-
     }
+
 }
