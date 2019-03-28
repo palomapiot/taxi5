@@ -22,4 +22,9 @@
     <string name="prompt_lastname">Apellidos</string>
     <string name="prompt_samePassword">Repita la contraseña</string>
     <string name="register_form">Formulario de registro</string>
+
+
+    <string name="location">5 km</string>
+    <string name="location_destino">10 min</string>
+
 </resources>
