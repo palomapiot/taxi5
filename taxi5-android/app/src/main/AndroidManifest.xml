@@ -28,6 +28,19 @@
             </intent-filter>
         </activity>
 
+
+        <activity
+            android:name=".ui.ChangePasswordActivity"
+            android:label="@string/activity_label_change_password" />
+
+        <activity
+            android:name=".ui.EditProfileActivity"
+            android:label="@string/activity_label_edit_profile" />
+
+        <activity
+            android:name=".ui.ProfileActivity"
+            android:label="@string/activity_label_profile" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
