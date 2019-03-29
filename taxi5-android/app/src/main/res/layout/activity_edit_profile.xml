@@ -62,7 +62,8 @@
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:theme="@style/AppTheme">
 
                 <EditText
                     android:id="@+id/editText"
@@ -72,12 +73,14 @@
                     android:ems="10"
                     android:hint="@string/prompt_name"
                     android:inputType="textPersonName"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:theme="@style/AppTheme" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:theme="@style/AppTheme">
 
                 <EditText
                     android:id="@+id/editText1"
@@ -87,12 +90,14 @@
                     android:ems="10"
                     android:hint="@string/prompt_lastname"
                     android:inputType="textPersonName"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:theme="@style/AppTheme" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:theme="@style/AppTheme">
 
                 <EditText
                     android:id="@+id/editText2"
@@ -102,12 +107,14 @@
                     android:ems="10"
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:theme="@style/AppTheme" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:theme="@style/AppTheme">
 
                 <EditText
                     android:id="@+id/editText3"
@@ -117,7 +124,8 @@
                     android:ems="10"
                     android:hint="@string/edit_profile_phone"
                     android:inputType="phone"
-                    android:importantForAutofill="no" />
+                    android:importantForAutofill="no"
+                    android:theme="@style/AppTheme" />
 
             </android.support.design.widget.TextInputLayout>
 
