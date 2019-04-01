@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
-        Intent intent = new Intent(ProfileActivity.this, MapsActivity.class);
+        Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
         startActivityForResult(intent, 0);
         return true;
     }

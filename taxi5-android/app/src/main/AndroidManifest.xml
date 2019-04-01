@@ -51,7 +51,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.MapsActivity"
+            android:name=".ui.HomeActivity"
             android:label="Mapa"
             android:parentActivityName=".ui.MainActivity">
         </activity>
@@ -59,14 +59,14 @@
         <activity
             android:name=".ui.TrayectoActivity"
             android:label="Trayecto"
-            android:parentActivityName=".ui.MapsActivity">
+            android:parentActivityName=".ui.HomeActivity">
         </activity>
 
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".ui.SearchActivity"
             android:label="Trayecto"
-            android:parentActivityName=".ui.MapsActivity">
+            android:parentActivityName=".ui.HomeActivity">
         </activity>
 
         <meta-data

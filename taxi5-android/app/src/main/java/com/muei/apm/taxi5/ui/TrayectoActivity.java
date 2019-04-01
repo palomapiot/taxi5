@@ -69,7 +69,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
     public void onCancelButtonClick(View view) {
         Log.d(TAG, "Boton para cambio de actividad pulsado en Trayecto");
-        Intent intent = new Intent(TrayectoActivity.this, MapsActivity.class);
+        Intent intent = new Intent(TrayectoActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 
