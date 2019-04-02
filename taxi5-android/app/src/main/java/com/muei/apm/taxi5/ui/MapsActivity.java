@@ -82,7 +82,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_view_history:
-                Toast.makeText(this, "Ver histórico", Toast.LENGTH_SHORT).show();
+                Intent intentHistory = new Intent(MapsActivity.this, HistoryActivity.class);
+                startActivity(intentHistory);
                 return true;
 
             case R.id.action_log_out:

@@ -50,4 +50,9 @@
     <string name="change_password_confirm_new">Confirmar nueva contraseña</string>
     <string name="change_password_update">Actualizar contraseña</string>
     <string name="perfil_del_usuario">Perfil del usuario</string>
+
+
+
+    <string name="default_name_historico">HISTORICO DE VIAJES</string>
+    <string name="activity_label_historico">Historico</string>
 </resources>
