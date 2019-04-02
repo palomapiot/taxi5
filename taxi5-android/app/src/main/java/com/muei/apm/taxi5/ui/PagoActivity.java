@@ -37,6 +37,13 @@ public class PagoActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        Intent intent = new Intent(PagoActivity.this, TrayectoActivity.class);
+        startActivityForResult(intent, 0);
+        return true;
+    }
+
 }
 
 
