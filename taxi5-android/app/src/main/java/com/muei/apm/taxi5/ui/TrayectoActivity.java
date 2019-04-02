@@ -15,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.SearchActivity;
 
 import java.util.ArrayList;
 
@@ -60,11 +61,12 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
 
-
-
     public void onConfirmButtonClick(View view) {
-        Log.d(TAG, "Boton para cambio de actividad pulsado en Trayecto");
-        Toast.makeText(getApplicationContext(), "Boton de confirmar pulsado", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(TrayectoActivity.this, PagoActivity.class);
+        startActivity(intent);
+
+        //Log.d(TAG, "Boton para cambio de actividad pulsado en Trayecto");
+        //Toast.makeText(getApplicationContext(), "Boton de confirmar pulsado", Toast.LENGTH_SHORT).show();
     }
 
     public void onCancelButtonClick(View view) {

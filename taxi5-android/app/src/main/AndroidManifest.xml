@@ -47,7 +47,7 @@
             android:label="@string/activity_label_profile" />
 
         <activity
-            android:name=".ui.HistoryActivity"
+            android:name=".ui.PagoActivity"
             android:label="@string/activity_label_historico" />
 
         <meta-data

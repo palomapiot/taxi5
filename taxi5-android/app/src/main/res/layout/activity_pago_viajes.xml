@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HistoryActivity">
+    tools:context=".ui.PagoActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="28dp"
         android:layout_marginTop="20dp"
         android:text="@string/default_name_historico"
         android:textSize="24sp"
@@ -51,10 +51,10 @@
         app:srcCompat="@mipmap/ic_launcher_round" />
 
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <TableLayout
         android:id="@+id/Tabla"
         android:layout_width="375dp"
-        android:layout_height="422dp"
+        android:layout_height="199dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -66,7 +66,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="1.0">
 
         <TableRow
@@ -149,6 +149,28 @@
 
     </TableLayout>
 
+    <Button
+        android:id="@+id/btnEditProfile2"
+        style="?android:textAppearanceSmall"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_rounded"
+        android:onClick="onPayButtonClick"
+        android:text="@string/realizar_pago"
+        android:textColor="@android:color/white"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/Tabla"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.968" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -53,6 +53,7 @@
 
 
 
-    <string name="default_name_historico">HISTORICO DE VIAJES</string>
-    <string name="activity_label_historico">Historico</string>
+    <string name="default_name_historico">PAGO A REALIZAR</string>
+    <string name="activity_label_historico">Pago</string>
+    <string name="realizar_pago">Pagar</string>
 </resources>

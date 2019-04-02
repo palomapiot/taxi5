@@ -82,7 +82,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_view_history:
-                Intent intentHistory = new Intent(MapsActivity.this, HistoryActivity.class);
+                Intent intentHistory = new Intent(MapsActivity.this, PagoActivity.class);
                 startActivity(intentHistory);
                 return true;
 
