@@ -5,7 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MapsActivity">
+    tools:context=".ui.HomeActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
@@ -32,7 +32,7 @@
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        tools:context=".ui.MapsActivity" />
+        tools:context=".ui.HomeActivity" />
 
 
     <android.support.design.widget.FloatingActionButton

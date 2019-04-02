@@ -17,11 +17,10 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.muei.apm.taxi5.R;
-import com.muei.apm.taxi5.SearchActivity;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final String TAG = MapsActivity.class.getSimpleName();
+    private static final String TAG = HomeActivity.class.getSimpleName();
     private static GoogleMap mMap;
 
     @Override
@@ -34,7 +33,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_home);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -62,7 +61,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void onDirectionsClick(View view) {
         Log.d(TAG, "Boton direceciones pulsado en Maps");
-        Intent intent = new Intent(MapsActivity.this, SearchActivity.class);
+        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
         startActivity(intent);
     }
 
@@ -77,7 +76,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         switch (item.getItemId()) {
             case R.id.action_view_profile:
-                Intent intentProfile = new Intent(MapsActivity.this, ProfileActivity.class);
+                Intent intentProfile = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intentProfile);
                 return true;
 
@@ -86,7 +85,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_log_out:
-                Intent intentLogout = new Intent(MapsActivity.this, MainActivity.class);
+                Intent intentLogout = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intentLogout);
                 return true;
 
