@@ -14,25 +14,27 @@ import com.muei.apm.taxi5.R;
 
 public class PagoActivity extends AppCompatActivity {
 
-    private static final String TAG = PagoActivity.class.getSimpleName();
+    private static final String PAGO_ACTIVITY_TAG = PagoActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago_viajes);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
 
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
 
     public void onPayButtonClick(View view) {
-        Log.d(TAG, "Boton para cambio de actividad pulsado en Trayecto");
-        Toast.makeText(this, "Pago realizado", Toast.LENGTH_SHORT).show();
+        Log.d(PAGO_ACTIVITY_TAG, "Boton para cambio de actividad pulsado en Trayecto");
+        Toast.makeText(this, getString(R.string.paid), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(PagoActivity.this, MapsActivity.class);
         startActivity(intent);
     }

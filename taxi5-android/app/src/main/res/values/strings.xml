@@ -56,4 +56,8 @@
     <string name="default_name_historico">PAGO A REALIZAR</string>
     <string name="activity_label_historico">Pago</string>
     <string name="realizar_pago">Pagar</string>
+    <string name="paid">Pago realizado</string>
+    <string name="price">Precio</string>
+    <string name="origin">Origen</string>
+    <string name="destination">Destino</string>
 </resources>
