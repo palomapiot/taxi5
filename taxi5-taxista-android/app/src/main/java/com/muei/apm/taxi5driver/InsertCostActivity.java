@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class InsertCostActivity extends AppCompatActivity {
 
@@ -18,4 +19,9 @@ public class InsertCostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_cost);
 
     }
+    
+    public void onClickConfirmChanges(View view) {
+        Toast.makeText(this, "Enviando el coste...", Toast.LENGTH_SHORT).show();
+    }
+
 }
