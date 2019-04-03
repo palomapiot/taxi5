@@ -53,7 +53,7 @@
         android:layout_marginRight="8dp"
         android:background="@drawable/btn_rounded"
         android:drawableStart="@android:drawable/stat_sys_upload"
-        android:onClick="onClickConfirmChanges"
+        android:onClick="onClickSendCost"
         android:paddingLeft="30dp"
         android:paddingRight="0dp"
         android:text="@string/request_payment"

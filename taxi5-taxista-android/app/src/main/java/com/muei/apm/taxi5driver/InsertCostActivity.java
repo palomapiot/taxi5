@@ -19,9 +19,9 @@ public class InsertCostActivity extends AppCompatActivity {
         setContentView(R.layout.activity_insert_cost);
 
     }
-    
-    public void onClickConfirmChanges(View view) {
-        Toast.makeText(this, "Enviando el coste...", Toast.LENGTH_SHORT).show();
+
+    public void onClickSendCost(View view) {
+        Toast.makeText(this, "Enviando el coste al usuario...", Toast.LENGTH_SHORT).show();
     }
 
 }
