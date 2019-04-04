@@ -1,11 +1,10 @@
 <resources>
     <string name="app_name">Taxi5 Driver</string>
     <string name="taxi5">Taxi5\nDriver</string>
-    <string name="ivLanding">Logo Taxi5</string>
+    <string name="logo_taxi5">Logo Taxi5</string>
     <string name="iniciar_sesion">Iniciar Sesión</string>
     <string name="registrarse">Registrarse</string>
     <string name="title_activity_login">Iniciar Sesión</string>
-    <!-- Strings related to login -->
     <string name="prompt_email">Correo</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">Sign in or register</string>
@@ -17,6 +16,6 @@
     <string name="permission_rationale">"Los permisos de los contactos son necesarios para autocompletar el correo electrónico."</string>
     <string name="title_insert_cost">Insertar coste del viaje</string>
     <string name="request_payment">Solicitar pago</string>
-    <string name="send_price_user">Enviando el coste al usuario...</string>
+    <string name="send_price_user">Enviando el coste al usuario&#8230;</string>
     <string name="eur">Euros (€)</string>
 </resources>
