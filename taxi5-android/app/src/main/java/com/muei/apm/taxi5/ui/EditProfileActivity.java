@@ -29,7 +29,7 @@ public class EditProfileActivity extends AppCompatActivity {
     }
 
     public void onClickConfirmChanges(View view) {
-        Toast.makeText(this, getString(R.string.profile_updated), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.activity_edit_profile_profile_updated), Toast.LENGTH_SHORT).show();
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

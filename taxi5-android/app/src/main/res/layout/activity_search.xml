@@ -30,7 +30,7 @@
         android:layout_marginBottom="24dp"
         android:background="@drawable/btn_rounded"
         android:onClick="onClickRequestATaxi"
-        android:text="@string/request_a_taxi_button"
+        android:text="@string/activity_search_request_taxi"
         android:textColor="@android:color/white"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -54,7 +54,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/til_detination"
+            android:hint="@string/activity_search_destination"
             android:theme="@style/AppTheme" />
     </android.support.design.widget.TextInputLayout>
 
@@ -76,7 +76,7 @@
         <android.support.design.widget.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/til_origin"
+            android:hint="@string/activity_search_origin"
             android:theme="@style/AppTheme" />
     </android.support.design.widget.TextInputLayout>
 

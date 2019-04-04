@@ -19,7 +19,7 @@ public class PagoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pago_viajes);
+        setContentView(R.layout.activity_pago);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -34,7 +34,7 @@ public class PagoActivity extends AppCompatActivity {
 
     public void onClickBtnPay(View view) {
         Log.d(PAGO_ACTIVITY_TAG, "Boton para cambio de actividad pulsado en Trayecto");
-        Toast.makeText(this, getString(R.string.paid), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(PagoActivity.this, HomeActivity.class);
         startActivity(intent);
     }

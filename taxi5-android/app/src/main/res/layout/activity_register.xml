@@ -35,7 +35,7 @@
         android:id="@+id/tvRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/register_form"
+        android:text="@string/activity_register_form"
         android:textSize="30sp"
         android:typeface="serif"
         app:fontFamily="sans-serif-light"
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="70dp"
                 android:background="@drawable/btn_rounded"
-                android:text="@string/registrarse"
+                android:text="@string/activity_register_registrarse"
                 android:textColor="@android:color/white"
                 android:typeface="sans" />
 

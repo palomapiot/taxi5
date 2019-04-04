@@ -1,72 +1,110 @@
 <resources>
+    <!-- MAIN ACTIVITY -->
     <string name="app_name">Taxi5</string>
     <string name="taxi5">Taxi5</string>
-    <string name="ivLanding">Logo Taxi5</string>
-    <string name="iniciar_sesion">Iniciar Sesión</string>
-    <string name="registrarse">Registrarse</string>
-    <string name="title_activity_login">Iniciar Sesión</string>
-    <!-- Strings related to login -->
+    <string name="logo_taxi5">Logo Taxi5</string>
+
+    <!-- REGISTER ACTIVITY & LOGIN ACTIVITY -->
+    <string name="activity_register_label">Registrarse</string>
+    <string name="activity_register_registrarse">Registrarse</string>
+    <string name="activity_register_form">Formulario de registro</string>
+    <string name="activity_login_label">Iniciar Sesión</string>
+    <string name="activity_login_iniciar_sesion">Iniciar Sesión</string>
+    <string name="activity_login_iniciar_sesion_google">Iniciar Sesión con Google</string>
+    <string name="prompt_name">Nombre</string>
+    <string name="prompt_lastname">Apellidos</string>
     <string name="prompt_email">Correo</string>
     <string name="prompt_password">Contraseña</string>
+    <string name="prompt_samePassword">Repita la contraseña</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Iniciar Sesión</string>
     <string name="error_invalid_email">Este correo es invalido</string>
     <string name="error_invalid_password">Esta contraseña es demasiado corta</string>
     <string name="error_incorrect_password">Esta contraseña es incorrecta</string>
     <string name="error_field_required">Este campo es obligatorio</string>
-    <string name="permission_rationale">"Los permisos de los contactos son necesarios para autocompletar el correo electrónico."
-    </string>
+    <string name="permission_rationale">"Los permisos de los contactos son necesarios para autocompletar el correo electrónico."</string>
 
-    <string name="title_activity_home">Taxi5</string>
-    <string name="title_activity_search">Buscar</string>
+    <!-- HOME ACTIVITY -->
+    <string name="activity_home_label">Taxi5</string>
+    <string name="activity_home_search">Buscar</string>
+    <string name="activity_home_profile">Perfil</string>
+    <string name="activity_home_historical">Histórico</string>
+    <string name="activity_home_logout">Desconectarse</string>
 
-    <string name="action_view_profile">Perfil</string>
-    <string name="action_view_history">Histórico</string>
-    <string name="action_log_out">Desconectarse</string>
+    <!-- PROFILE ACTIVITY -->
+    <string name="activity_profile_label">Mi perfil</string>
+    <string name="activity_profile_edit_profile">Editar perfil</string>
+    <string name="activity_profile_default_name_surname">NOMBRE APELLIDOS</string>
+    <string name="activity_profile_change_password">Cambiar contraseña</string>
+    <string name="activity_profile_user_profile">Perfil del usuario</string>
 
-    <string name="origin_label">Origen</string>
-    <string name="destination_label">Destino</string>
+    <!-- EDIT PROFILE ACTIVITY -->
+    <string name="activity_edit_profile_label">Editar perfil</string>
+    <string name="activity_edit_profile_phone">Teléfono</string>
+    <string name="activity_edit_profile_confirm_changes">Confirmar cambios</string>
+    <string name="activity_edit_profile_profile_updated">Perfil actualizado!</string>
 
-    <string name="search_button">Buscar</string>
+    <!-- CHANGE PASSWORD ACTIVITY -->
+    <string name="activity_change_password_label">Histórico</string>
+    <string name="activity_change_password_current_password">Contraseña actual</string>
+    <string name="activity_change_password_new_password">Nueva contraseña</string>
+    <string name="activity_change_password_confirm_new_password">Confirmar nueva contraseña</string>
+    <string name="activity_change_password_update">Actualizar contraseña</string>
+    <string name="activity_change_password_password_updated">Contraseña actualizada!</string>
 
-    <string name="til_origin">Origen</string>
-    <string name="til_detination">Destino</string>
-    <string name="request_a_taxi_button">Solicitar taxi</string>
+    <!-- HISTORICAL ACTIVITY -->
+    <string name="activity_historical_label">Histórico</string>
+    <string name="activity_historical_date_travel">fecha del viaje</string>
+    <string name="activity_historical_origin">Origen</string>
+    <string name="activity_historical_destination">Destino</string>
+    <string name="activity_historical_origin_location">localizacion de origen</string>
+    <string name="activity_historical_destination_location">localizacion de destino</string>
 
-    <string name="iniciar_sesion_google">Iniciar Sesión con Google</string>
-    <string name="title_activity_register">Registrarse</string>
-    <string name="prompt_name">Nombre</string>
-    <string name="prompt_lastname">Apellidos</string>
-    <string name="prompt_samePassword">Repita la contraseña</string>
-    <string name="register_form">Formulario de registro</string>
-    <string name="activity_label_profile">Mi perfil</string>
-    <string name="activity_label_change_password">Cambiar contraseña</string>
-    <string name="activity_label_edit_profile">Editar perfil</string>
-    <string name="activity_label_search">Buscar</string>
-    <string name="activity_label_historical">Histórico</string>
-    <string name="default_name_surname">NOMBRE APELLIDOS</string>
-    <string name="edit_profile">Editar perfil</string>
-    <string name="edit_profile_phone">Teléfono</string>
-    <string name="confirm_changes">Confirmar cambios</string>
-    <string name="change_password">Cambiar contraseña</string>
-    <string name="change_password_current">Contraseña actual</string>
-    <string name="change_password_new">Nueva contraseña</string>
-    <string name="change_password_confirm_new">Confirmar nueva contraseña</string>
-    <string name="change_password_update">Actualizar contraseña</string>
-    <string name="perfil_del_usuario">Perfil del usuario</string>
+    <!-- SEARCH ACTIVITY -->
+    <string name="activity_search_label">Buscar</string>
+    <string name="activity_search_origin">Origen</string>
+    <string name="activity_search_destination">Destino</string>
+    <string name="activity_search_request_taxi">Solicitar taxi</string>
 
-    <string name="default_name_historico">PAGO A REALIZAR</string>
-    <string name="activity_label_historico">Pago</string>
-    <string name="realizar_pago">Pagar</string>
-    <string name="paid">Pago realizado</string>
-    <string name="price">Precio</string>
-    <string name="origin">Origen</string>
-    <string name="destination">Destino</string>
-    <string name="confirm_travel">Confirmar viaje</string>
-    <string name="cancel">Cancelar</string>
-    <string name="password_updated">Contraseña actualizada!</string>
-    <string name="profile_updated">Perfil actualizado!</string>
-    <string name="date_travel">fecha del viaje</string>
-    <string name="travel_location">localizacion de destino</string>
-    <string name="origin_location">localizacion de origen</string>
+    <!-- TRAYECTO ACTIVITY -->
+    <string name="activity_trayecto_label">Trayecto</string>
+    <string name="activity_trayecto_confirm_travel">Confirmar viaje</string>
+    <string name="activity_trayecto_cancel">Cancelar</string>
+
+    <!-- PAGO ACTIVITY -->
+    <string name="activity_pago_label">Pago</string>
+    <string name="activity_pago_pago_a_realizar">PAGO A REALIZAR</string>
+    <string name="activity_pago_pay">Pagar</string>
+    <string name="activity_pago_paid">Pago realizado</string>
+    <string name="activity_pago_price">Precio</string>
+    <string name="activity_pago_origen">Origen</string>
+    <string name="activity_pago_destination">Destino</string>
+
+
+    <!--<string name="origin_label">Origen</string>-->
+    <!--<string name="destination_label">Destino</string>-->
+
+    <!--<string name="search_button">Buscar</string>-->
+
+    <!--<string name="til_origin">Origen</string>-->
+    <!--<string name="til_detination">Destino</string>-->
+    <!--<string name="request_a_taxi_button">Solicitar taxi</string>-->
+
+    <!--<string name="activity_label_profile">Mi perfil</string>-->
+    <!--<string name="activity_label_change_password">Cambiar contraseña</string>-->
+    <!--<string name="activity_label_edit_profile">Editar perfil</string>-->
+    <!--<string name="activity_label_search">Buscar</string>-->
+    <!--<string name="activity_label_historical">Histórico</string>-->
+
+
+    <!--<string name="default_name_historico">PAGO A REALIZAR</string>-->
+    <!--<string name="activity_label_historico">Pago</string>-->
+    <!--<string name="realizar_pago">Pagar</string>-->
+    <!--<string name="price">Precio</string>-->
+    <!--<string name="origin">Origen</string>-->
+    <!--<string name="destination">Destino</string>-->
+
+    <!--<string name="date_travel">fecha del viaje</string>-->
+    <!--<string name="travel_location">localizacion de destino</string>-->
+    <!--<string name="origin_location">localizacion de origen</string>-->
 </resources>

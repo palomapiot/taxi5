@@ -10,8 +10,6 @@
     android:screenOrientation="portrait"
     tools:context=".ui.LoginActivity">
 
-
-
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
@@ -38,17 +36,17 @@
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="512dp">
+        android:layout_height="450dp">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:orientation="vertical"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:orientation="vertical">
+            android:paddingRight="@dimen/activity_horizontal_margin">
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -62,8 +60,8 @@
                     android:hint="@string/prompt_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:theme="@style/AppTheme"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:theme="@style/AppTheme" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -83,8 +81,8 @@
                     android:importantForAutofill="no"
                     android:inputType="textPassword"
                     android:maxLines="1"
-                    android:theme="@style/AppTheme"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:theme="@style/AppTheme" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -95,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/btn_rounded"
-                android:text="@string/iniciar_sesion"
+                android:text="@string/activity_login_iniciar_sesion"
                 android:textColor="@android:color/white"
                 android:typeface="sans" />
 

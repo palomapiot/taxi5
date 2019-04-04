@@ -20,8 +20,6 @@
         android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-
-
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -36,7 +34,6 @@
         map:layout_constraintTop_toTopOf="parent"
         tools:context="ui.TrayectoActivity" />
 
-
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
@@ -49,7 +46,7 @@
         android:onClick="onConfirmButtonClick"
         app:backgroundTint="@color/colorPrimary"
         android:background="@drawable/btn_rounded"
-        android:text="@string/confirm_travel"
+        android:text="@string/activity_trayecto_confirm_travel"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +64,7 @@
         android:onClick="onCancelButtonClick"
         app:backgroundTint="@color/colorPrimary"
         android:background="@drawable/btn_rounded"
-        android:text="@string/cancel"
+        android:text="@string/activity_trayecto_cancel"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

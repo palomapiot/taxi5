@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="28dp"
         android:layout_marginTop="20dp"
-        android:text="@string/default_name_historico"
+        android:text="@string/activity_pago_pago_a_realizar"
         android:textSize="24sp"
         android:typeface="sans"
         app:layout_constraintEnd_toEndOf="@+id/ivUser"
@@ -41,7 +41,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:contentDescription="@string/perfil_del_usuario"
+        android:contentDescription="@string/activity_profile_user_profile"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -79,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/price"
+                android:text="@string/activity_pago_price"
                 android:textColor="@color/colorPrimary"
                 android:textSize="26sp" />
 
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:padding="5dp"
-                android:text="@string/origin"
+                android:text="@string/activity_pago_origen"
                 android:textColor="@color/colorPrimary"
                 android:textSize="26sp" />
 
@@ -98,12 +98,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
-                android:text="@string/destination"
+                android:text="@string/activity_pago_destination"
                 android:textColor="@color/colorPrimary"
                 android:textSize="26sp" />
 
         </TableRow>
-
 
 
         <TableRow
@@ -151,7 +150,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/btn_rounded"
         android:onClick="onClickBtnPay"
-        android:text="@string/realizar_pago"
+        android:text="@string/activity_pago_pay"
         android:textColor="@android:color/white"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="@+id/table"
@@ -160,6 +159,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
         app:layout_constraintVertical_bias="0.968" />
-
 
 </android.support.constraint.ConstraintLayout>
