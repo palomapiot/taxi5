@@ -35,7 +35,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         configureMaps();
@@ -81,7 +81,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_view_history:
-                Intent intentHistory = new Intent(MapsActivity.this, PagoActivity.class);
+                Intent intentHistory = new Intent(HomeActivity.this, PagoActivity.class);
                 startActivity(intentHistory);
                 return true;
 

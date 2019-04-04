@@ -60,4 +60,6 @@
     <string name="price">Precio</string>
     <string name="origin">Origen</string>
     <string name="destination">Destino</string>
+    <string name="confirm_travel">Confirmar viaje</string>
+    <string name="cancel">Cancelar</string>
 </resources>
