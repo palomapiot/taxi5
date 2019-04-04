@@ -81,7 +81,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_view_history:
-                Toast.makeText(this, "Ver histórico", Toast.LENGTH_SHORT).show();
+                Intent intentHistorical = new Intent(HomeActivity.this, HistoricalActivity.class);
+                startActivity(intentHistorical);
                 return true;
 
             case R.id.action_log_out:
@@ -93,10 +94,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-    public void onClickViewProfile(View view) {
-        Toast.makeText(this, "Ver perfil", Toast.LENGTH_SHORT).show();
     }
 
 }

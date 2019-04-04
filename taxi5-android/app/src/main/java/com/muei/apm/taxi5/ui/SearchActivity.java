@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.muei.apm.taxi5.R;
-import com.muei.apm.taxi5.ui.TrayectoActivity;
 
 public class SearchActivity extends AppCompatActivity {
 

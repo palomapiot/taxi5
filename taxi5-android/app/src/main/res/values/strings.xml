@@ -24,12 +24,14 @@
     <string name="action_view_history">Histórico</string>
     <string name="action_log_out">Desconectarse</string>
 
+    <string name="origin_label">Origen</string>
+    <string name="destination_label">Destino</string>
+
     <string name="search_button">Buscar</string>
 
     <string name="til_origin">Origen</string>
     <string name="til_detination">Destino</string>
     <string name="request_a_taxi_button">Solicitar taxi</string>
-
 
     <string name="iniciar_sesion_google">Iniciar Sesión con Google</string>
     <string name="title_activity_register">Registrarse</string>
@@ -40,6 +42,8 @@
     <string name="activity_label_profile">Mi perfil</string>
     <string name="activity_label_change_password">Cambiar contraseña</string>
     <string name="activity_label_edit_profile">Editar perfil</string>
+    <string name="activity_label_search">Buscar</string>
+    <string name="activity_label_historical">Histórico</string>
     <string name="default_name_surname">NOMBRE APELLIDOS</string>
     <string name="edit_profile">Editar perfil</string>
     <string name="edit_profile_phone">Teléfono</string>
