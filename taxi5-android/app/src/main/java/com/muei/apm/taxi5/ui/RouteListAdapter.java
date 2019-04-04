@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 public class RouteListAdapter extends BaseAdapter {
 
-    protected Activity activity;
-    protected ArrayList<Route> items;
+    private Activity activity;
+    private ArrayList<Route> items;
 
-    public RouteListAdapter (Activity activity, ArrayList<Route> items) {
+    public RouteListAdapter(Activity activity, ArrayList<Route> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -54,13 +54,13 @@ public class RouteListAdapter extends BaseAdapter {
 
         Route dir = items.get(position);
 
-        TextView date = (TextView) v.findViewById(R.id.route_date);
+        TextView date = v.findViewById(R.id.route_date);
         date.setText(dir.getDate());
 
-        TextView origin = (TextView) v.findViewById(R.id.origin_location);
+        TextView origin = v.findViewById(R.id.origin_location);
         origin.setText(dir.getOrigin());
 
-        TextView destination = (TextView) v.findViewById(R.id.destination_location);
+        TextView destination = v.findViewById(R.id.destination_location);
         destination.setText(dir.getDestination());
 
         return v;

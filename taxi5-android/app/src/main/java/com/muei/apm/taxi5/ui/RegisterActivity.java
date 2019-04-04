@@ -71,17 +71,17 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         // Set up the login form.
-        mNameView = (AutoCompleteTextView) findViewById(R.id.name);
-        mLastNameView = (AutoCompleteTextView) findViewById(R.id.lastname);
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mNameView = findViewById(R.id.name);
+        mLastNameView = findViewById(R.id.lastname);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordRepeatView = (EditText) findViewById(R.id.passwordVerified);
+        mPasswordView = findViewById(R.id.password);
+        mPasswordRepeatView = findViewById(R.id.passwordVerified);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -18,16 +18,18 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
 
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     public void onClickConfirmChanges(View view) {
-        Toast.makeText(this, "Perfil actualizado!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.profile_updated), Toast.LENGTH_SHORT).show();
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -35,5 +37,4 @@ public class EditProfileActivity extends AppCompatActivity {
         startActivityForResult(intent, 0);
         return true;
     }
-
 }

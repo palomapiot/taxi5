@@ -32,7 +32,7 @@ public class PagoActivity extends AppCompatActivity {
     }
 
 
-    public void onPayButtonClick(View view) {
+    public void onClickBtnPay(View view) {
         Log.d(PAGO_ACTIVITY_TAG, "Boton para cambio de actividad pulsado en Trayecto");
         Toast.makeText(this, getString(R.string.paid), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(PagoActivity.this, HomeActivity.class);

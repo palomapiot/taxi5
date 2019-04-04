@@ -64,4 +64,9 @@
     <string name="destination">Destino</string>
     <string name="confirm_travel">Confirmar viaje</string>
     <string name="cancel">Cancelar</string>
+    <string name="password_updated">Contraseña actualizada!</string>
+    <string name="profile_updated">Perfil actualizado!</string>
+    <string name="date_travel">fecha del viaje</string>
+    <string name="travel_location">localizacion de destino</string>
+    <string name="origin_location">localizacion de origen</string>
 </resources>

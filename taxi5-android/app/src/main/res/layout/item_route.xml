@@ -14,7 +14,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="8dp"
-        android:text="fecha del viaje" />
+        android:text="@string/date_travel" />
 
     <TextView
         android:id="@+id/origin_label"
@@ -29,7 +29,7 @@
         android:text="@string/origin_label"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/destination_location"
@@ -41,7 +41,7 @@
         android:layout_marginStart="97dp"
         android:layout_marginLeft="97dp"
         android:layout_marginTop="8dp"
-        android:text="localizacion de destino" />
+        android:text="@string/travel_location" />
 
     <TextView
         android:id="@+id/destination_label"
@@ -56,7 +56,7 @@
         android:text="@string/destination_label"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/colorPrimary"
-        android:textSize="18dp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/origin_location"
@@ -68,6 +68,6 @@
         android:layout_marginStart="97dp"
         android:layout_marginLeft="97dp"
         android:layout_marginTop="38dp"
-        android:text="localizacion de origen" />
+        android:text="@string/origin_location" />
 
 </RelativeLayout>

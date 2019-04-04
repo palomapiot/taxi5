@@ -6,11 +6,11 @@ public class Route {
     private String origin;
     private String destination;
 
-    public Route () {
+    public Route() {
         super();
     }
 
-    public Route (String date, String origin, String destination) {
+    public Route(String date, String origin, String destination) {
         super();
         this.date = date;
         this.origin = origin;

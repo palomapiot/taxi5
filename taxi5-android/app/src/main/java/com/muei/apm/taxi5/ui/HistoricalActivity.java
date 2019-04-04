@@ -1,12 +1,11 @@
 package com.muei.apm.taxi5.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.muei.apm.taxi5.R;
@@ -20,16 +19,18 @@ public class HistoricalActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historical);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
 
-        ListView lv = (ListView) findViewById(R.id.historical_listview);
+        ListView lv = findViewById(R.id.lvHistorical);
 
-        ArrayList<Route> routes = new ArrayList<Route>();
+        ArrayList<Route> routes = new ArrayList<>();
 
         // Create the Route objects
         Route route1 = new Route("Viaje realizado el 01/01/2018 a las 12:00", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
