@@ -1,17 +1,12 @@
 package com.muei.apm.taxi5driver;
 
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.Toast;
 
 public class InsertCostActivity extends AppCompatActivity {
 
-    private Button btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +16,7 @@ public class InsertCostActivity extends AppCompatActivity {
     }
 
     public void onClickSendCost(View view) {
-        Toast.makeText(this, "Enviando el coste al usuario...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.send_price_user), Toast.LENGTH_SHORT).show();
     }
 
 }

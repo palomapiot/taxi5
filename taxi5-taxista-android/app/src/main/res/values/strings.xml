@@ -17,4 +17,6 @@
     <string name="permission_rationale">"Los permisos de los contactos son necesarios para autocompletar el correo electrónico."</string>
     <string name="title_insert_cost">Insertar coste del viaje</string>
     <string name="request_payment">Solicitar pago</string>
+    <string name="send_price_user">Enviando el coste al usuario...</string>
+    <string name="eur">Euros (€)</string>
 </resources>

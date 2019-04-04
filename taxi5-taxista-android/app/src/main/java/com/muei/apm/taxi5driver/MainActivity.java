@@ -25,10 +25,4 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
     }
-
-    public void onClickBtnRegister(View view) {
-        /*btnRegister = (Button) findViewById(R.id.btnRegister);
-        Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-        startActivity(intent);*/
-    }
 }
