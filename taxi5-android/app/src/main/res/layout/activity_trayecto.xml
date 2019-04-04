@@ -5,6 +5,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:screenOrientation="portrait"
     tools:context="ui.TrayectoActivity">
 
     <android.support.v7.widget.Toolbar
@@ -12,11 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:elevation="4dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 
@@ -48,7 +49,7 @@
         android:onClick="onConfirmButtonClick"
         app:backgroundTint="@color/colorPrimary"
         android:background="@drawable/btn_rounded"
-        android:text="Confirmar viaje"
+        android:text="@string/confirm_travel"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +67,7 @@
         android:onClick="onCancelButtonClick"
         app:backgroundTint="@color/colorPrimary"
         android:background="@drawable/btn_rounded"
-        android:text="Cancelar"
+        android:text="@string/cancel"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

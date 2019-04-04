@@ -39,6 +39,10 @@
             android:name=".ui.ProfileActivity"
             android:label="@string/activity_label_profile" />
 
+        <activity
+            android:name=".ui.PagoActivity"
+            android:label="@string/activity_label_historico" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />

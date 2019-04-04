@@ -54,4 +54,14 @@
     <string name="change_password_confirm_new">Confirmar nueva contraseña</string>
     <string name="change_password_update">Actualizar contraseña</string>
     <string name="perfil_del_usuario">Perfil del usuario</string>
+
+    <string name="default_name_historico">PAGO A REALIZAR</string>
+    <string name="activity_label_historico">Pago</string>
+    <string name="realizar_pago">Pagar</string>
+    <string name="paid">Pago realizado</string>
+    <string name="price">Precio</string>
+    <string name="origin">Origen</string>
+    <string name="destination">Destino</string>
+    <string name="confirm_travel">Confirmar viaje</string>
+    <string name="cancel">Cancelar</string>
 </resources>
