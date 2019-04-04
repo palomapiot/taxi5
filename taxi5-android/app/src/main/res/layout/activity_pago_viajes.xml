@@ -104,18 +104,7 @@
 
         </TableRow>
 
-        <TableRow
-            android:id="@+id/tableSeparatorHeader"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
 
-            <FrameLayout
-                android:id="@+id/frameHeaderLine"
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:layout_span="6"
-                android:background="#FFFFFF"></FrameLayout>
-        </TableRow>
 
         <TableRow
             android:id="@+id/tableRow"
