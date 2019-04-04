@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,16 +19,16 @@ import com.muei.apm.taxi5.R;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final String TAG = HomeActivity.class.getSimpleName();
+    private static final String TAG_HOME_ACTIVITY = HomeActivity.class.getSimpleName();
     private static GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
-            Log.d(TAG, "onCreate()");
+            Log.d(TAG_HOME_ACTIVITY, "onCreate()");
         } else {
-            Log.d(TAG, "onCreate() with previousState");
+            Log.d(TAG_HOME_ACTIVITY, "onCreate() with previousState");
         }
 
         super.onCreate(savedInstanceState);
@@ -60,7 +59,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void onDirectionsClick(View view) {
-        Log.d(TAG, "Boton direceciones pulsado en Maps");
+        Log.d(TAG_HOME_ACTIVITY, "Boton direceciones pulsado en Maps");
         Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
         startActivity(intent);
     }
@@ -80,9 +79,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 startActivity(intentProfile);
                 return true;
 
-            case R.id.action_view_history:
-                Intent intentHistory = new Intent(HomeActivity.this, PagoActivity.class);
-                startActivity(intentHistory);
+            case R.id.action_view_historical:
+                Intent intentHistorical = new Intent(HomeActivity.this, HistoricalActivity.class);
+                startActivity(intentHistorical);
                 return true;
 
             case R.id.action_log_out:
@@ -94,10 +93,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-    public void onClickViewProfile(View view) {
-        Toast.makeText(this, "Ver perfil", Toast.LENGTH_SHORT).show();
     }
 
 }

@@ -7,7 +7,7 @@
         android:title="@string/action_view_profile" />
 
     <item
-        android:id="@+id/action_view_history"
+        android:id="@+id/action_view_historical"
         android:title="@string/action_view_history" />
     <item
         android:id="@+id/action_log_out"
