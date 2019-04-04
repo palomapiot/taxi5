@@ -17,7 +17,6 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.muei.apm.taxi5.R;
-import com.muei.apm.taxi5.SearchActivity;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 

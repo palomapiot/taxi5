@@ -46,6 +46,7 @@
             android:name=".ui.ProfileActivity"
             android:label="@string/activity_label_profile" />
 
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
@@ -64,7 +65,7 @@
 
 
         <activity
-            android:name=".SearchActivity"
+            android:name=".ui.SearchActivity"
             android:label="Trayecto"
             android:parentActivityName=".ui.MapsActivity">
         </activity>
