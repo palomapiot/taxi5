@@ -32,18 +32,18 @@ public class HistoricalActivity extends AppCompatActivity {
         ArrayList<Route> routes = new ArrayList<Route>();
 
         // Create the Route objects
-        Route route1 = new Route("Viaje realizado el 01/01/2018", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
-        Route route2 = new Route("Viaje realizado el 02/02/2018", "Juan Florez, 56","Av. de Alfonso Molina, Pza. de Madrid");
-        Route route3 = new Route("Viaje realizado el 03/03/2018", "Av. de Navarra, 27","Av. di Ferrocarril, 54");
-        Route route4 = new Route("Viaje realizado el 04/04/2018", "Av. de Hércules, 37","Juan Flórez, 116");
-        Route route5 = new Route("Viaje realizado el 05/05/2018", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
-        Route route6 = new Route("Viaje realizado el 06/06/2018", "Juan Florez, 56","Av. de Alfonso Molina, Pza. de Madrid");
-        Route route7 = new Route("Viaje realizado el 07/07/2018", "Av. de Navarra, 27","Av. di Ferrocarril, 54");
-        Route route8 = new Route("Viaje realizado el 08/08/2018", "Av. de Hércules, 37","Juan Flórez, 116");
-        Route route9 = new Route("Viaje realizado el 09/09/2018", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
-        Route route10 = new Route("Viaje realizado el 10/10/2018", "Juan Florez, 56","Av. de Alfonso Molina, Pza. de Madrid");
-        Route route11 = new Route("Viaje realizado el 11/11/2018", "Av. de Navarra, 27","Av. di Ferrocarril, 54");
-        Route route12 = new Route("Viaje realizado el 12/12/2018", "Av. de Hércules, 37","Juan Flórez, 116");
+        Route route1 = new Route("Viaje realizado el 01/01/2018 a las 12:00", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
+        Route route2 = new Route("Viaje realizado el 02/02/2018 a las 10:00", "Juan Florez, 56","Av. de Alfonso Molina, Pza. de Madrid");
+        Route route3 = new Route("Viaje realizado el 03/03/2018 a las 16:00", "Av. de Navarra, 27","Av. di Ferrocarril, 54");
+        Route route4 = new Route("Viaje realizado el 04/04/2018 a las 19:00", "Av. de Hércules, 37","Juan Flórez, 116");
+        Route route5 = new Route("Viaje realizado el 05/05/2018 a las 15:00", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
+        Route route6 = new Route("Viaje realizado el 06/06/2018 a las 17:00", "Juan Florez, 56","Av. de Alfonso Molina, Pza. de Madrid");
+        Route route7 = new Route("Viaje realizado el 07/07/2018 a las 18:00", "Av. de Navarra, 27","Av. di Ferrocarril, 54");
+        Route route8 = new Route("Viaje realizado el 08/08/2018 a las 20:00", "Av. de Hércules, 37","Juan Flórez, 116");
+        Route route9 = new Route("Viaje realizado el 09/09/2018 a las 22:00", "Pza. Pontevedra, 18","Antonio Insua Rivas, 86");
+        Route route10 = new Route("Viaje realizado el 10/10/2018 a las 06:00", "Juan Florez, 56","Av. de Alfonso Molina, Pza. de Madrid");
+        Route route11 = new Route("Viaje realizado el 11/11/2018 a las 09:00", "Av. de Navarra, 27","Av. di Ferrocarril, 54");
+        Route route12 = new Route("Viaje realizado el 12/12/2018 a las 14:00", "Av. de Hércules, 37","Juan Flórez, 116");
 
         routes.add(route1);
         routes.add(route2);
