@@ -68,10 +68,7 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
         LatLng barcelona = new LatLng(41.385064,2.173403);
         mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
 
-        LatLng madrid = new LatLng(40.416775,-3.70379);
-        mMap.addMarker(new MarkerOptions().position(madrid).title("Marker in Madrid"));
 
-        LatLng zaragoza = new LatLng(41.648823,-0.889085);
 
         //Define list to get all latlng for the route
         List<LatLng> path = new ArrayList();
@@ -81,7 +78,7 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyAy6azXMUfKwGJf-vsVHlFF54q6GQNnJ6M")
                 .build();
-        DirectionsApiRequest req = DirectionsApi.getDirections(context, "41.385064,2.173403", "40.416775,-3.70379");
+        DirectionsApiRequest req = DirectionsApi.getDirections(context, "43.333024,-8.410868", "41.385064,2.173403");
         try {
             DirectionsResult res = req.await();
 
@@ -135,7 +132,7 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         float zoomLevel = 16.0f; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(zaragoza, zoomLevel));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
 
 
     }
