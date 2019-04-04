@@ -1,9 +1,11 @@
-package com.muei.apm.taxi5driver;
+package com.muei.apm.taxi5driver.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
+
+import com.muei.apm.taxi5driver.R;
 
 public class InsertCostActivity extends AppCompatActivity {
 

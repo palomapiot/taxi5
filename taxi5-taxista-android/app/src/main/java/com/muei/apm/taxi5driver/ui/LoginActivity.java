@@ -1,4 +1,4 @@
-package com.muei.apm.taxi5driver;
+package com.muei.apm.taxi5driver.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -27,6 +27,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.muei.apm.taxi5driver.R;
 
 import java.util.ArrayList;
 import java.util.List;
