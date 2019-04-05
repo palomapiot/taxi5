@@ -80,31 +80,4 @@
     <string name="activity_pago_origen">Origen</string>
     <string name="activity_pago_destination">Destino</string>
 
-
-    <!--<string name="origin_label">Origen</string>-->
-    <!--<string name="destination_label">Destino</string>-->
-
-    <!--<string name="search_button">Buscar</string>-->
-
-    <!--<string name="til_origin">Origen</string>-->
-    <!--<string name="til_detination">Destino</string>-->
-    <!--<string name="request_a_taxi_button">Solicitar taxi</string>-->
-
-    <!--<string name="activity_label_profile">Mi perfil</string>-->
-    <!--<string name="activity_label_change_password">Cambiar contraseña</string>-->
-    <!--<string name="activity_label_edit_profile">Editar perfil</string>-->
-    <!--<string name="activity_label_search">Buscar</string>-->
-    <!--<string name="activity_label_historical">Histórico</string>-->
-
-
-    <!--<string name="default_name_historico">PAGO A REALIZAR</string>-->
-    <!--<string name="activity_label_historico">Pago</string>-->
-    <!--<string name="realizar_pago">Pagar</string>-->
-    <!--<string name="price">Precio</string>-->
-    <!--<string name="origin">Origen</string>-->
-    <!--<string name="destination">Destino</string>-->
-
-    <!--<string name="date_travel">fecha del viaje</string>-->
-    <!--<string name="travel_location">localizacion de destino</string>-->
-    <!--<string name="origin_location">localizacion de origen</string>-->
 </resources>

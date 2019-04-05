@@ -15,23 +15,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity
-            android:name=".ui.InsertCostActivity"
-            android:label="@string/title_insert_cost"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".ui.MainActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".ui.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.InsertCostActivity"
+            android:label="@string/activity_insert_cost_label"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/activity_login_label"
+            android:screenOrientation="portrait" />
+
     </application>
 </manifest>

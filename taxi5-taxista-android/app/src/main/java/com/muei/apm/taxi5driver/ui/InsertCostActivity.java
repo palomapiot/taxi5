@@ -18,7 +18,7 @@ public class InsertCostActivity extends AppCompatActivity {
     }
 
     public void onClickSendCost(View view) {
-        Toast.makeText(this, getString(R.string.send_price_user), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.activity_insert_cost_send_price_user), Toast.LENGTH_SHORT).show();
     }
 
 }

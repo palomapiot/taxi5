@@ -75,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/btn_rounded"
-                android:text="@string/iniciar_sesion"
+                android:text="@string/activity_main_iniciar_sesion"
                 android:textColor="@android:color/white"
                 android:typeface="sans" />
 
