@@ -79,6 +79,8 @@ public class TravelFragment extends Fragment {
 
 
             adapterTravels = new MyTravelRecyclerViewAdapter(travelList, mListener);
+
+
             recyclerView.setAdapter(adapterTravels);
         }
         return view;

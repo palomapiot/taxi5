@@ -22,5 +22,7 @@
     <string name="activity_insert_cost_request_payment">Solicitar pago</string>
     <string name="activity_insert_cost_send_price_user">Enviando el coste al usuario&#8230;</string>
     <string name="activity_insert_cost_eur">Euros (€)</string>
+    <string name="origin">Origen:</string>
+    <string name="destination">Destino:</string>
 
 </resources>

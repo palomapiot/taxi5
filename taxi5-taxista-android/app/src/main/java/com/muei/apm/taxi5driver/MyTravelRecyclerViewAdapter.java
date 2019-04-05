@@ -1,23 +1,16 @@
 package com.muei.apm.taxi5driver;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.muei.apm.taxi5driver.TravelFragment.OnListFragmentInteractionListener;
 import com.muei.apm.taxi5driver.model.Travel;
-import com.muei.apm.taxi5driver.ui.InsertCostActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
-
-import static android.content.ContentValues.TAG;
-import static android.support.v4.content.ContextCompat.startActivity;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link Travel} and makes a call to the
@@ -67,7 +60,7 @@ public class MyTravelRecyclerViewAdapter extends RecyclerView.Adapter<MyTravelRe
         return mValues.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
         public final TextView tvUser;
         public final TextView tvDate;
@@ -96,14 +89,6 @@ public class MyTravelRecyclerViewAdapter extends RecyclerView.Adapter<MyTravelRe
                     ", tvDestination=" + tvDestination +
                     ", mItem=" + mItem +
                     '}';
-        }
-
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), InsertCostActivity.class);
-            startActivity(v.getContext(), intent, null);
-            Log.d(TAG, "onClick " + getPosition() + " " + mItem);
-            Toast.makeText(v.getContext(), "Pago", Toast.LENGTH_SHORT).show();
         }
     }
 }

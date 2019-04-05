@@ -36,7 +36,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toEndOf="@+id/tvLabelOrigin"
         app:layout_constraintTop_toBottomOf="@+id/tvUser" />
 
     <TextView
@@ -46,25 +46,25 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/textView10"
+        app:layout_constraintStart_toEndOf="@+id/tvLabelDestination"
         app:layout_constraintTop_toBottomOf="@+id/tvUser" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/tvLabelOrigin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Origen:"
+        android:text="@string/origin"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvUser"
         app:layout_constraintTop_toBottomOf="@+id/tvUser" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tvLabelDestination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Destino: "
+        android:text="@string/destination"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/tvDate"
         app:layout_constraintTop_toBottomOf="@+id/tvUser" />
