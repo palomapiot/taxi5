@@ -31,9 +31,9 @@ public class SearchActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
+        btnRequestTaxi = findViewById(R.id.btnRequestTaxi);
         inputOrigen = findViewById(R.id.inputOrigen);
         inputDestino = findViewById(R.id.inputDestino);
-        btnRequestTaxi = findViewById(R.id.btnRequestTaxi);
 
         btnRequestTaxi.setOnClickListener(new View.OnClickListener() {
             @Override

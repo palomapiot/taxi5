@@ -63,7 +63,7 @@
 
         <activity
             android:name=".ui.TrayectoActivity"
-            android:label="Trayecto"
+            android:label="@string/activity_trayecto_label"
             android:parentActivityName=".ui.HomeActivity"
             android:screenOrientation="portrait" />
 

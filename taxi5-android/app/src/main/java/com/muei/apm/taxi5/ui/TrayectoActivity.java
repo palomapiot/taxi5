@@ -1,9 +1,14 @@
 package com.muei.apm.taxi5.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -28,13 +33,16 @@ import com.muei.apm.taxi5.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class TrayectoActivity extends FragmentActivity implements OnMapReadyCallback {
+public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
 
     private static final String TAG_TRAYECTO_ACTIVITY
             = TrayectoActivity.class.getSimpleName();
     private static GoogleMap mMap;
+    private String origen;
+    private String destino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +56,22 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trayecto);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras == null){
+            origen = null;
+            destino = null;
+        } else {
+            origen = extras.getString("ORIGEN");
+            destino = extras.getString("DESTINO");
+        }
+
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+        
+        ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -58,14 +81,48 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(GoogleMap googleMap)  {
         mMap = googleMap;
 
+        Geocoder locationAddress = new Geocoder(this, Locale.getDefault());
+        List<Address> direccionesOrigen = new ArrayList<Address>();
+        List<Address> direccionesDestino = new ArrayList<Address>();
         LatLng sydney = new LatLng(43.333024, -8.410868);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in FIC"));
+        LatLng barcelona = new LatLng(43.333024, -8.410868);
+        String origenStr = "";
+        String destinoStr = "";
 
-        LatLng barcelona = new LatLng(41.385064, 2.173403);
-        mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
+        try {
+            direccionesOrigen = locationAddress.getFromLocationName(origen, 1);
+            direccionesDestino = locationAddress.getFromLocationName(destino, 1);
+
+        } catch (Exception ex) {
+            Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
+        }
+
+
+
+        try {
+            sydney = new LatLng(direccionesOrigen.get(0).getLatitude(), direccionesOrigen.get(0).getLongitude());
+            Double l1 = sydney.latitude;
+            Double l2 = sydney.longitude;
+            String coordl1 = l1.toString();
+            String coordl2 = l2.toString();
+            origenStr = coordl1+","+coordl2;
+
+            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Origin"));
+            barcelona = new LatLng(direccionesDestino.get(0).getLatitude(), direccionesDestino.get(0).getLongitude());
+
+            Double l3 = barcelona.latitude;
+            Double l4 = barcelona.longitude;
+            String coordl3 = l3.toString();
+            String coordl4 = l4.toString();
+            destinoStr = coordl3+","+coordl4;
+
+            mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Destination"));
+        } catch (Exception ex) {
+            Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
+        }
 
 
         //Define list to get all latlng for the route
@@ -76,7 +133,7 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyAy6azXMUfKwGJf-vsVHlFF54q6GQNnJ6M")
                 .build();
-        DirectionsApiRequest req = DirectionsApi.getDirections(context, "43.333024,-8.410868", "41.385064,2.173403");
+        DirectionsApiRequest req = DirectionsApi.getDirections(context, origenStr, destinoStr);
         try {
             DirectionsResult res = req.await();
 
@@ -123,7 +180,7 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
 
         //Draw the polyline
         if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(5);
+            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20);
             mMap.addPolyline(opts);
         }
 
