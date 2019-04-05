@@ -30,7 +30,6 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/btn_rounded"
-        android:onClick="onClickRequestATaxi"
         android:text="@string/activity_search_request_taxi"
         android:textColor="@android:color/white"
         android:typeface="sans"
@@ -58,6 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_search_destination"
+            android:inputType="text"
             android:theme="@style/AppTheme" />
     </android.support.design.widget.TextInputLayout>
 
@@ -81,6 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_search_origin"
+            android:inputType="text"
             android:theme="@style/AppTheme" />
     </android.support.design.widget.TextInputLayout>
 
