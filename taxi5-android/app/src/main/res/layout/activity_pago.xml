@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:screenOrientation="portrait"
+    tools:context=".ui.PagoActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+    <TextView
+        android:id="@+id/tvNameHistoric"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/activity_pago_pago_a_realizar"
+        android:textSize="24sp"
+        android:typeface="sans"
+        app:layout_constraintEnd_toEndOf="@+id/ivUser"
+        app:layout_constraintStart_toStartOf="@+id/ivUser"
+        app:layout_constraintTop_toBottomOf="@+id/ivUser" />
+
+    <ImageView
+        android:id="@+id/ivUser"
+        android:layout_width="142dp"
+        android:layout_height="106dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:contentDescription="@string/activity_profile_user_profile"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.20999998"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
+
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="375dp"
+        android:layout_height="199dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:stretchColumns="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameHistoric"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TableRow
+            android:id="@+id/tableHeader"
+            android:layout_width="fill_parent"
+            android:layout_height="749dp">
+
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/activity_pago_price"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tvRowOrigin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="5dp"
+                android:text="@string/activity_pago_origen"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/tvRowDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/activity_pago_destination"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp" />
+
+        </TableRow>
+
+
+        <TableRow
+            android:id="@+id/tableRow"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvPriceTravel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="4,50 €"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvOrigin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Marineda"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvDestination"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Maria Pita"
+                android:textSize="20sp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btnMakePayment"
+        style="?android:textAppearanceSmall"
+        android:layout_width="254dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/btn_rounded"
+        android:onClick="onClickBtnPay"
+        android:text="@string/activity_pago_pay"
+        android:textColor="@android:color/white"
+        android:typeface="sans"
+        app:layout_constraintBottom_toBottomOf="@+id/table"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.968" />
+
+</android.support.constraint.ConstraintLayout>

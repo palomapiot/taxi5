@@ -18,15 +18,17 @@ public class ChangePasswordActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_password);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     public void onClickConfirmPassword(View view) {
-        Toast.makeText(this, "Contraseña actualizada!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.activity_change_password_password_updated), Toast.LENGTH_SHORT).show();
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

@@ -1,4 +1,4 @@
-package com.muei.apm.taxi5.ui;
+package com.muei.apm.taxi5driver.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -17,7 +17,6 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
@@ -29,7 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5driver.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,16 +67,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -89,7 +83,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -181,6 +175,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
+            cancel = true;
+        }
+
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
             cancel = true;
         }
 
@@ -340,8 +340,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
-                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                Intent intent = new Intent(LoginActivity.this, InsertCostActivity.class);
                 startActivity(intent);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -18,24 +17,24 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.muei.apm.taxi5.R;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final String TAG = MapsActivity.class.getSimpleName();
+    private static final String TAG_HOME_ACTIVITY = HomeActivity.class.getSimpleName();
     private static GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
-            Log.d(TAG, "onCreate()");
+            Log.d(TAG_HOME_ACTIVITY, "onCreate()");
         } else {
-            Log.d(TAG, "onCreate() with previousState");
+            Log.d(TAG_HOME_ACTIVITY, "onCreate() with previousState");
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_home);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         configureMaps();
@@ -60,8 +59,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void onDirectionsClick(View view) {
-        Log.d(TAG, "Boton direceciones pulsado en Maps");
-        Intent intent = new Intent(MapsActivity.this, SearchActivity.class);
+        Log.d(TAG_HOME_ACTIVITY, "Boton direceciones pulsado en Maps");
+        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
         startActivity(intent);
     }
 
@@ -76,16 +75,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         switch (item.getItemId()) {
             case R.id.action_view_profile:
-                Intent intentProfile = new Intent(MapsActivity.this, ProfileActivity.class);
+                Intent intentProfile = new Intent(HomeActivity.this, ProfileActivity.class);
                 startActivity(intentProfile);
                 return true;
 
-            case R.id.action_view_history:
-                Toast.makeText(this, "Ver histórico", Toast.LENGTH_SHORT).show();
+            case R.id.action_view_historical:
+                Intent intentHistorical = new Intent(HomeActivity.this, HistoricalActivity.class);
+                startActivity(intentHistorical);
                 return true;
 
             case R.id.action_log_out:
-                Intent intentLogout = new Intent(MapsActivity.this, MainActivity.class);
+                Intent intentLogout = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intentLogout);
                 return true;
 
@@ -93,10 +93,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-    public void onClickViewProfile(View view) {
-        Toast.makeText(this, "Ver perfil", Toast.LENGTH_SHORT).show();
     }
 
 }

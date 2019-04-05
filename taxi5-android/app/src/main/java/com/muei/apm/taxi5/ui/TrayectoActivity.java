@@ -32,7 +32,8 @@ import java.util.List;
 public class TrayectoActivity extends FragmentActivity implements OnMapReadyCallback {
 
 
-    private static final String TAG_TRAYECTO_ACTIVITY = TrayectoActivity.class.getSimpleName();
+    private static final String TAG_TRAYECTO_ACTIVITY
+            = TrayectoActivity.class.getSimpleName();
     private static GoogleMap mMap;
 
     @Override
@@ -49,7 +50,6 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
 
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -64,9 +64,8 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
         LatLng sydney = new LatLng(43.333024, -8.410868);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in FIC"));
 
-        LatLng barcelona = new LatLng(41.385064,2.173403);
+        LatLng barcelona = new LatLng(41.385064, 2.173403);
         mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Barcelona"));
-
 
 
         //Define list to get all latlng for the route
@@ -85,14 +84,14 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
             if (res.routes != null && res.routes.length > 0) {
                 DirectionsRoute route = res.routes[0];
 
-                if (route.legs !=null) {
-                    for(int i=0; i<route.legs.length; i++) {
+                if (route.legs != null) {
+                    for (int i = 0; i < route.legs.length; i++) {
                         DirectionsLeg leg = route.legs[i];
                         if (leg.steps != null) {
-                            for (int j=0; j<leg.steps.length;j++){
+                            for (int j = 0; j < leg.steps.length; j++) {
                                 DirectionsStep step = leg.steps[j];
-                                if (step.steps != null && step.steps.length >0) {
-                                    for (int k=0; k<step.steps.length;k++){
+                                if (step.steps != null && step.steps.length > 0) {
+                                    for (int k = 0; k < step.steps.length; k++) {
                                         DirectionsStep step1 = step.steps[k];
                                         EncodedPolyline points1 = step1.polyline;
                                         if (points1 != null) {
@@ -118,7 +117,7 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
                     }
                 }
             }
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
         }
 
@@ -140,13 +139,17 @@ public class TrayectoActivity extends FragmentActivity implements OnMapReadyCall
 
 
     public void onConfirmButtonClick(View view) {
+
         Log.d(TAG_TRAYECTO_ACTIVITY, "Boton para cambio de actividad pulsado en Trayecto");
         Toast.makeText(getApplicationContext(), "Boton de confirmar pulsado", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(TrayectoActivity.this, PagoActivity.class);
+        startActivity(intent);
     }
 
     public void onCancelButtonClick(View view) {
         Log.d(TAG_TRAYECTO_ACTIVITY, "Boton para cambio de actividad pulsado en Trayecto");
-        Intent intent = new Intent(TrayectoActivity.this, MapsActivity.class);
+
+        Intent intent = new Intent(TrayectoActivity.this, HomeActivity.class);
         startActivity(intent);
     }
 

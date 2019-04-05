@@ -31,7 +31,6 @@ public class SearchActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-
         inputOrigen = findViewById(R.id.inputOrigen);
         inputDestino = findViewById(R.id.inputDestino);
         btnRequestTaxi = findViewById(R.id.btnRequestTaxi);
@@ -39,13 +38,11 @@ public class SearchActivity extends AppCompatActivity {
         btnRequestTaxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if("".equals(inputOrigen.getText().toString().trim())) {
+                if ("".equals(inputOrigen.getText().toString().trim())) {
                     Toast.makeText(SearchActivity.this, getString(R.string.enter_origin_address), Toast.LENGTH_SHORT).show();
-                }
-                else if("".equals(inputDestino.getText().toString().trim())) {
+                } else if ("".equals(inputDestino.getText().toString().trim())) {
                     Toast.makeText(SearchActivity.this, getString(R.string.enter_destination_address), Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     final Intent intent = new Intent(SearchActivity.this, TrayectoActivity.class);
                     intent.putExtra("ORIGEN", inputOrigen.getText().toString().trim());
                     intent.putExtra("DESTINO", inputDestino.getText().toString().trim());
@@ -56,5 +53,4 @@ public class SearchActivity extends AppCompatActivity {
         });
 
     }
-
 }

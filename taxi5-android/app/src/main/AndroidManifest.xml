@@ -6,8 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -19,66 +18,82 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
-        <activity
-            android:name=".ui.RegisterActivity"
-            android:label="@string/title_activity_register"></activity>
-        <activity
-            android:name=".ui.LoginActivity"
-            android:label="@string/title_activity_login" />
-
-        <activity android:name=".ui.MainActivity">
+        <activity android:name=".ui.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
+            android:name=".ui.RegisterActivity"
+            android:label="@string/activity_register_label"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.LoginActivity"
+            android:label="@string/activity_login_label"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.ChangePasswordActivity"
-            android:label="@string/activity_label_change_password" />
+            android:label="@string/activity_change_password_label"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.EditProfileActivity"
-            android:label="@string/activity_label_edit_profile" />
+            android:label="@string/activity_edit_profile_label"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.ProfileActivity"
-            android:label="@string/activity_label_profile" />
-
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:label="@string/activity_profile_label"
+            android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.MapsActivity"
-            android:label="Mapa"
-            android:parentActivityName=".ui.MainActivity">
-        </activity>
+            android:name=".ui.PagoActivity"
+            android:label="@string/activity_pago_label"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.HomeActivity"
+            android:label="@string/activity_home_label"
+            android:parentActivityName=".ui.MainActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.TrayectoActivity"
             android:label="Trayecto"
-            android:parentActivityName=".ui.MapsActivity">
-        </activity>
-
+            android:parentActivityName=".ui.HomeActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.SearchActivity"
-            android:label="Trayecto"
-            android:parentActivityName=".ui.MapsActivity">
-        </activity>
+            android:label="@string/activity_search_label"
+            android:parentActivityName=".ui.HomeActivity"
+            android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.HistoricalActivity"
+            android:label="@string/activity_historical_label"
+            android:screenOrientation="portrait" />
+
+        <!-- METADATOS -->
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
     </application>
-
 </manifest>

@@ -1,3 +1,26 @@
 <resources>
-    <string name="app_name">Taxi5Driver</string>
+    <!-- MAIN ACTIVITY -->
+    <string name="app_name">Taxi5 Driver</string>
+    <string name="taxi5">Taxi5\nDriver</string>
+    <string name="logo_taxi5">Logo Taxi5</string>
+    <string name="activity_main_iniciar_sesion">Iniciar Sesión</string>
+
+    <!-- LOGIN ACTIVITY -->
+    <string name="activity_login_label">Iniciar Sesión</string>
+    <string name="prompt_email">Correo</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Iniciar Sesión</string>
+    <string name="error_invalid_email">Este correo es invalido</string>
+    <string name="error_invalid_password">Esta contraseña es demasiado corta</string>
+    <string name="error_incorrect_password">Esta contraseña es incorrecta</string>
+    <string name="error_field_required">Este campo es obligatorio</string>
+    <string name="permission_rationale">"Los permisos de los contactos son necesarios para autocompletar el correo electrónico."</string>
+
+    <!-- INSERT COST ACTIVITY -->
+    <string name="activity_insert_cost_label">Insertar coste del viaje</string>
+    <string name="activity_insert_cost_request_payment">Solicitar pago</string>
+    <string name="activity_insert_cost_send_price_user">Enviando el coste al usuario&#8230;</string>
+    <string name="activity_insert_cost_eur">Euros (€)</string>
+
 </resources>

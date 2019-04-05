@@ -4,12 +4,13 @@
 
     <item
         android:id="@+id/action_view_profile"
-        android:title="@string/action_view_profile" />
+        android:title="@string/activity_home_profile" />
 
     <item
-        android:id="@+id/action_view_history"
-        android:title="@string/action_view_history" />
+        android:id="@+id/action_view_historical"
+        android:title="@string/activity_home_historical" />
+
     <item
         android:id="@+id/action_log_out"
-        android:title="@string/action_log_out" />
+        android:title="@string/activity_home_logout" />
 </menu>
