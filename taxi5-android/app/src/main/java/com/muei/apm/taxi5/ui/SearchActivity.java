@@ -23,25 +23,27 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
         ActionBar ab = getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
 
-        inputOrigen = (TextInputEditText) findViewById(R.id.inputOrigen);
-        inputDestino = (TextInputEditText) findViewById(R.id.inputDestino);
-        btnRequestTaxi = (Button) findViewById(R.id.btnRequestTaxi);
+        inputOrigen = findViewById(R.id.inputOrigen);
+        inputDestino = findViewById(R.id.inputDestino);
+        btnRequestTaxi = findViewById(R.id.btnRequestTaxi);
 
         btnRequestTaxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if("".equals(inputOrigen.getText().toString().trim())) {
-                    Toast.makeText(SearchActivity.this, "Introduce dirección de origen", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this, getString(R.string.enter_origin_address), Toast.LENGTH_SHORT).show();
                 }
                 else if("".equals(inputDestino.getText().toString().trim())) {
-                    Toast.makeText(SearchActivity.this, "Introduce dirección de destino", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SearchActivity.this, getString(R.string.enter_destination_address), Toast.LENGTH_SHORT).show();
                 }
                 else {
                     final Intent intent = new Intent(SearchActivity.this, TrayectoActivity.class);
@@ -55,16 +57,4 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-    /*public void onClickSearchOrigin(View view) {
-        Toast.makeText(this, "Buscar origen", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onClickSearchDestination(View view) {
-        Toast.makeText(this, "Buscar destino", Toast.LENGTH_SHORT).show();
-    }
-
-    public void onClickRequestATaxi(View view) {
-        Intent intent = new Intent(SearchActivity.this, TrayectoActivity.class);
-        startActivity(intent);
-    }*/
 }

@@ -50,4 +50,6 @@
     <string name="change_password_confirm_new">Confirmar nueva contraseña</string>
     <string name="change_password_update">Actualizar contraseña</string>
     <string name="perfil_del_usuario">Perfil del usuario</string>
+    <string name="enter_origin_address">Introduce dirección de origen</string>
+    <string name="enter_destination_address">Introduce dirección de destino</string>
 </resources>
