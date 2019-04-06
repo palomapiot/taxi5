@@ -14,6 +14,9 @@ import com.muei.apm.taxi5.R;
 
 public class PagoActivity extends AppCompatActivity {
 
+    private String origen;
+    private String destino;
+
     private static final String PAGO_ACTIVITY_TAG = PagoActivity.class.getSimpleName();
 
     @Override
@@ -21,13 +24,24 @@ public class PagoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pago);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras == null){
+            origen = null;
+            destino = null;
+        } else {
+            origen = extras.getString("ORIGEN");
+            destino = extras.getString("DESTINO");
+        }
+
+        Toast.makeText(this, origen, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, destino, Toast.LENGTH_SHORT).show();
+
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
     }
 
 
     public void onClickBtnPay(View view) {
-        Log.d(PAGO_ACTIVITY_TAG, "Boton para cambio de actividad pulsado en Trayecto");
         Toast.makeText(this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(PagoActivity.this, HomeActivity.class);
         startActivity(intent);
