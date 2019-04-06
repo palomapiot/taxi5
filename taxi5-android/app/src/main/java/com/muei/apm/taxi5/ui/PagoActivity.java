@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muei.apm.taxi5.R;
@@ -33,8 +34,14 @@ public class PagoActivity extends AppCompatActivity {
             destino = extras.getString("DESTINO");
         }
 
-        Toast.makeText(this, origen, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, destino, Toast.LENGTH_SHORT).show();
+        TextView precio_label = findViewById(R.id.pago_precio);
+        TextView origen_label = findViewById(R.id.pago_origen);
+        TextView destino_label = findViewById(R.id.pago_destino);
+
+        precio_label.setText("5 €");
+        origen_label.setText(origen);
+        destino_label.setText(destino);
+
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
