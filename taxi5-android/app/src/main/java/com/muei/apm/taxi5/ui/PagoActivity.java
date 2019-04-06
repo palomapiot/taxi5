@@ -23,12 +23,6 @@ public class PagoActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-        ActionBar ab = getSupportActionBar();
-
-        if (ab != null) {
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
 
