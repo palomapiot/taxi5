@@ -1,8 +1,10 @@
 package com.muei.apm.taxi5.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,9 +51,30 @@ public class PagoActivity extends AppCompatActivity {
 
 
     public void onClickBtnPay(View view) {
-        Toast.makeText(this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(PagoActivity.this, HomeActivity.class);
-        startActivity(intent);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PagoActivity.this);
+        // Configura el titulo.
+        alertDialogBuilder.setTitle("Pago");
+        // Configura el mensaje.
+        alertDialogBuilder
+                .setMessage("¿Desea realizar el pago?")
+                .setCancelable(false)
+                .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        Toast.makeText(PagoActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(PagoActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                }).create().show();
+
+
+
+
     }
 
 
