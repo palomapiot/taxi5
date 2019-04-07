@@ -1,12 +1,10 @@
 package com.muei.apm.taxi5.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -200,11 +198,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         Toast.makeText(getApplicationContext(), "Boton de confirmar pulsado", Toast.LENGTH_SHORT).show();
 
 
-
-
-
-
-        Intent intent = new Intent(TrayectoActivity.this, PagoActivity.class);
+        Intent intent = new Intent(TrayectoActivity.this, PaymentActivity.class);
         intent.putExtra("ORIGEN", origen);
         intent.putExtra("DESTINO", destino);
 

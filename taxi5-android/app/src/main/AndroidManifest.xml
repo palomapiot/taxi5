@@ -51,7 +51,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.PagoActivity"
+            android:name=".ui.PaymentActivity"
             android:label="@string/activity_pago_label"
             android:screenOrientation="portrait" />
 

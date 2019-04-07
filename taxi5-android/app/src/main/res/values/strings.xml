@@ -71,17 +71,22 @@
     <string name="activity_trayecto_confirm_travel">Confirmar viaje</string>
     <string name="activity_trayecto_cancel">Cancelar</string>
 
-    <!-- PAGO ACTIVITY -->
+    <!-- PAYMENT ACTIVITY -->
     <string name="activity_pago_label">Pago</string>
     <string name="activity_pago_pago_a_realizar">PAGO A REALIZAR</string>
     <string name="activity_pago_pay">Pagar</string>
     <string name="activity_pago_paid">Pago realizado</string>
     <string name="activity_pago_price">Precio</string>
-    <string name="activity_pago_origen">Origen</string>
-    <string name="activity_pago_destination">Destino</string>
+    <string name="activity_pago_origen">Origen: </string>
+    <string name="activity_pago_destination">Destino: </string>
+    <string name="payment">Confirmación del pago</string>
+    <string name="payment_dialog">¿Desea realizar el pago?</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
 
     <!-- TRAYECTO ACTIVITY -->
 
     <string name="enter_origin_address">Introduce dirección de origen</string>
     <string name="enter_destination_address">Introduce dirección de destino</string>
+
 </resources>
