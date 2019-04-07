@@ -1,6 +1,7 @@
 # Created by https://www.gitignore.io/api/java,macos,linux,windows,android,androidstudio
 # Edit at https://www.gitignore.io/?templates=java,macos,linux,windows,android,androidstudio
 .DS_Store
+taxi5-android/.idea/*
 taxi5-android/.idea/
 taxi5-taxista-android/.idea/
 taxi5-apirest/
