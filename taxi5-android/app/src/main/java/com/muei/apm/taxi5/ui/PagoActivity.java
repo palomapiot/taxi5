@@ -38,12 +38,9 @@ public class PagoActivity extends AppCompatActivity {
 
         TextView precio_label = findViewById(R.id.pago_precio);
         TextView origen_label = findViewById(R.id.pago_origen);
-        TextView destino_label = findViewById(R.id.pago_destino);
 
         precio_label.setText("5 €");
-        origen_label.setText(origen);
-        destino_label.setText(destino);
-
+        origen_label.setText("Origen: " +origen.toUpperCase() + " - Destino: " +destino.toUpperCase());
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
