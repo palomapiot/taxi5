@@ -1,7 +1,14 @@
 package com.muei.apm.taxi5.ui;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -22,6 +29,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final String TAG_HOME_ACTIVITY = HomeActivity.class.getSimpleName();
     private static GoogleMap mMap;
 
+    private static double longitude = 43.333024;
+    private static double latitude = -8.410868;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,7 +48,38 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                        PackageManager.PERMISSION_GRANTED) {
+            getCurrentPosition();
+
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            getCurrentPosition();
+
+        }
+
         configureMaps();
+    }
+
+    private void getCurrentPosition() {
+        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        Location location;
+
+        if(network_enabled){
+
+            location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if(location!=null){
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
+            }
+        }
     }
 
     private void configureMaps() {
@@ -51,8 +93,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng sydney = new LatLng(43.333024, -8.410868);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in FIC"));
+        LatLng sydney = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in current position"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         float zoomLevel = 16.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));

@@ -59,6 +59,7 @@
             android:hint="@string/activity_search_destination"
             android:inputType="text"
             android:theme="@style/AppTheme" />
+
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
