@@ -31,18 +31,6 @@
         android:layout_marginBottom="8dp"
         android:visibility="gone" />
 
-    <TextView
-        android:id="@+id/tvRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_register_form"
-        android:textSize="30sp"
-        android:typeface="serif"
-        app:fontFamily="sans-serif-light"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin" />
-
     <ScrollView
         android:id="@+id/login_form"
         android:layout_width="match_parent"

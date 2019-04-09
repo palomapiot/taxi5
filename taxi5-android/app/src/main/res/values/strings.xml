@@ -45,7 +45,7 @@
     <string name="activity_edit_profile_profile_updated">Perfil actualizado!</string>
 
     <!-- CHANGE PASSWORD ACTIVITY -->
-    <string name="activity_change_password_label">Histórico</string>
+    <string name="activity_change_password_label">Cambiar contraseña</string>
     <string name="activity_change_password_current_password">Contraseña actual</string>
     <string name="activity_change_password_new_password">Nueva contraseña</string>
     <string name="activity_change_password_confirm_new_password">Confirmar nueva contraseña</string>
