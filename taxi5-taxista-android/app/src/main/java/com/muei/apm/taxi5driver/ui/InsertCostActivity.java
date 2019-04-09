@@ -3,12 +3,14 @@ package com.muei.apm.taxi5driver.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.muei.apm.taxi5driver.R;
 
 public class InsertCostActivity extends AppCompatActivity {
 
+    private Button btnFinishTravel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +21,14 @@ public class InsertCostActivity extends AppCompatActivity {
 
     public void onClickSendCost(View view) {
         Toast.makeText(this, getString(R.string.activity_insert_cost_send_price_user), Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickFinishTravel(View view) {
+        btnFinishTravel = findViewById(R.id.btnLogin);
+        Toast.makeText(this, getString(R.string.activity_insert_cost_travel_finished), Toast.LENGTH_SHORT).show();
+
+        // Utilizar finish() para volver a la actividad anterior. NO CREAR un nuevo Intent
+        finish();
     }
 
 }
