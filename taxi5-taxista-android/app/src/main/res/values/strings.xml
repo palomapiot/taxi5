@@ -25,4 +25,14 @@
     <string name="origin">Origen:</string>
     <string name="destination">Destino:</string>
 
+
+    <!-- ACCEPT PASSENGER ACTIVITY -->
+    <string name="activity_accept_passenger_label">Aceptar pasajero</string>
+    <string name="activity_accept_passenger_accept">Aceptar</string>
+    <string name="activity_accept_passenger_cancelar">Cancelar</string>
+    <string name="activity_accept_passenger_accepted">Pasajero aceptado!</string>
+    <string name="activity_accept_passenger_mock_nombreapellido">NOMBRE APELLIDO</string>
+    <string name="activity_accept_mock_origen">Ronda de Outeiro, 50, A Coruña</string>
+    <string name="activity_accept_mock_destino">Rúa do paseo, 3, Ourense</string>
+
 </resources>
