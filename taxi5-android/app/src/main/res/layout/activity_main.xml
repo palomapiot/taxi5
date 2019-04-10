@@ -43,7 +43,7 @@
         app:layout_constraintTop_toBottomOf="@+id/ivLanding" />
 
     <Button
-        android:id="@+id/btnLogin"
+        android:id="@+id/btnRegister"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -52,9 +52,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="44dp"
         android:background="@drawable/btn_rounded"
-        android:onClick="onClickBtnLogin"
+        android:onClick="onClickBtnRegister"
         android:radius="20sp"
-        android:text="@string/activity_login_iniciar_sesion"
+        android:text="@string/activity_register_registrarse"
         android:textColor="@android:color/white"
         android:typeface="sans"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +63,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnRegister"
+        android:id="@+id/btnLogin"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -72,11 +72,11 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/btn_rounded"
-        android:onClick="onClickBtnRegister"
-        android:text="@string/activity_register_registrarse"
+        android:onClick="onClickBtnLogin"
+        android:text="@string/activity_login_iniciar_sesion"
         android:textColor="@android:color/white"
         android:typeface="sans"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogin"
+        app:layout_constraintBottom_toTopOf="@+id/btnRegister"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent" />
