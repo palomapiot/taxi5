@@ -19,9 +19,13 @@
 
     <!-- INSERT COST ACTIVITY -->
     <string name="activity_insert_cost_label">Insertar coste del viaje</string>
-    <string name="activity_insert_cost_request_payment">Solicitar pago</string>
-    <string name="activity_insert_cost_send_price_user">Enviando el coste al usuario&#8230;</string>
     <string name="activity_insert_cost_eur">Euros (€)</string>
+    <string name="activity_insert_cost_request_payment">Solicitar pago</string>
+    <string name="activity_insert_cost_finish_travel">Finalizar viaje</string>
+    <string name="activity_insert_cost_send_price_user">Enviando el coste al usuario&#8230;</string>
+    <string name="activity_insert_cost_travel_finished">Viaje finalizado</string>
+
+    <!-- TRAVEL -->
     <string name="origin">Origen:</string>
     <string name="destination">Destino:</string>
 
