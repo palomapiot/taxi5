@@ -101,7 +101,7 @@
     </ScrollView>
 
     <com.google.android.gms.common.SignInButton
-        android:id="@+id/btnLoginGoogle"
+        android:id="@+id/sign_in_with_google_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/activity_horizontal_margin"

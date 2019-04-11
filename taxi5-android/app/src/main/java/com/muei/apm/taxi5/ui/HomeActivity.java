@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.muei.apm.taxi5.R;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
@@ -31,6 +34,10 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static double longitude = 43.333024;
     private static double latitude = -8.410868;
+
+    private Button googleSignOutButton;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     @Override
@@ -62,7 +69,39 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         configureMaps();
+
+
+
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if (firebaseAuth.getCurrentUser() != null) {
+                    startActivity(new Intent(HomeActivity.this, MainActivity.class));
+                }
+            }
+        };
+
+        /*googleSignOutButton = (Button) findViewById(R.id.sign_out_with_google_button);
+
+        googleSignOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                Intent intentLogout = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intentLogout);
+            }
+        });*/
+
     }
+
+    /*@Override
+    protected void onStart() {
+        super.onStart();
+
+        mAuth.addAuthStateListener(mAuthListener);
+    }*/
+
 
     private void getCurrentPosition() {
         LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
@@ -127,6 +166,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return true;
 
             case R.id.action_log_out:
+                mAuth.signOut();
                 Intent intentLogout = new Intent(HomeActivity.this, MainActivity.class);
                 startActivity(intentLogout);
                 return true;
