@@ -86,7 +86,9 @@ public class SearchActivity extends AppCompatActivity {
                     intent.putExtra("ORIGEN", inputOrigen.getText().toString().trim());
                     intent.putExtra("DESTINO", inputDestino.getText().toString().trim());
 
+                    SearchActivity.this.finish();
                     SearchActivity.this.startActivity(intent);
+
                 }
             }
         });

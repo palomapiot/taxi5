@@ -59,8 +59,7 @@ public class PaymentActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Toast.makeText(PaymentActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        PaymentActivity.this.finish();
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
