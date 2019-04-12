@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,6 +27,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.muei.apm.taxi5.R;
 
+import java.util.List;
+
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private static final String TAG_HOME_ACTIVITY = HomeActivity.class.getSimpleName();
@@ -35,6 +36,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private static double longitude = 43.333024;
     private static double latitude = -8.410868;
+    LocationManager mLocationManager;
+
 
     private Button googleSignOutButton;
     private FirebaseAuth mAuth;
@@ -137,13 +140,30 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         if(network_enabled){
 
-            location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            location = getLastKnownLocation();
 
             if(location!=null){
                 longitude = location.getLongitude();
                 latitude = location.getLatitude();
             }
         }
+    }
+
+    private Location getLastKnownLocation() {
+        mLocationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = mLocationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l = mLocationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
     }
 
     // Método para mostrar y ocultar el menú
