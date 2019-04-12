@@ -195,9 +195,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
     public void onConfirmButtonClick(View view) {
 
-        Toast.makeText(getApplicationContext(), "Boton de confirmar pulsado", Toast.LENGTH_SHORT).show();
-
-
         Intent intent = new Intent(TrayectoActivity.this, PaymentActivity.class);
         intent.putExtra("ORIGEN", origen);
         intent.putExtra("DESTINO", destino);
