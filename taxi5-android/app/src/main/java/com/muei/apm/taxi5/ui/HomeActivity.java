@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -125,6 +126,24 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Log.d(TAG_HOME_ACTIVITY, "Boton direceciones pulsado en Maps");
         Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
         startActivity(intent);
+    }
+
+    public void onGetCurrentPositionClick(View view) {
+        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+
+        boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        Location location;
+
+        if(network_enabled){
+
+            location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+            if(location!=null){
+                longitude = location.getLongitude();
+                latitude = location.getLatitude();
+            }
+        }
     }
 
     // Método para mostrar y ocultar el menú
