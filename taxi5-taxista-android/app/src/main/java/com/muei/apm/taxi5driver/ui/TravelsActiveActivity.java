@@ -19,7 +19,7 @@ public class TravelsActiveActivity extends AppCompatActivity implements TravelFr
 
     @Override
     public void onListFragmentInteraction(Travel item) {
-        Intent intent = new Intent(this, InsertCostActivity.class);
+        Intent intent = new Intent(TravelsActiveActivity.this, AcceptPassengerActivity.class);
         startActivity(intent);
     }
 }

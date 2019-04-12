@@ -1,5 +1,6 @@
 package com.muei.apm.taxi5driver.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,9 @@ public class AcceptPassengerActivity extends AppCompatActivity {
     }
 
     public void onClickAcceptPassenger(View view) {
-        Toast.makeText(this, getString(R.string.activity_accept_passenger_accepted), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AcceptPassengerActivity.this, InsertCostActivity.class);
+        startActivity(intent);
+        //Toast.makeText(this, getString(R.string.activity_accept_passenger_accepted), Toast.LENGTH_SHORT).show();
         finish();
     }
 

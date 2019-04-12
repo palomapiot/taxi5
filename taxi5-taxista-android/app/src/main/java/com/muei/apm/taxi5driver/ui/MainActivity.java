@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BORRAME_PRUEBAS(View view) {
-        Intent intent = new Intent(MainActivity.this, AcceptPassengerActivity.class);
+        Intent intent = new Intent(MainActivity.this, TravelsActiveActivity.class);
         startActivity(intent);
     }
 }
