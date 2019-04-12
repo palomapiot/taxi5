@@ -71,6 +71,12 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.RutaActivity"
+            android:label="@string/ruta_activity"
+            android:parentActivityName=".ui.TrayectoActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.SearchActivity"
             android:label="@string/activity_search_label"
             android:parentActivityName=".ui.HomeActivity"
