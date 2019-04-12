@@ -82,26 +82,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         };
 
-        /*googleSignOutButton = (Button) findViewById(R.id.sign_out_with_google_button);
-
-        googleSignOutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                Intent intentLogout = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(intentLogout);
-            }
-        });*/
 
     }
-
-    /*@Override
-    protected void onStart() {
-        super.onStart();
-
-        mAuth.addAuthStateListener(mAuthListener);
-    }*/
-
 
     private void getCurrentPosition() {
         LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
