@@ -21,7 +21,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,14 +28,21 @@
         <activity
             android:name=".ui.InsertCostActivity"
             android:label="@string/activity_insert_cost_label"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.TravelsActiveActivity"/>
 
         <activity
             android:name=".ui.LoginActivity"
             android:label="@string/activity_login_label"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.MainActivity"/>
 
         <activity android:name=".ui.TravelsActiveActivity" />
+
+        <activity android:name=".ui.AcceptPassengerActivity"
+            android:label="@string/activity_accept_passenger_label"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".ui.MainActivity"/> <!-- MODIFICAR ESTO PRUEBAS MAIN -->
 
     </application>
 
