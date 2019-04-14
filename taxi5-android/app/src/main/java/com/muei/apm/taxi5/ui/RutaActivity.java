@@ -1,15 +1,18 @@
 package com.muei.apm.taxi5.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,11 +35,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCallback {
-
-
-    private static final String TAG_TRAYECTO_ACTIVITY
-            = TrayectoActivity.class.getSimpleName();
+public class RutaActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private static final String TAG_RUTA_ACTIVITY
+            = RutaActivity.class.getSimpleName();
     private static GoogleMap mMap;
     private String origen;
     private String destino;
@@ -45,13 +46,13 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     protected void onCreate(Bundle savedInstanceState) {
 
         if (savedInstanceState != null) {
-            Log.d(TAG_TRAYECTO_ACTIVITY, "onCreate()");
+            Log.d(TAG_RUTA_ACTIVITY, "onCreate()");
         } else {
-            Log.d(TAG_TRAYECTO_ACTIVITY, "onCreate() with previousState");
+            Log.d(TAG_RUTA_ACTIVITY, "onCreate() with previousState");
         }
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_trayecto);
+        setContentView(R.layout.activity_ruta);
 
         Bundle extras = getIntent().getExtras();
         if (extras == null){
@@ -64,7 +65,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        
+
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
@@ -73,6 +74,26 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RutaActivity.this);
+        // Configura el titulo.
+        alertDialogBuilder.setTitle(R.string.taxista_en_camino);
+        // Configura el mensaje.
+        alertDialogBuilder
+                .setMessage(R.string.confirmar_llegada_taxista)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Empieza el viaje, el taxista llego a la ubicación del usuario
+                        Toast.makeText(RutaActivity.this, getString(R.string.viaje_en_proceso), Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).create().show();
 
 
     }
@@ -94,7 +115,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             direccionesDestino = locationAddress.getFromLocationName(destino, 1);
 
         } catch (Exception ex) {
-            Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
+            Log.e(TAG_RUTA_ACTIVITY, ex.getLocalizedMessage());
         }
 
 
@@ -118,7 +139,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
             mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Destination"));
         } catch (Exception ex) {
-            Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
+            Log.e(TAG_RUTA_ACTIVITY, ex.getLocalizedMessage());
         }
 
 
@@ -127,9 +148,8 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
 
         //Execute Directions API request
-        String API_KEY = getResources().getResourceName(R.string.google_api_key);
         GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey(API_KEY)
+                .apiKey("AIzaSyAy6azXMUfKwGJf-vsVHlFF54q6GQNnJ6M")
                 .build();
         DirectionsApiRequest req = DirectionsApi.getDirections(context, origenStr, destinoStr);
         try {
@@ -173,7 +193,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                 }
             }
         } catch (Exception ex) {
-            Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
+            Log.e(TAG_RUTA_ACTIVITY, ex.getLocalizedMessage());
         }
 
         //Draw the polyline
@@ -184,39 +204,20 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
-        float zoomLevel = 12.0f; //This goes up to 21
+        float zoomLevel = 16.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
 
 
     }
 
 
-
-
     public void onConfirmButtonClick(View view) {
 
-        Intent intent = new Intent(TrayectoActivity.this, RutaActivity.class);
+        Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
         intent.putExtra("ORIGEN", origen);
         intent.putExtra("DESTINO", destino);
 
         startActivity(intent);
     }
-
-    /*public void onConfirmButtonClick(View view) {
-
-        Intent intent = new Intent(TrayectoActivity.this, PaymentActivity.class);
-        intent.putExtra("ORIGEN", origen);
-        intent.putExtra("DESTINO", destino);
-
-        startActivity(intent);
-    }*/
-
-    public void onCancelButtonClick(View view) {
-        Log.d(TAG_TRAYECTO_ACTIVITY, "Boton para cambio de actividad pulsado en Trayecto");
-
-        Intent intent = new Intent(TrayectoActivity.this, HomeActivity.class);
-        startActivity(intent);
-    }
-
 
 }
