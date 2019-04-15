@@ -127,8 +127,9 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
 
         //Execute Directions API request
+        String API_KEY = getResources().getResourceName(R.string.google_api_key);
         GeoApiContext context = new GeoApiContext.Builder()
-                .apiKey("AIzaSyAy6azXMUfKwGJf-vsVHlFF54q6GQNnJ6M")
+                .apiKey(API_KEY)
                 .build();
         DirectionsApiRequest req = DirectionsApi.getDirections(context, origenStr, destinoStr);
         try {

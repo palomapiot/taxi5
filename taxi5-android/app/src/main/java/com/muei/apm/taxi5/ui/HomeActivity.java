@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -40,9 +41,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     LocationManager mLocationManager;
 
 
-    private Button googleSignOutButton;
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
 
 
     @Override
@@ -78,7 +77,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         mAuth = FirebaseAuth.getInstance();
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
+        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
@@ -150,6 +149,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 latitude = location.getLatitude();
             }
         }
+        Snackbar.make(findViewById(R.id.map), R.string.getting_current_location, Snackbar.LENGTH_SHORT).show();
+        configureMaps();
+
     }
 
     private Location getLastKnownLocation() {
