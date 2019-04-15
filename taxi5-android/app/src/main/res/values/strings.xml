@@ -31,6 +31,8 @@
     <string name="activity_home_historical">Histórico</string>
     <string name="activity_home_logout">Desconectarse</string>
 
+    <string name="no_current_location">Error: Imposible obtener su ubicación actual</string>
+
     <!-- PROFILE ACTIVITY -->
     <string name="activity_profile_label">Mi perfil</string>
     <string name="activity_profile_edit_profile">Editar perfil</string>
@@ -88,5 +90,13 @@
 
     <string name="enter_origin_address">Introduce dirección de origen</string>
     <string name="enter_destination_address">Introduce dirección de destino</string>
+
+    <!-- RUTA ACTIVITY -->
+
+    <string name="button_confirmar_llegada">Confirmar llegada</string>
+    <string name="ruta_activity">Ruta</string>
+    <string name="taxista_en_camino">Taxista en camino</string>
+    <string name="viaje_en_proceso">¡Comenzando viaje!</string>
+    <string name="confirmar_llegada_taxista">¿Ha llegado el taxista?</string>
 
 </resources>

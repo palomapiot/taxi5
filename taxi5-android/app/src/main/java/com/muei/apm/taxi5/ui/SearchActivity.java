@@ -29,6 +29,7 @@ public class SearchActivity extends AppCompatActivity {
 
     private static double longitude = 43.333024;
     private static double latitude = -8.410868;
+    LocationManager mLocationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +57,12 @@ public class SearchActivity extends AppCompatActivity {
             boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
             Location location;
             if(network_enabled){
-                location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                location = getLastKnownLocation();
                 if(location!=null){
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
+                } else {
+                    Toast.makeText(SearchActivity.this, getString(R.string.no_current_location), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -91,6 +94,23 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private Location getLastKnownLocation() {
+        mLocationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
+        List<String> providers = mLocationManager.getProviders(true);
+        Location bestLocation = null;
+        for (String provider : providers) {
+            Location l = mLocationManager.getLastKnownLocation(provider);
+            if (l == null) {
+                continue;
+            }
+            if (bestLocation == null || l.getAccuracy() < bestLocation.getAccuracy()) {
+                // Found best last known location: %s", l);
+                bestLocation = l;
+            }
+        }
+        return bestLocation;
     }
 
 
