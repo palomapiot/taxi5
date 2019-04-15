@@ -17,6 +17,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -101,6 +103,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             if(location!=null){
                 longitude = location.getLongitude();
                 latitude = location.getLatitude();
+            } else {
+                Toast.makeText(HomeActivity.this, getString(R.string.no_current_location), Toast.LENGTH_SHORT).show();
             }
         }
     }

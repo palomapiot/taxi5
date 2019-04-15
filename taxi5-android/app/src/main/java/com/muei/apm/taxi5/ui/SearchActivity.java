@@ -61,6 +61,8 @@ public class SearchActivity extends AppCompatActivity {
                 if(location!=null){
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
+                } else {
+                    Toast.makeText(SearchActivity.this, getString(R.string.no_current_location), Toast.LENGTH_SHORT).show();
                 }
             }
 

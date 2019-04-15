@@ -31,6 +31,8 @@
     <string name="activity_home_historical">Histórico</string>
     <string name="activity_home_logout">Desconectarse</string>
 
+    <string name="no_current_location">Error: Imposible obtener su ubicación actual</string>
+
     <!-- PROFILE ACTIVITY -->
     <string name="activity_profile_label">Mi perfil</string>
     <string name="activity_profile_edit_profile">Editar perfil</string>
