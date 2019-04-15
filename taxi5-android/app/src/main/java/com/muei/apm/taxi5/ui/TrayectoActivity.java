@@ -107,7 +107,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             String coordl2 = l2.toString();
             origenStr = coordl1+","+coordl2;
 
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Origin"));
+            mMap.setMyLocationEnabled(true);
             barcelona = new LatLng(direccionesDestino.get(0).getLatitude(), direccionesDestino.get(0).getLongitude());
 
             Double l3 = barcelona.latitude;

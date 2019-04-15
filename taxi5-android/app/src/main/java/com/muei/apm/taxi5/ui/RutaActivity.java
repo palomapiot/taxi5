@@ -20,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -41,6 +42,9 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static GoogleMap mMap;
     private String origen;
     private String destino;
+
+    // user route
+    private Polyline polyline_path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +81,11 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
 
         //Progress bar
-        final ProgressDialog pd = new ProgressDialog(RutaActivity.this);
+        final ProgressDialog pd = new ProgressDialog(RutaActivity.this, R.style.AppCompatAlertDialogStyle);
         pd.setTitle(getString(R.string.buscando_taxista));
-        pd.setMessage(getString(R.string.confirmar_llegada_taxista));
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
-        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Sí", new DialogInterface.OnClickListener(){
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Confirmar llegada del taxista", new DialogInterface.OnClickListener(){
             // Set a click listener for progress dialog cancel button
             @Override
             public void onClick(DialogInterface dialog, int which){
@@ -93,6 +96,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
         pd.show();
 
+        // draw user route
 
     }
 
@@ -126,7 +130,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
             String coordl2 = l2.toString();
             origenStr = coordl1+","+coordl2;
 
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Origin"));
+            mMap.setMyLocationEnabled(true);
             barcelona = new LatLng(direccionesDestino.get(0).getLatitude(), direccionesDestino.get(0).getLongitude());
 
             Double l3 = barcelona.latitude;
