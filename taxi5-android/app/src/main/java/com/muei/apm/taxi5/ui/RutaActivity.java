@@ -1,5 +1,6 @@
 package com.muei.apm.taxi5.ui;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -7,7 +8,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -76,24 +76,22 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
 
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RutaActivity.this);
-        // Configura el titulo.
-        alertDialogBuilder.setTitle(R.string.taxista_en_camino);
-        // Configura el mensaje.
-        alertDialogBuilder
-                .setMessage(R.string.confirmar_llegada_taxista)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Empieza el viaje, el taxista llego a la ubicación del usuario
-                        Toast.makeText(RutaActivity.this, getString(R.string.viaje_en_proceso), Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                }).create().show();
+        //Progress bar
+        final ProgressDialog pd = new ProgressDialog(RutaActivity.this);
+        pd.setTitle(getString(R.string.buscando_taxista));
+        pd.setMessage(getString(R.string.confirmar_llegada_taxista));
+        pd.setCancelable(false);
+        pd.setCanceledOnTouchOutside(false);
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Sí", new DialogInterface.OnClickListener(){
+            // Set a click listener for progress dialog cancel button
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                // dismiss the progress dialog
+                Toast.makeText(RutaActivity.this, getString(R.string.viaje_en_proceso), Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+            }
+        });
+        pd.show();
 
 
     }

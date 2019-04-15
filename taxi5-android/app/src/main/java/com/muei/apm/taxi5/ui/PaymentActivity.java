@@ -38,9 +38,9 @@ public class PaymentActivity extends AppCompatActivity {
         TextView origen_label = findViewById(R.id.pago_origen);
         TextView destino_label = findViewById(R.id.pago_destino);
 
-        precio_label.setText("5 €");
-        origen_label.setText(origen.toUpperCase());
-        destino_label.setText(destino.toUpperCase());
+        precio_label.setText("6,75€");
+        origen_label.setText(origen);
+        destino_label.setText(destino);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -59,8 +59,25 @@ public class PaymentActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Toast.makeText(PaymentActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
-                        startActivity(intent);
+
+
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this);
+                        builder1.setMessage(R.string.agradecimiento);
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Ir a inicio",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        dialog.cancel();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
+
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
