@@ -340,7 +340,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                // TODO guardar login
+                LoginActivity.this.finish();
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
             } else {

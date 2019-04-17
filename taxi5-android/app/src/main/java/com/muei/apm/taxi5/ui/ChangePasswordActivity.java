@@ -29,6 +29,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
 
     public void onClickConfirmPassword(View view) {
         Toast.makeText(this, getString(R.string.activity_change_password_password_updated), Toast.LENGTH_SHORT).show();
+        // TODO guardar constraseña
         ChangePasswordActivity.this.finish();
     }
 
