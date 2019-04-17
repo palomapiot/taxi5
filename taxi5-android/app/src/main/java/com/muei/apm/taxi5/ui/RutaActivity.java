@@ -1,12 +1,19 @@
 package com.muei.apm.taxi5.ui;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +51,12 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
     private String destino;
 
     // user route
-    private Polyline polyline_path;
+    private List<LatLng> routePoints = new ArrayList<LatLng>();
+    private LocationManager locationManager;
+    private android.location.LocationListener myLocationListener;
+    Location currentLocation;
+    private double currentLongitude;
+    private double currentLatitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +95,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         //Progress bar
         final ProgressDialog pd = new ProgressDialog(RutaActivity.this, R.style.AppCompatAlertDialogStyle);
         pd.setTitle(getString(R.string.buscando_taxista));
+        pd.setMessage(getString(R.string.buscando_taxista_mensaje));
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
         pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Confirmar llegada del taxista", new DialogInterface.OnClickListener(){
@@ -95,8 +108,6 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
         pd.show();
-
-        // draw user route
 
     }
 
@@ -210,8 +221,105 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
 
 
+        checkLocation();
+
     }
 
+    public void checkLocation() {
+
+        String serviceString = Context.LOCATION_SERVICE;
+        locationManager = (LocationManager) getSystemService(serviceString);
+
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+
+        myLocationListener = new android.location.LocationListener() {
+            public void onLocationChanged(Location locationListener) {
+
+                if (isGPSEnabled(RutaActivity.this)) {
+                    if (locationListener != null) {
+                        if (ActivityCompat.checkSelfPermission(RutaActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                                && ActivityCompat.checkSelfPermission(RutaActivity.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+
+                        if (locationManager != null) {
+                            currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            if (currentLocation != null) {
+                                currentLatitude = currentLocation.getLatitude();
+                                currentLongitude = currentLocation.getLongitude();
+                            }
+                        }
+                    }
+                } else if (isInternetConnected(RutaActivity.this)) {
+                    if (locationManager != null) {
+                        currentLocation = locationManager
+                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                        if (currentLocation != null) {
+                            currentLatitude = currentLocation.getLatitude();
+                            currentLongitude = currentLocation.getLongitude();
+                        }
+                    }
+                }
+
+                LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+
+                routePoints.add(latLng);
+
+                Polyline route = mMap.addPolyline(new PolylineOptions()
+                        .width(20)
+                        .color(Color.RED)
+                        .geodesic(false)
+                        .zIndex(3));
+                route.setPoints(routePoints);
+
+
+            }
+
+            public void onProviderDisabled(String provider) {
+
+            }
+
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+        };
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 1, myLocationListener);  //  here the min time interval and min distance
+    }
+
+
+    public static boolean isInternetConnected(Context ctx) {
+        ConnectivityManager connectivityMgr = (ConnectivityManager) ctx
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo wifi = connectivityMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobile = connectivityMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        // Check if wifi or mobile network is available or not. If any of them is
+        // available or connected then it will return true, otherwise false;
+        if (wifi != null) {
+            if (wifi.isConnected()) {
+                return true;
+            }
+        }
+        if (mobile != null) {
+            if (mobile.isConnected()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean isGPSEnabled(Context mContext) {
+        LocationManager locationManager = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+    }
 
     public void onConfirmButtonClick(View view) {
 

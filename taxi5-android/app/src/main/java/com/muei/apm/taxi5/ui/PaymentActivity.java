@@ -49,7 +49,7 @@ public class PaymentActivity extends AppCompatActivity {
 
     public void onClickBtnPay(View view) {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentActivity.this);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
         // Configura el titulo.
         alertDialogBuilder.setTitle(R.string.payment);
         // Configura el mensaje.
@@ -61,7 +61,7 @@ public class PaymentActivity extends AppCompatActivity {
                         Toast.makeText(PaymentActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
 
 
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this);
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
                         builder1.setMessage(R.string.agradecimiento);
                         builder1.setCancelable(true);
 

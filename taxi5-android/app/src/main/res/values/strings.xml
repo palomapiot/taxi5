@@ -92,6 +92,8 @@
 
     <string name="enter_origin_address">Introduce dirección de origen</string>
     <string name="enter_destination_address">Introduce dirección de destino</string>
+    <string name="cancelar_viaje">¿Estás seguro de que desea cancelar el viaje?</string>
+    <string name="viaje_cancelado">Viaje cancelado</string>
 
     <!-- RUTA ACTIVITY -->
 
@@ -100,6 +102,7 @@
     <string name="taxista_en_camino">Taxista en camino</string>
     <string name="viaje_en_proceso">¡Comenzando viaje!</string>
     <string name="buscando_taxista">Buscando taxista...</string>
+    <string name="buscando_taxista_mensaje">En breves momentos te asignaremos un taxista.</string>
     <string name="confirmar_llegada_taxista">Confirmar llegada del taxista</string>
     <string name="getting_current_location">Obteniendo ubicación actual ...</string>
 
