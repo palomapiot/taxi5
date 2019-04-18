@@ -1,15 +1,18 @@
 package com.muei.apm.taxi5.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -107,7 +110,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             String coordl2 = l2.toString();
             origenStr = coordl1+","+coordl2;
 
-            mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Origin"));
+            mMap.setMyLocationEnabled(true);
             barcelona = new LatLng(direccionesDestino.get(0).getLatitude(), direccionesDestino.get(0).getLongitude());
 
             Double l3 = barcelona.latitude;
@@ -213,8 +216,29 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     public void onCancelButtonClick(View view) {
         Log.d(TAG_TRAYECTO_ACTIVITY, "Boton para cambio de actividad pulsado en Trayecto");
 
-        Intent intent = new Intent(TrayectoActivity.this, HomeActivity.class);
-        startActivity(intent);
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
+        builder1.setMessage(R.string.cancelar_viaje);
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "Sí",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Toast.makeText(TrayectoActivity.this, getString(R.string.viaje_cancelado), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TrayectoActivity.this, HomeActivity.class);
+                        startActivity(intent);
+                        dialog.cancel();
+                    }
+                })
+            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            }).create().show();;
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+
     }
 
 

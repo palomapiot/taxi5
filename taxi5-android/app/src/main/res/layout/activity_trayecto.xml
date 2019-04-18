@@ -27,47 +27,62 @@
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        map:layout_constraintBottom_toTopOf="@+id/button"
+        android:layout_marginBottom="0dp"
+        map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintEnd_toEndOf="parent"
         map:layout_constraintStart_toStartOf="parent"
         map:layout_constraintTop_toTopOf="parent"
-        tools:context="ui.TrayectoActivity" />
+        tools:context="ui.TrayectoActivity">
+    </fragment>
 
     <Button
         android:id="@+id/button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginEnd="225dp"
-        android:layout_marginRight="225dp"
-        android:layout_marginBottom="5dp"
-        android:onClick="onConfirmButtonClick"
-        app:backgroundTint="@color/colorPrimary"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginEnd="110dp"
+        android:layout_marginRight="110dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_rounded"
+        android:onClick="onConfirmButtonClick"
         android:text="@string/activity_trayecto_confirm_travel"
         android:textColor="@android:color/white"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map_marker" />
+
 
     <Button
         android:id="@+id/buttonCancel"
-        android:layout_width="0dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="225dp"
-        android:layout_marginLeft="225dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginBottom="5dp"
-        android:onClick="onCancelButtonClick"
-        app:backgroundTint="@color/colorPrimary"
+        android:layout_marginStart="125dp"
+        android:layout_marginLeft="125dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/btn_rounded"
-        android:text="@string/activity_trayecto_cancel"
+        android:onClick="onCancelButtonClick"
+        android:text="X"
         android:textColor="@android:color/white"
+        android:textSize="24sp"
+        app:backgroundTint="@android:color/holo_red_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.973"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintVertical_bias="0.008" />
+
+
+
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>
