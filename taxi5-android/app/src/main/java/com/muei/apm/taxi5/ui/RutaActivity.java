@@ -98,7 +98,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         pd.setMessage(getString(R.string.buscando_taxista_mensaje));
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
-        pd.setButton(DialogInterface.BUTTON_NEGATIVE, "Confirmar llegada del taxista", new DialogInterface.OnClickListener(){
+        pd.setButton(DialogInterface.BUTTON_NEGATIVE, getString(R.string.confirm_driver_arrival), new DialogInterface.OnClickListener() {
             // Set a click listener for progress dialog cancel button
             @Override
             public void onClick(DialogInterface dialog, int which){
@@ -309,9 +309,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
         if (mobile != null) {
-            if (mobile.isConnected()) {
-                return true;
-            }
+            return mobile.isConnected();
         }
         return false;
     }

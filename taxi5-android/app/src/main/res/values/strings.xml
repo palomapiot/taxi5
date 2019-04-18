@@ -105,5 +105,6 @@
     <string name="buscando_taxista_mensaje">En breves momentos te asignaremos un taxista.</string>
     <string name="confirmar_llegada_taxista">Confirmar llegada del taxista</string>
     <string name="getting_current_location">Obteniendo ubicación actual ...</string>
+    <string name="confirm_driver_arrival">Confirmar llegada del taxista</string>
 
 </resources>
