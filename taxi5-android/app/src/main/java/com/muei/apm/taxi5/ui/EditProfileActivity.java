@@ -30,6 +30,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
     public void onClickConfirmChanges(View view) {
         Toast.makeText(this, getString(R.string.activity_edit_profile_profile_updated), Toast.LENGTH_SHORT).show();
+        // TODO guardar cambios
+        EditProfileActivity.this.finish();
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

@@ -89,7 +89,11 @@ public class SearchActivity extends AppCompatActivity {
                     intent.putExtra("ORIGEN", inputOrigen.getText().toString().trim());
                     intent.putExtra("DESTINO", inputDestino.getText().toString().trim());
 
+                    // TODO guardar origen
+                    // TODO guardar destino
+                    SearchActivity.this.onPause();
                     SearchActivity.this.startActivity(intent);
+
                 }
             }
         });
@@ -112,7 +116,6 @@ public class SearchActivity extends AppCompatActivity {
         }
         return bestLocation;
     }
-
 
 
 }

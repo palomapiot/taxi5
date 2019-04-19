@@ -22,7 +22,7 @@
     <TextView
         android:id="@+id/tvNameHistoric"
         android:layout_width="wrap_content"
-        android:layout_height="28dp"
+        android:layout_height="37dp"
         android:text="@string/activity_pago_pago_a_realizar"
         android:textSize="24sp"
         android:typeface="sans"

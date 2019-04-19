@@ -67,7 +67,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        
+
         ActionBar ab = getSupportActionBar();
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
@@ -230,11 +230,11 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                         dialog.cancel();
                     }
                 })
-            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            }).create().show();;
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).create().show();
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
