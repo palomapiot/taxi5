@@ -14,9 +14,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -81,6 +85,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        ActionBar ab = getSupportActionBar();
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -105,6 +110,43 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
         pd.show();
 
+    }
+
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_ruta, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.problemaRuta) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(RutaActivity.this, R.style.AppCompatAlertDialogStyle);
+            builder1.setMessage(R.string.cancelar_viaje_iniciado);
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Sí",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Toast.makeText(RutaActivity.this, getString(R.string.viaje_cancelado), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(RutaActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    }).create().show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
