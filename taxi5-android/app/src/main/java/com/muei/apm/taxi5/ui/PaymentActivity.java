@@ -71,13 +71,14 @@ public class PaymentActivity extends AppCompatActivity {
                                         Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
                                         startActivity(intent);
                                         dialog.cancel();
+
+                                        PaymentActivity.this.finish();
                                     }
                                 });
 
                         AlertDialog alert11 = builder1.create();
                         alert11.show();
 
-                        PaymentActivity.this.finish();
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
