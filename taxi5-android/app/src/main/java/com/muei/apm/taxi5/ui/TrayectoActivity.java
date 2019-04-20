@@ -11,6 +11,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -192,9 +194,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
     }
 
-
-
-
     public void onConfirmButtonClick(View view) {
 
         Intent intent = new Intent(TrayectoActivity.this, RutaActivity.class);
@@ -203,15 +202,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
         startActivity(intent);
     }
-
-    /*public void onConfirmButtonClick(View view) {
-
-        Intent intent = new Intent(TrayectoActivity.this, PaymentActivity.class);
-        intent.putExtra("ORIGEN", origen);
-        intent.putExtra("DESTINO", destino);
-
-        startActivity(intent);
-    }*/
 
     public void onCancelButtonClick(View view) {
         Log.d(TAG_TRAYECTO_ACTIVITY, "Boton para cambio de actividad pulsado en Trayecto");
@@ -239,6 +229,43 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         AlertDialog alert11 = builder1.create();
         alert11.show();
 
+    }
+
+    // create an action bar button
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_trayecto, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    // handle button activities
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.cancelarViajeSinIniciar) {
+            AlertDialog.Builder builder1 = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
+            builder1.setMessage(R.string.cancelar_viaje);
+            builder1.setCancelable(true);
+
+            builder1.setPositiveButton(
+                    "Sí",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Toast.makeText(TrayectoActivity.this, getString(R.string.viaje_cancelado), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(TrayectoActivity.this, HomeActivity.class);
+                            startActivity(intent);
+                            dialog.cancel();
+                        }
+                    })
+                    .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    }).create().show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

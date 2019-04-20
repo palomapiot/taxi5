@@ -94,6 +94,7 @@
     <string name="enter_destination_address">Introduce dirección de destino</string>
     <string name="cancelar_viaje">¿Estás seguro de que desea cancelar el viaje?</string>
     <string name="viaje_cancelado">Viaje cancelado</string>
+    <string name="cancelar_viaje_menu">Cancelar viaje</string>
 
     <!-- RUTA ACTIVITY -->
 
