@@ -111,4 +111,9 @@
     <string name="comunicar_problema_ruta">Comunicando problema...</string>
     <string name="cancelar_viaje_iniciado">¿Hubo algún problema y desea cancelar el viaje en curso?</string>
 
+    <!-- Endpoint -->
+
+    <string name="endpoint">http://localhost:5000/</string>
+
+
 </resources>

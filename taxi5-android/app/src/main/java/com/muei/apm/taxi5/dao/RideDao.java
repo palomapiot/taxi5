@@ -14,15 +14,15 @@ import java.util.List;
 public interface RideDao {
 
 
-    @Query("SELECT * FROM user")
+    @Query("SELECT * FROM ride")
     List<Ride> getAll();
 
-    @Query("SELECT * FROM ride WHERE rid IN (:rideIds)")
+    @Query("SELECT * FROM ride WHERE id IN (:rideIds)")
     List<Ride> loadAllByIds(long[] rideIds);
 
 
-    @Query("SELECT * FROM ride WHERE user_id = :uid")
-    List<Ride> findAllByUserId(long uid);
+    @Query("SELECT * FROM ride WHERE user_id = :id")
+    List<Ride> findAllByUserId(long id);
 
     @Insert
     public Long insert(Ride ride);

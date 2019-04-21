@@ -20,7 +20,7 @@ public class Ride {
 
     @PrimaryKey
     @NonNull
-    public long rid;
+    public long id;
 
     public String origin;
 
@@ -28,11 +28,12 @@ public class Ride {
 
     public Calendar date;
 
+    @ColumnInfo(name = "user_id")
+    public long userId;
+
     @Ignore
     public String dateString;
 
-    @ColumnInfo(name = "user_id")
-    public long userId;
 
     public Ride(String origin, String destination, Calendar date, long userId) {
         this.origin = origin;
