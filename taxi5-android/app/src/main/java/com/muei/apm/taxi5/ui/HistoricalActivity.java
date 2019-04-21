@@ -9,10 +9,13 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.service.RideService;
 
 import java.util.ArrayList;
 
 public class HistoricalActivity extends AppCompatActivity {
+
+    private RideService rideService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,12 @@ public class HistoricalActivity extends AppCompatActivity {
         RouteListAdapter adapter = new RouteListAdapter(this, routes);
 
         lv.setAdapter(adapter);
+
+        /*List<Ride> rides = new ArrayList<Ride>();
+        rideService = new RideService(getBaseContext());
+        rides.addAll(rideService.getHistorialByUserId(1));*/
+
+
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
