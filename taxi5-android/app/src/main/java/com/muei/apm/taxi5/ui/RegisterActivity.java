@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.api.APIService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private View mLoginFormView;
 
     private  final  String TAG = RegisterActivity.class.getSimpleName();
+
+    // api
+    private APIService mAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -380,8 +384,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             }
 
             // TODO: register the new account here.
-
-
             return true;
         }
 

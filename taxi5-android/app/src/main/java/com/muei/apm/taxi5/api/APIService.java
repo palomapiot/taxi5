@@ -4,7 +4,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-public interface RetrofitInterface {
+public interface APIService {
 
     @POST("/user")
     Call<ApiObject> createUser(@Body ApiObject user);
