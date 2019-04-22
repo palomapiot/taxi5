@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -32,6 +33,7 @@ import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
 import com.muei.apm.taxi5.api.ApiObject;
 import com.muei.apm.taxi5.api.ApiUtils;
+import com.muei.apm.taxi5.api.LoginObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -391,6 +393,20 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
                     if (response.isSuccessful()) {
                         Log.i(TAG, "post submitted to API." + response.body().toString());
+                        mAPIService.loginUser(new LoginObject(mEmail, mPassword)).enqueue(new Callback<ApiObject>() {
+                            @Override
+                            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                                Log.i(TAG, "login post submitted to API." + response.body().toString());
+
+                                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApiObject> call, Throwable t) {
+                                Log.i(TAG, "Unable to submit post to API.");
+                            }
+                        });
                     }
                 }
 

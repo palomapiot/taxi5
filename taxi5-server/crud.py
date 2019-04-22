@@ -31,6 +31,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True)
     phone = db.Column(db.String(9), unique=True)
     psswd = db.Column(db.String(128))
+    rides = db.relationship('Ride', backref='user', lazy=True)
 
     def set_password(self, password):
         self.psswd = generate_password_hash(password)
@@ -54,6 +55,33 @@ class UserSchema(ma.Schema):
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+
+
+class Ride(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    origin = db.Column(db.String(240))
+    destination = db.Column(db.String(240))
+    ridedate = db.Column(db.BigInteger)
+    price = db.Column(db.Float)
+    userid = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+
+    def __init__(self, origin, destination, ridedate, price, userid):
+        self.origin = origin
+	self.destination = destination
+        self.ridedate = ridedate
+	self.price = price
+	self.userid = userid
+
+
+class RideSchema(ma.Schema):
+    class Meta:
+        # Fields to expose
+        fields = ('origin', 'destination', 'ridedate', 'price', 'userid')
+
+
+ride_schema = RideSchema()
+rides_schema = RideSchema(many=True)
+
 
 ##############
 ##  ROUTES  ##
@@ -115,6 +143,14 @@ def get_current_user():
     return user_schema.jsonify(user)
 
 
+# endpoint to get user rides by user id
+@app.route("/rides/<id>", methods=["GET"])
+def get_user_rides(id):
+    rides = Ride.query.filter(Ride.userid == id)
+    #user.rides
+    return rides_schema.jsonify(rides)
+
+
 # endpoint to update user
 @app.route("/user/<id>", methods=["PUT"])
 def user_update(id):
@@ -129,7 +165,18 @@ def user_update(id):
     user.lastname = lastname
     user.email = email
     user.phone = phone
-    user.psswd = psswd
+    user.set_password(psswd)
+
+    db.session.commit()
+    return user_schema.jsonify(user)
+
+# endpoint to update user psswd
+@app.route("/userpsswd/<id>", methods=["PUT"])
+def user_update_psswd(id):
+    user = User.query.get(id)
+    psswd = request.json['psswd']
+
+    user.set_password(psswd)
 
     db.session.commit()
     return user_schema.jsonify(user)
@@ -143,6 +190,37 @@ def user_delete(id):
     db.session.commit()
 
     return user_schema.jsonify(user)
+
+###########
+##  RIDE ##
+###########
+
+# endpoint to create new ride
+@app.route("/ride", methods=["POST"])
+def add_ride():
+    origin = request.json['origin']
+    destination = request.json['destination']
+    ridedate = request.json['ridedate']
+    price = None
+    userid = request.json['userid']
+    
+    new_ride = Ride(origin, destination, ridedate, price, userid)
+
+    db.session.add(new_ride)
+    db.session.commit()
+
+    return ride_schema.jsonify(new_ride)
+
+# endpoint to update ride (set price)
+@app.route("/ride/<id>", methods=["PUT"])
+def ride_update(id):
+    ride = Ride.query.get(id)
+    price = request.json['price']
+
+    ride.price = price
+
+    db.session.commit()
+    return ride_schema.jsonify(ride)
 
 @app.errorhandler(404)
 def not_found(error):

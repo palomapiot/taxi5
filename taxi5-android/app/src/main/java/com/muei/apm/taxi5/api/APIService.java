@@ -9,4 +9,7 @@ public interface APIService {
     @POST("/user")
     Call<ApiObject> createUser(@Body ApiObject user);
 
+    @POST("/login")
+    Call<ApiObject> loginUser(@Body LoginObject user);
+
 }
