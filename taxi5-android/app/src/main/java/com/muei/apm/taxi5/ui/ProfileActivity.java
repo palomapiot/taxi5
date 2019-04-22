@@ -9,8 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.api.APIService;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private  final  String TAG = ProfileActivity.class.getSimpleName();
+
+    // api
+    private APIService mAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +29,40 @@ public class ProfileActivity extends AppCompatActivity {
         if (ab != null) {
             ab.setDisplayHomeAsUpEnabled(true);
         }
+
+
+        /*mAPIService = ApiUtils.getAPIService();
+        // TODO: get user id
+        mAPIService.getCurrentUser().enqueue(new Callback<ApiObject>() {
+            @Override
+            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "current user get submitted to API." + response.body().toString());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiObject> call, Throwable t) {
+                Log.i(TAG, "Unable to get current user from API.");
+            }
+        });
+
+        mAPIService.getUserDetails(1).enqueue(new Callback<ApiObject>() {
+            @Override
+            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "get submitted to API." + response.body().toString());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiObject> call, Throwable t) {
+                Log.i(TAG, "Unable to get from API.");
+            }
+        });*/
+
     }
 
     public void onClickEditProfile(View view) {
