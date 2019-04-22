@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,9 +30,15 @@ import android.widget.TextView;
 
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
+import com.muei.apm.taxi5.api.ApiObject;
+import com.muei.apm.taxi5.api.ApiUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -61,6 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private AutoCompleteTextView mNameView;
     private AutoCompleteTextView mLastNameView;
     private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mPhoneView;
     private EditText mPasswordView;
     private EditText mPasswordRepeatView;
     private View mProgressView;
@@ -83,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         mNameView = findViewById(R.id.name);
         mLastNameView = findViewById(R.id.lastname);
         mEmailView = findViewById(R.id.email);
+        mPhoneView = findViewById(R.id.phone);
         populateAutoComplete();
 
         mPasswordView = findViewById(R.id.password);
@@ -172,6 +181,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         mLastNameView.setError(null);
         mEmailView.setError(null);
         mPasswordView.setError(null);
+        mPhoneView.setError(null);
 
         // Store values at the time of the login attempt.
         String name = mNameView.getText().toString();
@@ -179,6 +189,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
         String passwordRepeated = mPasswordRepeatView.getText().toString();
+        String phone = mPhoneView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -220,7 +231,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mPasswordRepeatView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordRepeatView;
             cancel = true;
-        } else if (passwordRepeated.equals(password)) { // check the same password
+        } else if (!passwordRepeated.equals(password)) { // check the same password
             mPasswordRepeatView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordRepeatView;
             cancel = true;
@@ -231,7 +242,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
             cancel = true;
-        } else if (passwordRepeated.equals(password)) {// check the same password
+        } else if (!passwordRepeated.equals(password)) {// check the same password
             mPasswordView.setError(getString(R.string.error_incorrect_password));
             focusView = mPasswordView;
             cancel = true;
@@ -245,7 +256,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
+            mAuthTask = new UserLoginTask(email, password, name, lastname, phone);
             mAuthTask.execute((Void) null);
         }
     }
@@ -358,15 +369,36 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
         private final String mEmail;
         private final String mPassword;
+        private final String mFirstName;
+        private final String mLastName;
+        private final String mPhone;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String password, String firstName, String lastName, String phone) {
             mEmail = email;
             mPassword = password;
+            mFirstName = firstName;
+            mLastName = lastName;
+            mPhone = phone;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+            mAPIService = ApiUtils.getAPIService();
+            ApiObject body = new ApiObject(mFirstName, mLastName, mEmail, mPhone, mPassword);
+            mAPIService.createUser(body).enqueue(new Callback<ApiObject>() {
+                @Override
+                public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "post submitted to API." + response.body().toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiObject> call, Throwable t) {
+                    Log.i(TAG, "Unable to submit post to API.");
+                }
+            });
 
             try {
                 // Simulate network access.
