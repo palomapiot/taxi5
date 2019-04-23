@@ -393,17 +393,22 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                 public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
                     if (response.isSuccessful()) {
                         Log.i(TAG, "post submitted to API." + response.body().toString());
-                        mAPIService.loginUser(new LoginObject(mEmail, mPassword)).enqueue(new Callback<ApiObject>() {
+                        mAPIService.loginUser(new LoginObject(mEmail, mPassword)).enqueue(new Callback<LoginObject>() {
                             @Override
-                            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
-                                Log.i(TAG, "login post submitted to API." + response.body().toString());
+                            public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
+                                if (response.isSuccessful()) {
+                                    Log.i(TAG, "login submitted to API." + response.body().toString());
 
-                                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                startActivity(intent);
+                                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                } else  {
+                                    Log.i(TAG, "FAILED TO LOG." + response.body().toString());
+
+                                }
                             }
 
                             @Override
-                            public void onFailure(Call<ApiObject> call, Throwable t) {
+                            public void onFailure(Call<LoginObject> call, Throwable t) {
                                 Log.i(TAG, "Unable to submit post to API.");
                             }
                         });

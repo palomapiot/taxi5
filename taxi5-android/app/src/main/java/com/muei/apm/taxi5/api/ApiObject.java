@@ -4,6 +4,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ApiObject {
+    @SerializedName("id")
+    @Expose
+    public Long id;
+
     @SerializedName("firstname")
     @Expose
     public String firstName;
@@ -24,6 +28,15 @@ public class ApiObject {
     @Expose
     public String phone;
 
+    public ApiObject(Long id, String firstName, String lastName, String email, String phone, String psswd) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+        this.psswd = psswd;
+    }
+
     public ApiObject(String firstName, String lastName, String email, String phone, String psswd) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,6 +48,7 @@ public class ApiObject {
     @Override
     public String toString() {
         return "{" +
+                "id='" + id + '\'' +
                 "firstname='" + firstName + '\'' +
                 ", lastname='" + lastName + '\'' +
                 ", email='" + email + '\'' +

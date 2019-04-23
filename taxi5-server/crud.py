@@ -50,7 +50,7 @@ class User(UserMixin, db.Model):
 class UserSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('firstname', 'lastname', 'email', 'phone', 'psswd')
+        fields = ('id', 'firstname', 'lastname', 'email', 'phone', 'psswd')
 
 
 user_schema = UserSchema()

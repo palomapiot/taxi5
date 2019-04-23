@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class LoginObject {
 
+    @SerializedName("id")
+    @Expose
+    public Long id;
+
     @SerializedName("email")
     @Expose
     public String email;
@@ -21,6 +25,7 @@ public class LoginObject {
     @Override
     public String toString() {
         return "{" +
+                ", id='" + id + '\'' +
                 ", email='" + email + '\'' +
                 ", psswd='" + psswd + '\'' +
                 '}';

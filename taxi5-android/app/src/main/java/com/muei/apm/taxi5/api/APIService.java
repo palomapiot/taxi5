@@ -12,10 +12,10 @@ public interface APIService {
     Call<ApiObject> createUser(@Body ApiObject user);
 
     @POST("/login")
-    Call<ApiObject> loginUser(@Body LoginObject user);
+    Call<LoginObject> loginUser(@Body LoginObject user);
 
     @GET("/currentuser")
-    Call<ApiObject> getCurrentUser();
+    Call<ApiObject> getCurrentUserId();
 
     @GET("/user/{id}")
     Call<ApiObject> getUserDetails(@Path("id") long id);

@@ -46,9 +46,16 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.api.APIService;
+import com.muei.apm.taxi5.api.ApiUtils;
+import com.muei.apm.taxi5.api.LoginObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -86,6 +93,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int RC_SIGN_IN = 9001;
     private static final String TAG = "SignInActivity";
     private FirebaseAuth.AuthStateListener mAuthListener;
+
+    // api
+    private APIService mAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -407,10 +417,27 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmail = email;
             mPassword = password;
         }
-
+        Long currentUserId;
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+            mAPIService = ApiUtils.getAPIService();
+            LoginObject body = new LoginObject(mEmail, mPassword);
+            mAPIService.loginUser(body).enqueue(new Callback<LoginObject>() {
+                @Override
+                public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "LOGIN SUBMIT TO API." + response.body().toString());
+                        // TODO: añadir el id del usuario logueado a sesion para acceder desde to2 la2
+                        currentUserId = response.body().id;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginObject> call, Throwable t) {
+                    Log.i(TAG, "Unable to submit post to API.");
+                }
+            });
 
             try {
                 // Simulate network access.
