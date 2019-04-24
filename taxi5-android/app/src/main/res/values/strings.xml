@@ -13,7 +13,6 @@
     <string name="activity_login_iniciar_sesion_google">Iniciar Sesión con Google</string>
     <string name="prompt_name">Nombre</string>
     <string name="prompt_lastname">Apellidos</string>
-    <string name="prompt_phone">Teléfono</string>
     <string name="prompt_email">Correo</string>
     <string name="prompt_password">Contraseña</string>
     <string name="prompt_samePassword">Repita la contraseña</string>
@@ -111,10 +110,5 @@
     <string name="ruta_problema">¿Hubo un problema?</string>
     <string name="comunicar_problema_ruta">Comunicando problema...</string>
     <string name="cancelar_viaje_iniciado">¿Hubo algún problema y desea cancelar el viaje en curso?</string>
-
-    <!-- Endpoint -->
-
-    <string name="endpoint">http://localhost:5000/</string>
-
 
 </resources>

@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,11 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickBtnRegister(View view) {
         btnRegister = findViewById(R.id.btnRegister);
-
         Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
         startActivity(intent);
-
-
     }
 
 
