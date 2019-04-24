@@ -76,7 +76,7 @@ class Ride(db.Model):
 class RideSchema(ma.Schema):
     class Meta:
         # Fields to expose
-        fields = ('origin', 'destination', 'ridedate', 'price', 'userid')
+        fields = ('id', 'origin', 'destination', 'ridedate', 'price', 'userid')
 
 
 ride_schema = RideSchema()

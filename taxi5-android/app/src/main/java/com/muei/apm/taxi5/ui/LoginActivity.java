@@ -423,7 +423,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
+            
             mAPIService = ApiUtils.getAPIService();
             LoginObject body = new LoginObject(mEmail, mPassword);
             mAPIService.loginUser(body).enqueue(new Callback<LoginObject>() {
@@ -431,7 +431,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
                     if (response.isSuccessful()) {
                         Log.i(TAG, "LOGIN SUBMIT TO API." + response.body().toString());
-                        // TODO: añadir el id del usuario logueado a sesion para acceder desde to2 la2
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                         editor.putLong("currentUserId", response.body().id);
                         editor.apply();

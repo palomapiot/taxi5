@@ -32,4 +32,11 @@ public interface APIService {
     @PUT("/userpsswd/{id}")
     Call<ApiObject> updatePsswd(@Path("id") long id, @Body UpdatePsswdObject user);
 
+
+    @POST("/ride")
+    Call<RideObject> addRide(@Body RideObject ride);
+
+    @PUT("/ride/{id}")
+    Call<RideObject> updateRide(@Path("id") long id, @Body RideObject ride);
+
 }

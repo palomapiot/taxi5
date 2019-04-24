@@ -5,6 +5,10 @@ import com.google.gson.annotations.SerializedName;
 
 public class RideObject {
 
+    @SerializedName("id")
+    @Expose
+    public Long id;
+
     @SerializedName("origin")
     @Expose
     public String origin;
@@ -15,7 +19,7 @@ public class RideObject {
 
     @SerializedName("ridedate")
     @Expose
-    public String ridedate;
+    public long ridedate;
 
     @SerializedName("price")
     @Expose
@@ -25,12 +29,24 @@ public class RideObject {
     @Expose
     public Long userid;
 
-    public RideObject(String origin, String destination, String ridedate, float price, Long userid) {
+    public RideObject(String origin, String destination, long ridedate, float price, Long userid) {
         this.origin = origin;
         this.destination = destination;
         this.ridedate = ridedate;
         this.price = price;
         this.userid = userid;
+    }
+
+    public RideObject(String origin, String destination, long ridedate, Long userid) {
+        this.origin = origin;
+        this.destination = destination;
+        this.ridedate = ridedate;
+        this.userid = userid;
+    }
+
+
+    public RideObject(float price) {
+        this.price = price;
     }
 
     @Override

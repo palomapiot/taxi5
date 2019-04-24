@@ -12,6 +12,7 @@ import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.RideObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RouteListAdapter extends BaseAdapter {
 
@@ -56,7 +57,7 @@ public class RouteListAdapter extends BaseAdapter {
         RideObject dir = items.get(position);
 
         TextView date = v.findViewById(R.id.route_date);
-        date.setText(dir.ridedate);
+        date.setText(Objects.toString(dir.ridedate, null));
 
         TextView origin = v.findViewById(R.id.origin_location);
         origin.setText(dir.origin);
