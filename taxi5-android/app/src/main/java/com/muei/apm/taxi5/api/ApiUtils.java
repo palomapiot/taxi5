@@ -4,7 +4,7 @@ public class ApiUtils {
 
     private ApiUtils() {}
 
-    public static final String BASE_URL = "http://192.168.43.208:5000/";
+    public static final String BASE_URL = "https://taxi5-server.herokuapp.com/";
 
     public static APIService getAPIService() {
 
