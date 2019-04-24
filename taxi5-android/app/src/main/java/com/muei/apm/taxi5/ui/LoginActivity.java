@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -96,6 +97,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     // api
     private APIService mAPIService;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private boolean todoCorrecto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -417,7 +420,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mEmail = email;
             mPassword = password;
         }
-        Long currentUserId;
+
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -429,7 +432,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     if (response.isSuccessful()) {
                         Log.i(TAG, "LOGIN SUBMIT TO API." + response.body().toString());
                         // TODO: añadir el id del usuario logueado a sesion para acceder desde to2 la2
-                        currentUserId = response.body().id;
+                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putLong("currentUserId", response.body().id);
+                        editor.apply();
+                        todoCorrecto = true;
                     }
                 }
 
@@ -455,7 +461,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
-            return true;
+            return todoCorrecto;
         }
 
         @Override

@@ -9,15 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.api.RideObject;
 
 import java.util.ArrayList;
 
 public class RouteListAdapter extends BaseAdapter {
 
     private Activity activity;
-    private ArrayList<Route> items;
+    private ArrayList<RideObject> items;
 
-    public RouteListAdapter(Activity activity, ArrayList<Route> items) {
+    public RouteListAdapter(Activity activity, ArrayList<RideObject> items) {
         this.activity = activity;
         this.items = items;
     }
@@ -52,16 +53,16 @@ public class RouteListAdapter extends BaseAdapter {
             v = inf.inflate(R.layout.item_route, null);
         }
 
-        Route dir = items.get(position);
+        RideObject dir = items.get(position);
 
         TextView date = v.findViewById(R.id.route_date);
-        date.setText(dir.getDate());
+        date.setText(dir.ridedate);
 
         TextView origin = v.findViewById(R.id.origin_location);
-        origin.setText(dir.getOrigin());
+        origin.setText(dir.origin);
 
         TextView destination = v.findViewById(R.id.destination_location);
-        destination.setText(dir.getDestination());
+        destination.setText(dir.destination);
 
         return v;
     }

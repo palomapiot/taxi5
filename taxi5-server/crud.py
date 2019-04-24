@@ -159,13 +159,11 @@ def user_update(id):
     lastname = request.json['lastname']
     email = request.json['email']
     phone = request.json['phone']
-    psswd = request.json['psswd']
 
     user.firstname = firstname
     user.lastname = lastname
     user.email = email
     user.phone = phone
-    user.set_password(psswd)
 
     db.session.commit()
     return user_schema.jsonify(user)

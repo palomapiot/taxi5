@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -80,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
     // api
     private APIService mAPIService;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -398,7 +400,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                             public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
                                 if (response.isSuccessful()) {
                                     Log.i(TAG, "login submitted to API." + response.body().toString());
-
+                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                    editor.putLong("currentUserId", response.body().id);
+                                    editor.apply();
                                     Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                 } else  {

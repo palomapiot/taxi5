@@ -1,9 +1,12 @@
 package com.muei.apm.taxi5.api;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface APIService {
@@ -19,5 +22,14 @@ public interface APIService {
 
     @GET("/user/{id}")
     Call<ApiObject> getUserDetails(@Path("id") long id);
+
+    @GET("/rides/{id}")
+    Call<List<RideObject>> getUserRides(@Path("id") long id);
+
+    @PUT("/user/{id}")
+    Call<ApiObject> updateUserDetails(@Path("id") long id, @Body ApiObject user);
+
+    @PUT("/userpsswd/{id}")
+    Call<ApiObject> updatePsswd(@Path("id") long id, @Body UpdatePsswdObject user);
 
 }
