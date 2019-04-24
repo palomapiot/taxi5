@@ -1,5 +1,6 @@
 package com.muei.apm.taxi5.ui;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class HistoricalActivity extends AppCompatActivity {
     private APIService mAPIService;
     private Long currentUserId = null;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
-    private  final  String TAG = HistoricalActivity.class.getSimpleName();
+    private final  String TAG = HistoricalActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class HistoricalActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
+        final Activity act = this;
 
         mAPIService = ApiUtils.getAPIService();
         // TODO: get user id
@@ -59,20 +61,25 @@ public class HistoricalActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "current user rides get submitted to API." + response.body().toString());
 
-
-                    // Añadimos los viajes
                     ListView lv = findViewById(R.id.lvHistorical);
-
                     ArrayList<RideObject> routes = new ArrayList<>();
+                    for(int i = 0; i < response.body().size(); i++){
 
-                    // Create the Route objects
-                    RideObject rideObject = new RideObject(response.body().get(0).origin, response.body().get(0).destination, response.body().get(0).ridedate, response.body().get(0).price, response.body().get(0).userid);
 
-                    routes.add(rideObject);
-                    // todo ahhhhhhhhhhhh
-                    //RouteListAdapter adapter = new RouteListAdapter(this, routes);
+                        // Añadimos los viajes
+                        RideObject cuerpo = response.body().get(i);
+
+
+                        // Create the Route objects
+                        RideObject rideObject = new RideObject(cuerpo.origin, cuerpo.destination, cuerpo.ridedate, cuerpo.price, cuerpo.userid);
+
+                        routes.add(rideObject);
+                    }
+
+                    RouteListAdapter adapter = new RouteListAdapter(act, routes);
 
                     lv.setAdapter(adapter);
+
 
                 }
             }
