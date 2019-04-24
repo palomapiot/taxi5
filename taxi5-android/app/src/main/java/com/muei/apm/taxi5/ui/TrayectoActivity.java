@@ -2,6 +2,7 @@ package com.muei.apm.taxi5.ui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -32,10 +33,17 @@ import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.EncodedPolyline;
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.api.APIService;
+import com.muei.apm.taxi5.api.ApiUtils;
+import com.muei.apm.taxi5.api.RideObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -45,6 +53,13 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     private static GoogleMap mMap;
     private String origen;
     private String destino;
+
+
+    // api
+    private APIService mAPIService;
+    private Long currentUserId = null;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private final  String TAG = TrayectoActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -195,6 +210,32 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     }
 
     public void onConfirmButtonClick(View view) {
+
+        mAPIService = ApiUtils.getAPIService();
+        // TODO: get user id
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        currentUserId = prefs.getLong("currentUserId", 0);
+
+        mAPIService = ApiUtils.getAPIService();
+
+        RideObject body = new RideObject(origen, destino, System.currentTimeMillis(), currentUserId);
+        mAPIService.addRide(body).enqueue(new Callback<RideObject>() {
+            @Override
+            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "ride post submitted to API." + response.body().toString());
+                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                    editor.putLong("lastRideId", response.body().id);
+                    editor.apply();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideObject> call, Throwable t) {
+                Log.i(TAG, "Unable to post ride to API.");
+            }
+        });
+
 
         Intent intent = new Intent(TrayectoActivity.this, RutaActivity.class);
         intent.putExtra("ORIGEN", origen);
