@@ -36,7 +36,7 @@ public class PaymentActivity extends AppCompatActivity {
     private Long currentUserId = null;
     private Long lastRideId = null;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
-    private final  String TAG = PaymentActivity.class.getSimpleName();
+    private final String TAG = PaymentActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,27 +108,28 @@ public class PaymentActivity extends AppCompatActivity {
                         });
 
 
+                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                        startActivity(intent);
 
-
-
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
-                        builder1.setMessage(R.string.agradecimiento);
-                        builder1.setCancelable(true);
-
-                        builder1.setPositiveButton(
-                                "Ir a inicio",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
-                                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
-                                        startActivity(intent);
-                                        dialog.cancel();
-
-                                        PaymentActivity.this.finish();
-                                    }
-                                });
-
-                        AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        // FIXME: ¿?
+//                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
+//                        builder1.setMessage(R.string.agradecimiento);
+//                        builder1.setCancelable(true);
+//
+//                        builder1.setPositiveButton(
+//                                "Ir a inicio",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog, int id) {
+//                                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+//                                        startActivity(intent);
+//                                        dialog.cancel();
+//
+//                                        PaymentActivity.this.finish();
+//                                    }
+//                                });
+//
+//                        AlertDialog alert11 = builder1.create();
+//                        alert11.show();
 
                     }
                 })
