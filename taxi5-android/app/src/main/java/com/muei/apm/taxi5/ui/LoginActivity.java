@@ -446,7 +446,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             try {
                 // Simulate network access.
-                Thread.sleep(500);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 return false;
             }
@@ -458,6 +458,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
+
 
             // TODO: register the new account here.
             return todoCorrecto;
