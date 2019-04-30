@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
@@ -17,7 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -67,7 +65,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-        /**
+    /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -184,28 +182,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private void signIn() {
         mGoogleApiClient.clearDefaultAccountAndReconnect();
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(LoginActivity.this, R.style.AppCompatAlertDialogStyle);
-        // Configura el titulo.
-        alertDialogBuilder.setTitle(R.string.eula_dialog_title);
-        // Configura el mensaje.
-        alertDialogBuilder
-                .setMessage(R.string.eula_dialog)
-                .setCancelable(false)
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // TODO guardar login
-                        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                        startActivityForResult(signInIntent, RC_SIGN_IN);
-                    }
-                })
-                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                }).create().show();
-
-
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
@@ -445,7 +423,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            
+
             mAPIService = ApiUtils.getAPIService();
             LoginObject body = new LoginObject(mEmail, mPassword);
             mAPIService.loginUser(body).enqueue(new Callback<LoginObject>() {

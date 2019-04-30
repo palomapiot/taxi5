@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
@@ -17,7 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -31,7 +29,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
@@ -406,6 +403,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                     editor.putLong("currentUserId", response.body().id);
                                     editor.apply();
+                                    Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
+                                    startActivity(intent);
                                 } else  {
                                     Log.i(TAG, "FAILED TO LOG." + response.body().toString());
 
@@ -450,27 +449,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mAuthTask = null;
             showProgress(false);
 
-
-
             if (success) {
-                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(RegisterActivity.this, R.style.AppCompatAlertDialogStyle);
-                // Configura el titulo.
-                alertDialogBuilder.setTitle(R.string.eula_dialog_title);
-                // Configura el mensaje.
-                alertDialogBuilder
-                        .setMessage(R.string.eula_dialog)
-                        .setCancelable(false)
-                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
-                                startActivity(intent);
-                            }
-                        })
-                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        }).create().show();
+                // TODO guardar register
+                RegisterActivity.this.finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
