@@ -87,10 +87,6 @@ rides_schema = RideSchema(many=True)
 ##  ROUTES  ##
 ##############
 
-@app.route('/')
-def hello():
-    return "Holi mundi"
-
 # endpoint to login user
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -171,6 +167,15 @@ def user_update(id):
 
     db.session.commit()
     return user_schema.jsonify(user)
+
+# endpoint to get user hash psswd
+@app.route("/checkpsswd/<id>", methods=["POST"])
+def get_user_has_psswd(id):
+    user = User.query.get(id)
+    if user.check_password(request.json['psswd']):
+        return jsonify(success=True)
+    return jsonify(success=False)
+
 
 # endpoint to update user psswd
 @app.route("/userpsswd/<id>", methods=["PUT"])

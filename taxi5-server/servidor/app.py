@@ -1,91 +1,11 @@
-from flask import Flask, request, jsonify, make_response
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-from flask_login import LoginManager, current_user, login_user, UserMixin, logout_user
-#from flask_httpauth import HTTPBasicAuth
-#auth = HTTPBasicAuth()
-from werkzeug.security import generate_password_hash, check_password_hash
-import os
+#!flask/bin/python
+from flask import Flask
 
 app = Flask(__name__)
-app.secret_key='taxi5'
-# Login
-login = LoginManager(app)
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'crud.sqlite')
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
 
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
-##############
-##  Models  ##
-##############
-
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    firstname = db.Column(db.String(80))
-    lastname = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True)
-    phone = db.Column(db.String(9), unique=True)
-    psswd = db.Column(db.String(128))
-    rides = db.relationship('Ride', backref='user', lazy=True)
-
-    def set_password(self, password):
-        self.psswd = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.psswd, password)
-
-    def __init__(self, firstname, lastname, email, phone, psswd):
-        self.firstname = firstname
-	self.lastname = lastname
-        self.email = email
-	self.phone = phone
-	self.set_password(psswd)
-
-
-class UserSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ('id', 'firstname', 'lastname', 'email', 'phone', 'psswd')
-
-
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
-
-
-class Ride(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    origin = db.Column(db.String(240))
-    destination = db.Column(db.String(240))
-    ridedate = db.Column(db.BigInteger)
-    price = db.Column(db.Float)
-    userid = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __init__(self, origin, destination, ridedate, price, userid):
-        self.origin = origin
-	self.destination = destination
-        self.ridedate = ridedate
-	self.price = price
-	self.userid = userid
-
-
-class RideSchema(ma.Schema):
-    class Meta:
-        # Fields to expose
-        fields = ('id', 'origin', 'destination', 'ridedate', 'price', 'userid')
-
-
-ride_schema = RideSchema()
-rides_schema = RideSchema(many=True)
-
-
-##############
-##  ROUTES  ##
-##############
+@app.route('/')
+def hello():
+    return "Holi mundi"
 
 # endpoint to login user
 @app.route('/login', methods=['GET', 'POST'])
@@ -168,6 +88,14 @@ def user_update(id):
     db.session.commit()
     return user_schema.jsonify(user)
 
+# endpoint to check user psswd
+@app.route("/checkpsswd/<id>", methods=["POST"])
+def user_check_psswd(id):
+    user = User.query.get(id)
+    if user.check_password(request.json['psswd']):
+        return jsonify(success=True)
+    return jsonify(success=False)
+
 # endpoint to update user psswd
 @app.route("/userpsswd/<id>", methods=["PUT"])
 def user_update_psswd(id):
@@ -226,4 +154,4 @@ def not_found(error):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True)
