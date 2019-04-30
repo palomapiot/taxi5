@@ -65,7 +65,7 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-        /**
+    /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
@@ -423,7 +423,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            
+
             mAPIService = ApiUtils.getAPIService();
             LoginObject body = new LoginObject(mEmail, mPassword);
             mAPIService.loginUser(body).enqueue(new Callback<LoginObject>() {
