@@ -38,5 +38,7 @@
     <string name="activity_accept_passenger_mock_nombreapellido">NOMBRE APELLIDO</string>
     <string name="activity_accept_mock_origen">Ronda de Outeiro, 50, A Coruña</string>
     <string name="activity_accept_mock_destino">Rúa do paseo, 3, Ourense</string>
+    <string name="travel_active">Viaje Activo</string>
+    <string name="travel_list">Lista de Viajes</string>
 
 </resources>
