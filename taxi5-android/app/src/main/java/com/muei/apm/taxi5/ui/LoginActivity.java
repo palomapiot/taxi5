@@ -181,10 +181,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void signIn() {
-        final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
-
         mGoogleApiClient.clearDefaultAccountAndReconnect();
-        sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
