@@ -54,6 +54,9 @@
     <string name="activity_change_password_confirm_new_password">Confirmar nueva contraseña</string>
     <string name="activity_change_password_update">Actualizar contraseña</string>
     <string name="activity_change_password_password_updated">Contraseña actualizada!</string>
+    <string name="activity_change_password_password_error">Error! La contraseña actual no es correcta.</string>
+
+
 
     <!-- HISTORICAL ACTIVITY -->
     <string name="activity_historical_label">Histórico</string>

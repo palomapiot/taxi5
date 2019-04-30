@@ -108,28 +108,28 @@ public class PaymentActivity extends AppCompatActivity {
                         });
 
 
-                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
-                        startActivity(intent);
+                        //Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                        //startActivity(intent);
 
                         // FIXME: ¿?
-//                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
-//                        builder1.setMessage(R.string.agradecimiento);
-//                        builder1.setCancelable(true);
-//
-//                        builder1.setPositiveButton(
-//                                "Ir a inicio",
-//                                new DialogInterface.OnClickListener() {
-//                                    public void onClick(DialogInterface dialog, int id) {
-//                                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
-//                                        startActivity(intent);
-//                                        dialog.cancel();
-//
-//                                        PaymentActivity.this.finish();
-//                                    }
-//                                });
-//
-//                        AlertDialog alert11 = builder1.create();
-//                        alert11.show();
+                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
+                        builder1.setMessage(R.string.agradecimiento);
+                        builder1.setCancelable(true);
+
+                        builder1.setPositiveButton(
+                                "Ir a inicio",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        dialog.cancel();
+
+                                        PaymentActivity.this.finish();
+                                    }
+                                });
+
+                        AlertDialog alert11 = builder1.create();
+                        alert11.show();
 
                     }
                 })
