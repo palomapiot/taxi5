@@ -30,11 +30,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         buttonPass = (Button) findViewById(R.id.btnChangePassword);
 
-        //si login con google
-        final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        Boolean loginGoogle = true;
 
-        if (!sharedPreferences.getBoolean("LOGINGOOGLE", false)) {
+        //si login con google
+        final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean("LOGINGOOGLE", loginGoogle)) {
             buttonPass.setVisibility(View.INVISIBLE);
+        } else {
+            buttonPass.setVisibility(View.VISIBLE);
         }
 
     }

@@ -181,10 +181,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void signIn() {
-        final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
 
         mGoogleApiClient.clearDefaultAccountAndReconnect();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
+        sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).apply();
+
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -472,8 +475,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
 
+
+            final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+            sharedPreferences.edit().putBoolean("LOGINGOOGLE", false).commit();
+            sharedPreferences.edit().putBoolean("LOGINGOOGLE", false).apply();
+
+
             if (success) {
                 // TODO guardar login
+
                 LoginActivity.this.finish();
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
