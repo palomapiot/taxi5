@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         if (!sharedPreferences.getBoolean("EULA", false)) {
-            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this,  R.style.AppCompatAlertDialogStyle);
             // Configura el titulo.
             alertDialogBuilder.setTitle(R.string.eula_dialog_title);
             // Configura el mensaje.
