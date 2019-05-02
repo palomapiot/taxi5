@@ -54,7 +54,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     private static GoogleMap mMap;
     private String origen;
     private String destino;
-    private ProgressDialog progressDialog;
 
 
     // api
@@ -74,10 +73,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trayecto);
-
-        progressDialog= new ProgressDialog(this, R.style.AppAlertProgressDialogStyle);
-        progressDialog.setMessage(getString(R.string.calculando_ruta));
-        progressDialog.show();
 
         Bundle extras = getIntent().getExtras();
         if (extras == null){
@@ -205,7 +200,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         if (path.size() > 0) {
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20);
             mMap.addPolyline(opts);
-            progressDialog.dismiss();
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
