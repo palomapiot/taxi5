@@ -54,6 +54,9 @@
     <string name="activity_change_password_confirm_new_password">Confirmar nueva contraseña</string>
     <string name="activity_change_password_update">Actualizar contraseña</string>
     <string name="activity_change_password_password_updated">Contraseña actualizada!</string>
+    <string name="activity_change_password_password_error">Error! La contraseña actual no es correcta.</string>
+
+
 
     <!-- HISTORICAL ACTIVITY -->
     <string name="activity_historical_label">Histórico</string>
@@ -112,6 +115,62 @@
     <string name="ruta_problema">¿Hubo un problema?</string>
     <string name="comunicar_problema_ruta">Comunicando problema...</string>
     <string name="cancelar_viaje_iniciado">¿Hubo algún problema y desea cancelar el viaje en curso?</string>
+
+
+
+    <!-- EULA -->
+    <string name="eula_dialog_title">EUALA agreegment</string>
+    <string name="eula_dialog">Taxi5 1.0.0\n
+                        Copyright (c) 5 Taxi5\n
+                        \n
+                        *** END USER LICENSE AGREEMENT ***\n
+                        \n
+                        IMPORTANT: PLEASE READ THIS LICENSE CAREFULLY BEFORE USING THIS SOFTWARE.\n
+                        \n
+                        1. LICENSE\n
+                        \n
+                        By receiving, opening the file package, and/or using Taxi5 1.0.0(\Software\) containing this software, you agree that this End User User License Agreement(EULA) is a legally binding and valid contract and agree to be bound by it. You agree to abide by the intellectual property laws and all of the terms and conditions of this Agreement.\n
+                        \n
+                        Unless you have a different license agreement signed by Taxi5 your use of Taxi5 1.0.0 indicates your acceptance of this license agreement and warranty.\n
+                        \n
+                        Subject to the terms of this Agreement, Taxi5 grants to you a limited, non-exclusive, non-transferable license, without right to sub-license, to use Taxi5 1.0.0 in accordance with this Agreement and any other written agreement with Taxi5. Taxi5 does not transfer the title of Taxi5 1.0.0 to you; the license granted to you is not a sale. This agreement is a binding legal agreement between Taxi5 and the purchasers or users of Taxi5 1.0.0.\n
+                        \n
+                        If you do not agree to be bound by this agreement, remove Taxi5 1.0.0 from your computer now and, if applicable, promptly return to Taxi5 by mail any copies of Taxi5 1.0.0 and related documentation and packaging in your possession.\n
+                        \n
+                        2. DISTRIBUTION\n
+                        \n
+                        Taxi5 1.0.0 and the license herein granted shall not be copied, shared, distributed, re-sold, offered for re-sale, transferred or sub-licensed in whole or in part except that you may make one copy for archive purposes only. For information about redistribution of Taxi5 1.0.0 contact Taxi5.\n
+                        \n
+                        3. USER AGREEMENT\n
+                        \n
+                        3.1 Use\n
+                        \n
+                        Your license to use Taxi5 1.0.0 is limited to the number of licenses purchased by you. You shall not allow others to use, copy or evaluate copies of Taxi5 1.0.0.\n
+                        \n
+                        3.2 Use Restrictions\n
+                        \n
+                        You shall use Taxi5 1.0.0 in compliance with all applicable laws and not for any unlawful purpose. Without limiting the foregoing, use, display or distribution of Taxi5 1.0.0 together with material that is pornographic, racist, vulgar, obscene, defamatory, libelous, abusive, promoting hatred, discriminating or displaying prejudice based on religion, ethnic heritage, race, sexual orientation or age is strictly prohibited.\n
+                        \n
+                        Each licensed copy of Taxi5 1.0.0 may be used on one single computer location by one user. Use of Taxi5 1.0.0 means that you have loaded, installed, or run Taxi5 1.0.0 on a computer or similar device. If you install Taxi5 1.0.0 onto a multi-user platform, server or network, each and every individual user of Taxi5 1.0.0 must be licensed separately.\n
+                        \n
+                        Except as expressly stated in writing, Taxi5 makes no representation or warranties in respect of this Software and expressly excludes all other warranties, expressed or implied, oral or written, including, without limitation, any implied warranties of merchantable quality or fitness for a particular purpose.\n
+                        \n
+                        3.6 Governing Law\n
+                        \n
+                        This Agreement shall be governed by the law of the Spain applicable therein. You hereby irrevocably attorn and submit to the non-exclusive jurisdiction of the courts of Spain therefrom. If any provision shall be considered unlawful, void or otherwise unenforceable, then that provision shall be deemed severable from this License and not affect the validity and enforceability of any other provisions.\n
+                        \n
+                        3.7 Termination\n
+                        \n
+                        Any failure to comply with the terms and conditions of this Agreement will result in automatic and immediate termination of this license. Upon termination of this license granted herein for any reason, you agree to immediately cease use of Taxi5 1.0.0 and destroy all copies of Taxi5 1.0.0 supplied under this Agreement. The financial obligations incurred by you shall survive the expiration or termination of this license.\n
+                        \n
+                        4. DISCLAIMER OF WARRANTY\n
+                        \n
+                        THIS SOFTWARE AND THE ACCOMPANYING FILES ARE SOLD \AS IS\ AND WITHOUT WARRANTIES AS TO PERFORMANCE OR MERCHANTABILITY OR ANY OTHER WARRANTIES WHETHER EXPRESSED OR IMPLIED. THIS DISCLAIMER CONCERNS ALL FILES GENERATED AND EDITED BY Taxi5 1.0.0 AS WELL.\n
+                        \n
+                        5. CONSENT OF USE OF DATA\n
+                        \n
+                        You agree that Taxi5 may collect and use information gathered in any manner as part of the product support services provided to you, if any, related to Taxi5 1.0.0.Taxi5 may also use this information to provide notices to you which may be of use or interest to you.)</string>
+
 
     <!-- Endpoint -->
 

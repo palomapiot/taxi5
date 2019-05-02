@@ -1,7 +1,10 @@
 package com.muei.apm.taxi5driver.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +18,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        if (!sharedPreferences.getBoolean("EULA", false)) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this,  R.style.AppCompatAlertDialogStyle);
+            // Configura el titulo.
+            alertDialogBuilder.setTitle(R.string.eula_dialog_title);
+            // Configura el mensaje.
+            alertDialogBuilder
+                    .setMessage(R.string.eula_dialog)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean("EULA", true).commit();
+                            //Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            //startActivity(intent);
+                        }
+                    }).create().show();
+        }
+
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException e) {

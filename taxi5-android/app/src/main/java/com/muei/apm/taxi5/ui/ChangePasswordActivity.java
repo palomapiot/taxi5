@@ -17,6 +17,8 @@ import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
 import com.muei.apm.taxi5.api.ApiObject;
 import com.muei.apm.taxi5.api.ApiUtils;
+import com.muei.apm.taxi5.api.BooleanObject;
+import com.muei.apm.taxi5.api.PsswdObject;
 import com.muei.apm.taxi5.api.UpdatePsswdObject;
 
 import retrofit2.Call;
@@ -55,7 +57,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
     }
 
     public void onClickConfirmPassword(View view) {
-        Toast.makeText(this, getString(R.string.activity_change_password_password_updated), Toast.LENGTH_SHORT).show();
         // TODO guardar constraseña
 
         boolean cancel = false;
@@ -72,8 +73,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         mActualPsswd = mActualPsswdView.getText().toString();
         mNewPsswd = mNewPsswdView.getText().toString();
         mConfirmNewPsswd = mmConfirmNewPsswdView.getText().toString();
-
-        // TODO: Comprobar que la contraseña actual es la que está en la base de datos
 
         //Check for a password not null
         if (TextUtils.isEmpty(mNewPsswd)) {
@@ -97,27 +96,51 @@ public class ChangePasswordActivity extends AppCompatActivity {
             cancel = true;
         }
 
-
         if (cancel) {
             focusView.requestFocus();
         } else {
+
             mAPIService = ApiUtils.getAPIService();
-            UpdatePsswdObject body = new UpdatePsswdObject(mNewPsswd);
-            mAPIService.updatePsswd(currentUserId, body).enqueue(new Callback<ApiObject>() {
+
+            // TODO: Comprobar que la contraseña actual es la que está en la base de datos
+            PsswdObject body = new PsswdObject(mActualPsswd);
+            mAPIService.checkPsswd(currentUserId, body).enqueue(new Callback<BooleanObject>() {
                 @Override
-                public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                public void onResponse(Call<BooleanObject> call, Response<BooleanObject> response) {
+                    Log.i(TAG, "respuesta" + response);
                     if (response.isSuccessful()) {
-                        Log.i(TAG, "user update put submitted to API." + response.body().toString());
-                        currentUserId = response.body().id;
-                        ChangePasswordActivity.this.finish();
+                        Log.i(TAG, "passwd matches." + response.body());
+
+                        UpdatePsswdObject contrasinal = new UpdatePsswdObject(mNewPsswd);
+                        mAPIService.updatePsswd(currentUserId, contrasinal).enqueue(new Callback<ApiObject>() {
+                            @Override
+                            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                                if (response.isSuccessful()) {
+                                    Log.i(TAG, "user update put submitted to API." + response.body().toString());
+                                    currentUserId = response.body().id;
+                                    Toast.makeText(getApplicationContext(), getString(R.string.activity_change_password_password_updated), Toast.LENGTH_SHORT).show();
+                                    ChangePasswordActivity.this.finish();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<ApiObject> call, Throwable t) {
+                                Log.i(TAG, "Unable to get current user from API.");
+                                Toast.makeText(getApplicationContext(), getString(R.string.activity_change_password_password_error), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ApiObject> call, Throwable t) {
-                    Log.i(TAG, "Unable to get current user from API.");
+                public void onFailure(Call<BooleanObject> call, Throwable t) {
+                    Log.i(TAG, "passwd doest match.");
+                    mActualPsswdView.setError(getString(R.string.error_incorrect_password));
+
                 }
             });
+
+
 
         }
 

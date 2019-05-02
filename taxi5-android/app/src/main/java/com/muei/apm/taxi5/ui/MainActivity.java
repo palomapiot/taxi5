@@ -1,8 +1,11 @@
 package com.muei.apm.taxi5.ui;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -22,11 +25,33 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        //final SharedPreferences sharedPreferences = getActi().getPreferences(getActivity().getApplicationContext().MODE_PRIVATE);
+
+
+        final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        if (!sharedPreferences.getBoolean("EULA", false)) {
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
+            // Configura el titulo.
+            alertDialogBuilder.setTitle(R.string.eula_dialog_title);
+            // Configura el mensaje.
+            alertDialogBuilder
+                    .setMessage(R.string.eula_dialog)
+                    .setCancelable(false)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            sharedPreferences.edit().putBoolean("EULA", true).commit();
+                            //Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                            //startActivity(intent);
+                        }
+                    }).create().show();
+        }
 
 
         mAuth = FirebaseAuth.getInstance();
