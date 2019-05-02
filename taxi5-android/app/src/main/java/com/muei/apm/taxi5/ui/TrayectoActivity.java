@@ -98,6 +98,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onMapReady(GoogleMap googleMap)  {
+
         mMap = googleMap;
 
         Geocoder locationAddress = new Geocoder(this, Locale.getDefault());
@@ -307,6 +308,5 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }

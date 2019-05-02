@@ -1,5 +1,6 @@
 package com.muei.apm.taxi5.ui;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Address;
@@ -30,6 +31,9 @@ public class SearchActivity extends AppCompatActivity {
     private static double longitude = 43.333024;
     private static double latitude = -8.410868;
     LocationManager mLocationManager;
+
+    private ProgressDialog progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +88,11 @@ public class SearchActivity extends AppCompatActivity {
                 if ("".equals(inputDestino.getText().toString().trim())) {
                     Toast.makeText(SearchActivity.this, getString(R.string.enter_destination_address), Toast.LENGTH_SHORT).show();
                 } else {
+
+                    progressDialog= new ProgressDialog(v.getContext(), R.style.AppAlertProgressDialogStyle);
+                    progressDialog.setMessage(getString(R.string.calculando_ruta));
+                    progressDialog.show();
+
                     final Intent intent = new Intent(SearchActivity.this, TrayectoActivity.class);
 
                     intent.putExtra("ORIGEN", inputOrigen.getText().toString().trim());
@@ -115,6 +124,15 @@ public class SearchActivity extends AppCompatActivity {
             }
         }
         return bestLocation;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
     }
 
 
