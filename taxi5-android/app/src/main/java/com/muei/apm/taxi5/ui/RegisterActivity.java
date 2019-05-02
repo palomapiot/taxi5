@@ -403,6 +403,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                     editor.putLong("currentUserId", response.body().id);
                                     editor.apply();
+                                    SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+                                    sharedPreferences.edit().putBoolean("LOGINGOOGLE", false).commit();
                                     Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                                     startActivity(intent);
                                 } else  {
@@ -451,6 +453,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
 
             if (success) {
                 // TODO guardar register
+                SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+                sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
                 RegisterActivity.this.finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

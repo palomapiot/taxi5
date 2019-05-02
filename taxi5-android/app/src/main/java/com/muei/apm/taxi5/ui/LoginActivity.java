@@ -181,10 +181,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     private void signIn() {
-        final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
 
         mGoogleApiClient.clearDefaultAccountAndReconnect();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
+
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -217,6 +219,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+                            sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                         } else {
@@ -437,6 +441,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                         SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                         editor.putLong("currentUserId", response.body().id);
                         editor.apply();
+                        SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+                        sharedPreferences.edit().putBoolean("LOGINGOOGLE", false).commit();
                         todoCorrecto = true;
                     }
                 }
@@ -474,6 +480,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             if (success) {
                 // TODO guardar login
+                final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+                sharedPreferences.edit().putBoolean("LOGINGOOGLE", false).commit();
+
                 LoginActivity.this.finish();
                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                 startActivity(intent);
