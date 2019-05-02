@@ -75,7 +75,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trayecto);
 
-        progressDialog= new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog= new ProgressDialog(this, R.style.AppAlertProgressDialogStyle);
         progressDialog.setMessage(getString(R.string.calculando_ruta));
         progressDialog.show();
 
@@ -104,11 +104,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
     @Override
     public void onMapReady(GoogleMap googleMap)  {
-
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        // AQUI EMPEZAR DE MOSTRAR EL PROGRESS BAR
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
         mMap = googleMap;
 
@@ -214,11 +209,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
-
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        // AQUI DEJAR DE MOSTRAR EL PROGRESS BAR
-        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
 
         float zoomLevel = 12.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));

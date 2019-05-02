@@ -19,4 +19,11 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="AppAlertProgressDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+        <item name="android:background">@color/colorGray</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
 </resources>
