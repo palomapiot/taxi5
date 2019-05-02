@@ -126,5 +126,14 @@ public class SearchActivity extends AppCompatActivity {
         return bestLocation;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+
+    }
+
 
 }

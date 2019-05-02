@@ -1,6 +1,5 @@
 package com.muei.apm.taxi5.ui;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -309,6 +308,5 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 }
