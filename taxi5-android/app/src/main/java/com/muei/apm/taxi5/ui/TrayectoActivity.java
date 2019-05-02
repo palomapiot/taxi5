@@ -1,5 +1,6 @@
 package com.muei.apm.taxi5.ui;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -53,6 +54,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
     private static GoogleMap mMap;
     private String origen;
     private String destino;
+    private ProgressDialog progressDialog;
 
 
     // api
@@ -72,6 +74,10 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trayecto);
+
+        progressDialog= new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(getString(R.string.calculando_ruta));
+        progressDialog.show();
 
         Bundle extras = getIntent().getExtras();
         if (extras == null){
@@ -94,11 +100,16 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap)  {
+
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // AQUI EMPEZAR DE MOSTRAR EL PROGRESS BAR
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
         mMap = googleMap;
 
         Geocoder locationAddress = new Geocoder(this, Locale.getDefault());
@@ -199,9 +210,15 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         if (path.size() > 0) {
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20);
             mMap.addPolyline(opts);
+            progressDialog.dismiss();
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
+
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        // AQUI DEJAR DE MOSTRAR EL PROGRESS BAR
+        //<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 
         float zoomLevel = 12.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));

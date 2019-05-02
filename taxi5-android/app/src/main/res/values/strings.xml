@@ -96,6 +96,7 @@
     <string name="cancelar_viaje">¿Estás seguro de que desea cancelar el viaje?</string>
     <string name="viaje_cancelado">Viaje cancelado</string>
     <string name="cancelar_viaje_menu">Cancelar viaje</string>
+    <string name="calculando_ruta">Calculando ruta</string>
 
     <!-- RUTA ACTIVITY -->
 
