@@ -9,6 +9,7 @@ import android.media.RingtoneManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -40,6 +41,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
     private int soundID;
 
 
+
     private static final String PAGO_ACTIVITY_TAG = PaymentActivity.class.getSimpleName();
 
 
@@ -68,7 +70,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         TextView origen_label = findViewById(R.id.pago_origen);
         TextView destino_label = findViewById(R.id.pago_destino);
 
-        precio_label.setText("6.75");
+        precio_label.setText("6.75 €");
         origen_label.setText(origen);
         destino_label.setText(destino);
 
@@ -78,10 +80,14 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         setSupportActionBar(myToolbar);
 
 
+
+
+
+
     }
 
 
-    public void onClickBtnPay(View view) {
+    public void onClickBtnPay(final View view) {
 
         // Obtiene instancia a Vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
@@ -105,6 +111,10 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+
+                        Button botonPagar= findViewById(R.id.btnMakePayment);
+                        botonPagar.setVisibility(View.INVISIBLE);
+
                         PaymentActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
                         // Load the sound
                         soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
@@ -118,8 +128,9 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
 
                         RingtoneManager.getRingtone(PaymentActivity.this, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).play();
 
+                        Snackbar.make(findViewById(R.id.btnMakePayment), R.string.activity_pago_paid, Snackbar.LENGTH_SHORT).show();
 
-                        Toast.makeText(PaymentActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(PaymentActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
 
                         // añadir precio del viaje en la bd
                         mAPIService = ApiUtils.getAPIService();
@@ -148,12 +159,30 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                             }
                         });
 
+                        //Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                        //startActivity(intent);
+                       // PaymentActivity.this.finish();
+
+                        Snackbar.make(findViewById(R.id.btnMakePayment), R.string.activity_pago_paid, Snackbar.LENGTH_INDEFINITE).setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                                .setAction(R.string.undo_string, new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.i("Snackbar", "Pulsada acción snackbar!");
+                                        Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
+                                        startActivity(intent);
+                                        PaymentActivity.this.finish();
+                                    }
+                                })
+                                .show();
+
+
+
 
                         //Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
                         //startActivity(intent);
 
-                        // FIXME: ¿?
-                        AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
+
+                        /*AlertDialog.Builder builder1 = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
                         builder1.setMessage(R.string.agradecimiento);
                         builder1.setCancelable(true);
 
@@ -170,7 +199,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                                 });
 
                         AlertDialog alert11 = builder1.create();
-                        alert11.show();
+                        alert11.show();*/
 
                     }
                 })
@@ -179,6 +208,10 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                         dialog.cancel();
                     }
                 }).create().show();
+
+
+
+
 
 
     }
