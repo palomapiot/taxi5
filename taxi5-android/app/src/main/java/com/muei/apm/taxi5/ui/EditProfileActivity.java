@@ -62,6 +62,9 @@ public class EditProfileActivity extends AppCompatActivity {
         mEmailView = findViewById(R.id.editText2);
         mPhoneView = findViewById(R.id.editText3);
 
+        final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
+
+
         mAPIService = ApiUtils.getAPIService();
         // TODO: get user id
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -89,6 +92,11 @@ public class EditProfileActivity extends AppCompatActivity {
                 Log.i(TAG, "Unable to get current user from API.");
             }
         });
+        if (sharedPreferences.getBoolean("LOGINGOOGLE", true)) {
+            String name = sharedPreferences.getString("NAME", "");
+            mEmailView.setText(name);
+            mEmailView.setEnabled(false);
+        }
 
     }
 
