@@ -44,6 +44,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         buttonPass = findViewById(R.id.btnChangePassword);
 
+        tvName = findViewById(R.id.tvName);
+
         Boolean loginGoogle = true;
 
         //si login con google
