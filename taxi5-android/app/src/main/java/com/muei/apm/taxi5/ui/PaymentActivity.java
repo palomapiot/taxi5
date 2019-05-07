@@ -85,20 +85,13 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
 
         // Obtiene instancia a Vibrator
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        Button button1 = ((Button)findViewById(R.id.btnMakePayment));
+        Button button1 = findViewById(R.id.btnMakePayment);
         //Compruebe si dispositivo tiene un vibrador.
         if (vibrator.hasVibrator()) {//Si tiene vibrador
-            long tiempo = 300; //en milisegundos
+            long tiempo = 500; //en milisegundos
             vibrator.vibrate(tiempo);
-
-            /*button1.setOnClickListener(
-                    new View.OnClickListener() {
-                        public void onClick(View view) {
-                            long tiempo = 300; //en milisegundos
-                            vibrator.vibrate(tiempo);
-                        }});*/
         } else {//no tiene
-            Log.v("VIBRATOR", "Este dispositivo NO puede vibrar");
+            Log.d("VIBRATOR", "Este dispositivo NO puede vibrar");
         }
 
 
