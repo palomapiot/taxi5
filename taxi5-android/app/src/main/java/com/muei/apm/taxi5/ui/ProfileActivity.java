@@ -9,12 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.muei.apm.taxi5.R;
 
 public class ProfileActivity extends AppCompatActivity {
 
     private Button buttonPass;
+
+    private TextView tvName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-        buttonPass = (Button) findViewById(R.id.btnChangePassword);
+        buttonPass = findViewById(R.id.btnChangePassword);
 
         Boolean loginGoogle = true;
 
@@ -40,6 +43,9 @@ public class ProfileActivity extends AppCompatActivity {
         } else {
             buttonPass.setVisibility(View.VISIBLE);
         }
+
+        tvName = findViewById(R.id.tvName);
+        tvName.setText(sharedPreferences.getString("NAME", ""));
 
     }
 

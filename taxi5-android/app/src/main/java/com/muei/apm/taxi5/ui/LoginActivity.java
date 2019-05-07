@@ -159,6 +159,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 })
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
     }
 
     @Override
@@ -175,6 +176,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
 
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        String name = acct.getDisplayName();
+        String email = acct.getEmail();
+        sharedPreferences.edit().putString("NAME", name).commit();
+        sharedPreferences.edit().putString("EMAIL", name).commit();
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
