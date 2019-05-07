@@ -1,15 +1,22 @@
 package com.muei.apm.taxi5.ui;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,11 +29,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private String origen;
     private String destino;
     private float finalPrice;
+    boolean loaded = false;
+    private SoundPool soundPool;
+    private Vibrator vibrator;
+    private int soundID;
+
 
     private static final String PAGO_ACTIVITY_TAG = PaymentActivity.class.getSimpleName();
 
@@ -64,10 +76,25 @@ public class PaymentActivity extends AppCompatActivity {
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+
     }
 
 
     public void onClickBtnPay(View view) {
+
+        // Obtiene instancia a Vibrator
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        Button button1 = findViewById(R.id.btnMakePayment);
+        //Compruebe si dispositivo tiene un vibrador.
+        if (vibrator.hasVibrator()) {//Si tiene vibrador
+            long tiempo = 500; //en milisegundos
+            vibrator.vibrate(tiempo);
+        } else {//no tiene
+            Log.d("VIBRATOR", "Este dispositivo NO puede vibrar");
+        }
+
+
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
         // Configura el titulo.
@@ -78,6 +105,20 @@ public class PaymentActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        PaymentActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+                        // Load the sound
+                        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+                        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                            @Override
+                            public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                                       int status) {
+                                loaded = true;
+                            }
+                        });
+
+                        RingtoneManager.getRingtone(PaymentActivity.this, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).play();
+
+
                         Toast.makeText(PaymentActivity.this, getString(R.string.activity_pago_paid), Toast.LENGTH_SHORT).show();
 
                         // añadir precio del viaje en la bd
@@ -149,6 +190,24 @@ public class PaymentActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // Getting the user sound settings
+            AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+            float actualVolume = (float) audioManager
+                    .getStreamVolume(AudioManager.STREAM_MUSIC);
+            float maxVolume = (float) audioManager
+                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            float volume = actualVolume / maxVolume;
+            // Is the sound loaded already?
+            if (loaded) {
+                soundPool.play(soundID, volume, volume, 1, 0, 1f);
+                Log.e("Test", "Played sound");
+            }
+        }
+        return false;
+    }
 }
 
 
