@@ -124,8 +124,6 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
         }
 
-
-
         try {
             sydney = new LatLng(direccionesOrigen.get(0).getLatitude(), direccionesOrigen.get(0).getLongitude());
             Double l1 = sydney.latitude;
@@ -148,6 +146,19 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
         }
 
+        if ((origenStr == "") || (destinoStr == "")) {
+            AlertDialog.Builder ad = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
+            ad.setTitle("Imposible calcular la ruta");
+            ad.setMessage("La ruta establecida no es válida. Introduzca origen y destino de nuevo.");
+            ad.setCancelable(false);
+            ad.setPositiveButton("Volver a buscar", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface ad, int id) {
+                    Intent intentSearch = new Intent(TrayectoActivity.this, SearchActivity.class);
+                    startActivity(intentSearch);
+                }
+            });
+            ad.show();
+        }
 
         //Define list to get all latlng for the route
         List<LatLng> path = new ArrayList();
@@ -158,6 +169,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                 .apiKey("AIzaSyAy6azXMUfKwGJf-vsVHlFF54q6GQNnJ6M")
                 .build();
         DirectionsApiRequest req = DirectionsApi.getDirections(context, origenStr, destinoStr);
+
         try {
             DirectionsResult res = req.await();
 
@@ -197,6 +209,18 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                         }
                     }
                 }
+            } else {
+                AlertDialog.Builder ad = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
+                ad.setTitle("Imposible calcular la ruta");
+                ad.setMessage("La ruta establecida es imposible realizarla en taxi. Introduzca una ruta válida.");
+                ad.setCancelable(false);
+                ad.setPositiveButton("Volver a buscar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface ad, int id) {
+                        Intent intentSearch = new Intent(TrayectoActivity.this, SearchActivity.class);
+                        startActivity(intentSearch);
+                    }
+                });
+                ad.show();
             }
         } catch (Exception ex) {
             Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
@@ -211,8 +235,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         mMap.getUiSettings().setZoomControlsEnabled(true);
 
         float zoomLevel = 12.0f; //This goes up to 21
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
-
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(barcelona, zoomLevel));
 
     }
 
