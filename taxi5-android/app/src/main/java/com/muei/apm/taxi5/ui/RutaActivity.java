@@ -92,7 +92,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         //Progress bar
         final ProgressDialog pd = new ProgressDialog(RutaActivity.this, R.style.AppCompatAlertDialogStyle);
-        pd.setTitle(getString(R.string.buscando_taxista));
+        pd.setTitle(getString(R.string.esperando_taxista));
         pd.setMessage(getString(R.string.buscando_taxista_mensaje));
         pd.setCancelable(false);
         pd.setCanceledOnTouchOutside(false);
@@ -102,6 +102,18 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(DialogInterface dialog, int which){
                 // dismiss the progress dialog
                 Toast.makeText(RutaActivity.this, getString(R.string.viaje_en_proceso), Toast.LENGTH_SHORT).show();
+                pd.dismiss();
+            }
+        });
+        pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancelar_viaje_menu), new DialogInterface.OnClickListener() {
+            // Set a click listener for progress dialog cancel button
+            @Override
+            public void onClick(DialogInterface dialog, int which){
+                // dismiss the progress dialog
+                Toast.makeText(RutaActivity.this, getString(R.string.viaje_cancelado), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(RutaActivity.this, HomeActivity.class);
+                startActivity(intent);
+                RutaActivity.this.finish();
                 pd.dismiss();
             }
         });
