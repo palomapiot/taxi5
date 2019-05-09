@@ -19,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
@@ -70,7 +69,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         TextView origen_label = findViewById(R.id.pago_origen);
         TextView destino_label = findViewById(R.id.pago_destino);
 
-        precio_label.setText("6.75 €");
+        precio_label.setText("6,75");
         origen_label.setText(origen);
         destino_label.setText(destino);
 

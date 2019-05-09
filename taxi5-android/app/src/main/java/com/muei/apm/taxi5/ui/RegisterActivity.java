@@ -27,6 +27,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
 import com.muei.apm.taxi5.api.ApiObject;
@@ -68,8 +70,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     private EditText mPasswordRepeatView;
     private View mProgressView;
     private View mLoginFormView;
+    private GoogleSignInAccount acct;
 
-    private  final  String TAG = RegisterActivity.class.getSimpleName();
+    private final String TAG = RegisterActivity.class.getSimpleName();
 
     // api
     private APIService mAPIService;
@@ -113,6 +116,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        acct = GoogleSignIn.getLastSignedInAccount(this);
 
 
     }
@@ -340,11 +344,15 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
                                     editor.putLong("currentUserId", response.body().id);
                                     editor.apply();
+                                    String name = acct.getDisplayName();
+                                    final String email = acct.getEmail();
                                     SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
                                     sharedPreferences.edit().putBoolean("LOGINGOOGLE", false).commit();
+                                    sharedPreferences.edit().putString("NAME", name).commit();
+                                    sharedPreferences.edit().putString("EMAIL", email).commit();
                                     Intent intent = new Intent(RegisterActivity.this, HomeActivity.class);
                                     startActivity(intent);
-                                } else  {
+                                } else {
                                     Log.i(TAG, "FAILED TO LOG." + response.body().toString());
 
                                 }
