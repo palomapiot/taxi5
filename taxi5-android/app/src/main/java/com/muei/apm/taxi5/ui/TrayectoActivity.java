@@ -142,7 +142,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         if ((origenStr == "") || (destinoStr == "")) {
             AlertDialog.Builder ad = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
             ad.setTitle("Imposible calcular la ruta");
-            ad.setMessage("La ruta establecida no es válida. Introduza origen y destino de nuevo.");
+            ad.setMessage("La ruta establecida no es válida. Introduzca origen y destino de nuevo.");
             ad.setCancelable(false);
             ad.setPositiveButton("Volver a buscar", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface ad, int id) {
@@ -205,7 +205,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             } else {
                 AlertDialog.Builder ad = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
                 ad.setTitle("Imposible calcular la ruta");
-                ad.setMessage("La ruta establecida es imposible realizarla en taxi. Introduza una ruta válida.");
+                ad.setMessage("La ruta establecida es imposible realizarla en taxi. Introduzca una ruta válida.");
                 ad.setCancelable(false);
                 ad.setPositiveButton("Volver a buscar", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface ad, int id) {
