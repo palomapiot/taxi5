@@ -10,8 +10,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
 import com.muei.apm.taxi5.api.ApiObject;
@@ -34,6 +39,7 @@ public class EditProfileActivity extends AppCompatActivity {
     private EditText mSurnameView;
     private EditText mEmailView;
     private EditText mPhoneView;
+    private ImageView mImageView;
 
 
     private String mEmail;
@@ -61,41 +67,51 @@ public class EditProfileActivity extends AppCompatActivity {
         mSurnameView = findViewById(R.id.editText1);
         mEmailView = findViewById(R.id.editText2);
         mPhoneView = findViewById(R.id.editText3);
+        mImageView = findViewById(R.id.imageView);
 
         final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
 
-
-        mAPIService = ApiUtils.getAPIService();
-        // TODO: get user id
-        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-        currentUserId = prefs.getLong("currentUserId", 0);
-
-        mAPIService = ApiUtils.getAPIService();
-        // TODO: get user id
-        mAPIService.getUserDetails(currentUserId).enqueue(new Callback<ApiObject>() {
-            @Override
-            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "current user get submitted to API." + response.body().toString());
-                    currentUserId = response.body().id;
-
-                    mNameView.setText(response.body().firstName);
-                    mSurnameView.setText(response.body().lastName);
-                    mEmailView.setText(response.body().email);
-                    mPhoneView.setText(response.body().phone);
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiObject> call, Throwable t) {
-                Log.i(TAG, "Unable to get current user from API.");
-            }
-        });
         if (sharedPreferences.getBoolean("LOGINGOOGLE", true)) {
-            String name = sharedPreferences.getString("NAME", "");
-            mEmailView.setText(name);
+            String email = sharedPreferences.getString("EMAIL", "");
+            mEmailView.setText(email);
             mEmailView.setEnabled(false);
+            String[] name = sharedPreferences.getString("NAME", "").split(" ", 2);
+            String firstname = name[0];
+            String lastname = name[1];
+            mNameView.setText(firstname);
+            mSurnameView.setText(lastname);
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+            Glide.with(getApplicationContext()).load(acct.getPhotoUrl())
+                    .thumbnail(0.5f)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(mImageView);
+        } else {
+            // TODO: get user id
+            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+            currentUserId = prefs.getLong("currentUserId", 0);
+
+            mAPIService = ApiUtils.getAPIService();
+            // TODO: get user id
+            mAPIService.getUserDetails(currentUserId).enqueue(new Callback<ApiObject>() {
+                @Override
+                public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "current user get submitted to API." + response.body().toString());
+                        currentUserId = response.body().id;
+
+                        mNameView.setText(response.body().firstName);
+                        mSurnameView.setText(response.body().lastName);
+                        mEmailView.setText(response.body().email);
+                        mPhoneView.setText(response.body().phone);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiObject> call, Throwable t) {
+                    Log.i(TAG, "Unable to get current user from API.");
+                }
+            });
         }
 
     }

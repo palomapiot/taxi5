@@ -10,8 +10,13 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
 import com.muei.apm.taxi5.api.ApiObject;
@@ -29,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     public static final String MY_PREFS_NAME = "MyPrefsFile";
 
     private TextView tvName;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
         buttonPass = findViewById(R.id.btnChangePassword);
 
         tvName = findViewById(R.id.tvName);
+        imageView = findViewById(R.id.ivProfile);
 
         Boolean loginGoogle = true;
 
@@ -55,6 +62,12 @@ public class ProfileActivity extends AppCompatActivity {
             buttonPass.setVisibility(View.INVISIBLE);
             tvName = findViewById(R.id.tvName);
             tvName.setText(sharedPreferences.getString("NAME", ""));
+            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+            Glide.with(getApplicationContext()).load(acct.getPhotoUrl())
+                    .thumbnail(0.5f)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(imageView);
         } else {
             buttonPass.setVisibility(View.VISIBLE);
             mAPIService = ApiUtils.getAPIService();

@@ -19,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;

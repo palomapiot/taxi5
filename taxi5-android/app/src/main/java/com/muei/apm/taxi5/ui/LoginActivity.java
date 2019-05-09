@@ -47,6 +47,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.muei.apm.taxi5.R;
 import com.muei.apm.taxi5.api.APIService;
+import com.muei.apm.taxi5.api.ApiObject;
 import com.muei.apm.taxi5.api.ApiUtils;
 import com.muei.apm.taxi5.api.LoginObject;
 
@@ -172,16 +173,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void signIn() {
 
         mGoogleApiClient.clearDefaultAccountAndReconnect();
-
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
         sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
-
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        String name = acct.getDisplayName();
-        String email = acct.getEmail();
-        sharedPreferences.edit().putString("NAME", name).commit();
-        sharedPreferences.edit().putString("EMAIL", name).commit();
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -195,6 +189,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
@@ -217,6 +213,47 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             sharedPreferences.edit().putBoolean("LOGINGOOGLE", true).commit();
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getApplicationContext());
+                            String name = (acct.getDisplayName() != null) ? acct.getDisplayName() : "";
+                            final String email = acct.getEmail();
+                            final String token = acct.getIdToken();
+                            sharedPreferences.edit().putString("NAME", name).commit();
+                            sharedPreferences.edit().putString("EMAIL", email).commit();
+
+                            mAPIService = ApiUtils.getAPIService();
+                            ApiObject body = new ApiObject(name, "", email, null, token);
+                            mAPIService.createUser(body).enqueue(new Callback<ApiObject>() {
+                                @Override
+                                public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                                    if (response.isSuccessful()) {
+                                        Log.i(TAG, "post submitted to API." + response.body().toString());
+                                        mAPIService.loginUser(new LoginObject(email, token)).enqueue(new Callback<LoginObject>() {
+                                            @Override
+                                            public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
+                                                if (response.isSuccessful()) {
+                                                    Log.i(TAG, "login submitted to API." + response.body().toString());
+                                                    SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                                    editor.putLong("currentUserId", response.body().id);
+                                                    editor.apply();
+                                                } else {
+                                                    Log.i(TAG, "FAILED TO LOG." + response.body().toString());
+
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<LoginObject> call, Throwable t) {
+                                                Log.i(TAG, "Unable to submit post to API.");
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<ApiObject> call, Throwable t) {
+                                    Log.i(TAG, "Unable to submit post to API.");
+                                }
+                            });
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
