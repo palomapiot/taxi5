@@ -86,6 +86,11 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+
+    }
 
     public void onClickBtnPay(final View view) {
 

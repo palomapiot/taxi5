@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -84,6 +86,8 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        Button boton= findViewById(R.id.button);
+        boton.setVisibility(View.VISIBLE);
 
         //Toolbar myToolbar = findViewById(R.id.my_toolbar);
         //setSupportActionBar(myToolbar);
@@ -105,8 +109,10 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onClick(DialogInterface dialog, int which){
                 // dismiss the progress dialog
-                Toast.makeText(RutaActivity.this, getString(R.string.viaje_en_proceso), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(RutaActivity.this, getString(R.string.viaje_en_proceso), Toast.LENGTH_SHORT).show();
                 pd.dismiss();
+                Snackbar.make(findViewById(R.id.button), R.string.viaje_en_proceso, Snackbar.LENGTH_LONG).setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                        .show();
             }
         });
         pd.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.cancelar_viaje_menu), new DialogInterface.OnClickListener() {
@@ -122,6 +128,10 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
         pd.show();
+
+
+
+
 
     }
 
@@ -371,12 +381,30 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void onConfirmButtonClick(View view) {
+        Button boton= findViewById(R.id.button);
+        boton.setVisibility(View.INVISIBLE);
 
-        Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
-        intent.putExtra("ORIGEN", origen);
-        intent.putExtra("DESTINO", destino);
+        Snackbar.make(findViewById(R.id.button), R.string.llegada_dest, Snackbar.LENGTH_INDEFINITE).setActionTextColor(getResources().getColor(R.color.colorPrimary))
+                .setAction(R.string.ir_pagar, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
+                        intent.putExtra("ORIGEN", origen);
+                        intent.putExtra("DESTINO", destino);
 
-        startActivity(intent);
+                        startActivity(intent);
+                        RutaActivity.this.finish();
+                    }
+                })
+                .show();
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+
+
     }
 
 }
