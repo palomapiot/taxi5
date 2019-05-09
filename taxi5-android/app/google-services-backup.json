@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "69055388197-vq6e7lp9unj5insd4o5vo6nohdnuc2le.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.muei.apm.taxi5",
-            "certificate_hash": "72c44b5fee467202099c691838dc3ad5bc11ffa9"
-          }
-        },
-        {
           "client_id": "69055388197-19rkm92k2dmudn488q25cpeg0f5blfqq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
