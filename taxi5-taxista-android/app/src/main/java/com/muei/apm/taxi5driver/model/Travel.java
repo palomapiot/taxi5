@@ -10,9 +10,9 @@ public class Travel {
 
     private String user;
 
-    private Calendar date;
+    private long date;
 
-    public Travel(String origin, String destination, String user, Calendar date) {
+    public Travel(String origin, String destination, String user, long date) {
         this.origin = origin;
         this.destination = destination;
         this.user = user;
@@ -43,11 +43,11 @@ public class Travel {
         this.user = user;
     }
 
-    public Calendar getDate() {
+    public long getDate() {
         return date;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(long date) {
         this.date = date;
     }
 }

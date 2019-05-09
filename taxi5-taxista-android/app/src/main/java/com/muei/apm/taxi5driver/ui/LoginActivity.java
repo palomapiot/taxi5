@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,9 +30,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.muei.apm.taxi5driver.R;
+import com.muei.apm.taxi5driver.api.APIService;
+import com.muei.apm.taxi5driver.api.ApiUtils;
+import com.muei.apm.taxi5driver.api.LoginObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -61,6 +70,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+
+
+    // api
+    private APIService mAPIService;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private boolean todoCorrecto = false;
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,13 +160,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
-            cancel = true;
-        }
-
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.setError(getString(R.string.error_field_required));
@@ -159,12 +168,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         } else if (!isEmailValid(email)) {
             mEmailView.setError(getString(R.string.error_invalid_email));
             focusView = mEmailView;
-            cancel = true;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
             cancel = true;
         }
 
@@ -299,9 +302,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+
+            mAPIService = ApiUtils.getAPIService();
+            LoginObject body = new LoginObject(mEmail, mPassword);
+            mAPIService.loginTaxi(body).enqueue(new Callback<LoginObject>() {
+                @Override
+                public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "LOGIN SUBMIT TO API." + response.body().toString());
+                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                        editor.putLong("currentUserId", response.body().id);
+                        editor.apply();
+                        todoCorrecto = true;
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<LoginObject> call, Throwable t) {
+                    Log.i(TAG, "Unable to submit post to API.");
+                }
+            });
+
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
+                Thread.sleep(1500);
             } catch (InterruptedException e) {
                 return false;
             }
@@ -315,7 +339,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             // TODO: register the new account here.
-            return true;
+            return todoCorrecto;
         }
 
         @Override
