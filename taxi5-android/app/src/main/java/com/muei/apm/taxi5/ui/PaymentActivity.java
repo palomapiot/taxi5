@@ -70,7 +70,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         TextView origen_label = findViewById(R.id.pago_origen);
         TextView destino_label = findViewById(R.id.pago_destino);
 
-        precio_label.setText("6.75 €");
+        precio_label.setText("6.75");
         origen_label.setText(origen);
         destino_label.setText(destino);
 
@@ -86,6 +86,11 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+
+    }
 
     public void onClickBtnPay(final View view) {
 

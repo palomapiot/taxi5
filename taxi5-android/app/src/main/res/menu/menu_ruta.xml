@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/problemaRuta"
-        android:title="@string/ruta_problema"
-        />
+        android:drawable="@android:drawable/ic_menu_delete"
+        app:showAsAction="ifRoom"
+        android:title="Cancelar">
+    </item>
 </menu>
