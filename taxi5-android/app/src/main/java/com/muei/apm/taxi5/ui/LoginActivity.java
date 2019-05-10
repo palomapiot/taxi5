@@ -227,9 +227,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
                                     if (response.isSuccessful()) {
                                         Log.i(TAG, "post submitted to API." + response.body().toString());
-        /*cambiar esto >>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
                                         mAPIService.loginUser(new LoginObject(email, token)).enqueue(new Callback<LoginObject>() {
-        /*<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
                                             @Override
                                             public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
                                                 if (response.isSuccessful()) {
