@@ -1,15 +1,11 @@
 package com.muei.apm.taxi5driver.ui;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioManager;
-import android.media.RingtoneManager;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,6 +14,7 @@ import android.widget.TextView;
 
 import com.muei.apm.taxi5driver.R;
 import com.muei.apm.taxi5driver.api.APIService;
+import com.muei.apm.taxi5driver.api.ApiObject;
 import com.muei.apm.taxi5driver.api.ApiUtils;
 import com.muei.apm.taxi5driver.api.RideObject;
 import com.muei.apm.taxi5driver.api.TaxiIdLogin;
@@ -63,13 +60,37 @@ public class AcceptPassengerActivity extends AppCompatActivity implements View.O
         tvDestination = findViewById(R.id.textView4);
 
         mAPIService = ApiUtils.getAPIService();
+
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        currentUserId = prefs.getLong("currentUserId", 0);
         mAPIService.getRideById(extraRideId.longValue()).enqueue(new Callback<RideObject>() {
             @Override
             public void onResponse(Call<RideObject> call, Response<RideObject> response) {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "get ride details submitted to API." + response.body().toString());
                     // TODO: recuperar nombre y apellidos usuarios, no id
-                    tvUser.setText(response.body().userid.toString());
+
+
+                    mAPIService.getUserDetails(currentUserId).enqueue(new Callback<ApiObject>() {
+                        @Override
+                        public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                            if (response.isSuccessful()) {
+                                Log.i(TAG, "get user details submitted to API." + response.body().toString());
+
+                                ApiObject usuario = response.body();
+                                tvUser.setText(usuario.firstName + ' ' + usuario.lastName);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApiObject> call, Throwable t) {
+                            Log.i(TAG, "Unable to get current user details from API.");
+                            System.out.println(t.getMessage());
+                        }
+                    });
+
+
+
 
                     tvOrigin.setText(response.body().origin);
                     tvDestination.setText(response.body().destination);

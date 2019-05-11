@@ -1,9 +1,9 @@
 package com.muei.apm.taxi5driver;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.muei.apm.taxi5driver.api.APIService;
 import com.muei.apm.taxi5driver.api.ApiUtils;
@@ -19,10 +18,7 @@ import com.muei.apm.taxi5driver.api.RideObject;
 import com.muei.apm.taxi5driver.model.Travel;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
-
-import android.content.SharedPreferences;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +31,8 @@ import retrofit2.Response;
  * interface.
  */
 public class TravelFragment extends Fragment {
+
+    private SwipeRefreshLayout swipeContainer;
 
     // TODO: Customize parameters
     private int mColumnCount = 1;
@@ -73,10 +71,11 @@ public class TravelFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_travel_list, container, false);
 
+
         // Set the adapter
-        if (view instanceof RecyclerView) {
+        recyclerView = view.findViewById(R.id.list);
+        if (recyclerView != null) {
             Context context = view.getContext();
-            recyclerView = (RecyclerView) view;
             if (mColumnCount <= 1) {
                 recyclerView.setLayoutManager(new LinearLayoutManager(context));
             } else {
@@ -86,16 +85,12 @@ public class TravelFragment extends Fragment {
             //travelList.add(new Travel("Coruña", "Santiago", "Daniel", Calendar.getInstance()));
 
             mAPIService = ApiUtils.getAPIService();
-            // TODO: get user id
-
-            mAPIService = ApiUtils.getAPIService();
-            // TODO: get user id
             mAPIService.getRides().enqueue(new Callback<List<RideObject>>() {
                 @Override
                 public void onResponse(Call<List<RideObject>> call, Response<List<RideObject>> response) {
                     if (response.isSuccessful()) {
                         Log.i(TAG, "current user rides get submitted to API." + response.body().toString());
-                        for(int i = 0; i < response.body().size(); i++){
+                        for (int i = 0; i < response.body().size(); i++) {
 
                             RideObject ride = response.body().get(i);
                             // Añadimos los viajes
@@ -117,8 +112,49 @@ public class TravelFragment extends Fragment {
             });
 
 
-
         }
+
+        swipeContainer = view.findViewById(R.id.swipeContainer);
+        // Setup refresh listener which triggers new data loading
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call swipeContainer.setRefreshing(false)
+                // once the network request has completed successfully.
+                mAPIService = ApiUtils.getAPIService();
+                mAPIService.getRides().enqueue(new Callback<List<RideObject>>() {
+                    @Override
+                    public void onResponse(Call<List<RideObject>> call, Response<List<RideObject>> response) {
+                        if (response.isSuccessful()) {
+                            Log.i(TAG, "current user rides get submitted to API." + response.body().toString());
+                            travelList.clear();
+                            for (int i = 0; i < response.body().size(); i++) {
+
+                                RideObject ride = response.body().get(i);
+                                // Añadimos los viajes
+                                Travel cuerpo = new Travel(ride.id.longValue(), ride.origin, ride.destination, ride.userid.toString(), ride.ridedate);
+                                travelList.add(cuerpo);
+                            }
+
+                            adapterTravels = new MyTravelRecyclerViewAdapter(travelList, mListener);
+                            recyclerView.setAdapter(adapterTravels);
+
+                        }
+                        swipeContainer.setRefreshing(false);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<RideObject>> call, Throwable t) {
+                        Log.i(TAG, "Unable to get current user rides from API.");
+                        System.out.println(t.getMessage());
+                        swipeContainer.setRefreshing(false);
+
+                    }
+                });
+            }
+        });
         return view;
     }
 

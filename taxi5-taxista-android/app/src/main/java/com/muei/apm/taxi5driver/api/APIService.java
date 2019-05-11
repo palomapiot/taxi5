@@ -29,6 +29,7 @@ public interface APIService {
     @GET("/ride/{id}")
     Call<RideObject> getRideById(@Path("id") long id);
 
-
+    @GET("/user/{id}")
+    Call<ApiObject> getUserDetails(@Path("id") long id);
 
 }
