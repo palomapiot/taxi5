@@ -5,6 +5,10 @@
     <string name="logo_taxi5">Logo Taxi5</string>
     <string name="activity_main_iniciar_sesion">Iniciar Sesión</string>
 
+    <!-- MENU -->
+    <string name="activity_home_logout">Desconectarse</string>
+
+
     <!-- LOGIN ACTIVITY -->
     <string name="activity_login_label">Iniciar Sesión</string>
     <string name="prompt_email">Correo</string>

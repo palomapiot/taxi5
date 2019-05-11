@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.TravelsActiveActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
     <TextView
         android:id="@+id/tvTravelActiveTitle"
         android:layout_width="wrap_content"
@@ -128,4 +137,23 @@
         app:layout_constraintTop_toBottomOf="@+id/tvListTravelsTitle"
         app:layout_constraintVertical_bias="0.0"
         tools:layout="@layout/fragment_travel_list" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:onClick="onReloadClick"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_directions_black_24dp"
+        android:focusable="true" />
+
 </android.support.constraint.ConstraintLayout>
