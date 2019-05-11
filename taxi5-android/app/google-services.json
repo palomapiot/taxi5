@@ -50,6 +50,51 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69055388197:android:d4546e7ccee9e907",
+        "android_client_info": {
+          "package_name": "com.muei.apm.taxifive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69055388197-kbrj0d384h8vdrgdoln4m9bginejqrs6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.muei.apm.taxifive",
+            "certificate_hash": "f5daf56b4d59216686b7f3f24a93f11fd56fa9c8"
+          }
+        },
+        {
+          "client_id": "69055388197-f6lbtor9jfhdhkeklkl2u98jkqlr8amd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.muei.apm.taxifive",
+            "certificate_hash": "72c44b5fee467202099c691838dc3ad5bc11ffa9"
+          }
+        },
+        {
+          "client_id": "69055388197-bcunkrdm0qa21lohmqglakjf9r3uu33a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBrQp5iQG-hH2DXyG_iVcca4P_JLriJwY8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69055388197-bcunkrdm0qa21lohmqglakjf9r3uu33a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

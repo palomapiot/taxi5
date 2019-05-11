@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.muei.apm.taxi5">
+    package="com.muei.apm.taxifive">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <!--<uses-permission android:name="android.permission.GET_ACCOUNTS" />-->
@@ -22,7 +22,9 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".ui.MainActivity" android:screenOrientation="portrait">
+        <activity
+            android:name="com.muei.apm.taxifive.ui.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,61 +32,61 @@
         </activity>
 
         <activity
-            android:name=".ui.RegisterActivity"
+            android:name="com.muei.apm.taxifive.ui.RegisterActivity"
             android:label="@string/activity_register_label"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.LoginActivity"
+            android:name="com.muei.apm.taxifive.ui.LoginActivity"
             android:label="@string/activity_login_label"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.ChangePasswordActivity"
+            android:name="com.muei.apm.taxifive.ui.ChangePasswordActivity"
             android:label="@string/activity_change_password_label"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.EditProfileActivity"
+            android:name="com.muei.apm.taxifive.ui.EditProfileActivity"
             android:label="@string/activity_edit_profile_label"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.ProfileActivity"
+            android:name="com.muei.apm.taxifive.ui.ProfileActivity"
             android:label="@string/activity_profile_label"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.PaymentActivity"
+            android:name="com.muei.apm.taxifive.ui.PaymentActivity"
             android:label="@string/activity_pago_label"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.HomeActivity"
+            android:name="com.muei.apm.taxifive.ui.HomeActivity"
             android:label="@string/activity_home_label"
-            android:parentActivityName=".ui.MainActivity"
+            android:parentActivityName="com.muei.apm.taxifive.ui.MainActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.TrayectoActivity"
+            android:name="com.muei.apm.taxifive.ui.TrayectoActivity"
             android:label="@string/activity_trayecto_label"
-            android:parentActivityName=".ui.HomeActivity"
+            android:parentActivityName="com.muei.apm.taxifive.ui.HomeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.RutaActivity"
+            android:name="com.muei.apm.taxifive.ui.RutaActivity"
             android:label="@string/ruta_activity"
-            android:parentActivityName=".ui.TrayectoActivity"
+            android:parentActivityName="com.muei.apm.taxifive.ui.TrayectoActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.SearchActivity"
+            android:name="com.muei.apm.taxifive.ui.SearchActivity"
             android:label="@string/activity_search_label"
-            android:parentActivityName=".ui.HomeActivity"
+            android:parentActivityName="com.muei.apm.taxifive.ui.HomeActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.HistoricalActivity"
+            android:name="com.muei.apm.taxifive.ui.HistoricalActivity"
             android:label="@string/activity_historical_label"
             android:screenOrientation="portrait" />
 
