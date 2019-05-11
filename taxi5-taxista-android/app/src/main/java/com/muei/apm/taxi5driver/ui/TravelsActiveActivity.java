@@ -27,4 +27,9 @@ public class TravelsActiveActivity extends AppCompatActivity implements TravelFr
         intent.putExtra("rideId", item.id);
         startActivity(intent);
     }
+
+
+    public void onBackPressed() {
+
+    }
 }

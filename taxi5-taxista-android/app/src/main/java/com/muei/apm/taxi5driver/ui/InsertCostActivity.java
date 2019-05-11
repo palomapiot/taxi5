@@ -1,13 +1,19 @@
 package com.muei.apm.taxi5driver.ui;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muei.apm.taxi5driver.R;
@@ -15,15 +21,16 @@ import com.muei.apm.taxi5driver.api.APIService;
 import com.muei.apm.taxi5driver.api.ApiUtils;
 import com.muei.apm.taxi5driver.api.RideCostObject;
 import com.muei.apm.taxi5driver.api.RideObject;
-import com.muei.apm.taxi5driver.api.TaxiIdLogin;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class InsertCostActivity extends AppCompatActivity {
 
     private Button btnFinishTravel;
+
 
     //api
     private APIService mAPIService;
@@ -35,6 +42,12 @@ public class InsertCostActivity extends AppCompatActivity {
 
     private EditText editCost;
     private String mCost;
+
+    boolean loaded = false;
+    private SoundPool soundPool;
+    private Vibrator vibrator;
+    private int soundID;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,15 +91,49 @@ public class InsertCostActivity extends AppCompatActivity {
             }
         });
 
-        Toast.makeText(this, getString(R.string.activity_insert_cost_send_price_user), Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.solicitar_pago_btn), R.string.activity_insert_cost_send_price_user, Snackbar.LENGTH_SHORT).show();
+        Button pago = findViewById(R.id.solicitar_pago_btn);
+        pago.setText(R.string.volver);
     }
 
     public void onClickFinishTravel(View view) {
         btnFinishTravel = findViewById(R.id.btnLogin);
-        Toast.makeText(this, getString(R.string.activity_insert_cost_travel_finished), Toast.LENGTH_SHORT).show();
 
-        // Utilizar finish() para volver a la actividad anterior. NO CREAR un nuevo Intent
-        finish();
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(InsertCostActivity.this, R.style.AppCompatAlertDialogStyle);
+        // Configura el titulo.
+        alertDialogBuilder.setTitle(R.string.fin);
+        alertDialogBuilder
+                .setMessage(R.string.aceptacion_p)
+                .setCancelable(false)
+                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+
+                        InsertCostActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+                        // Load the sound
+                        soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+                        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                            @Override
+                            public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                                       int status) {
+                                loaded = true;
+                            }
+                        });
+
+                        RingtoneManager.getRingtone(InsertCostActivity.this, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).play();
+
+                        InsertCostActivity.this.finish();
+
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                }).create().show();
+
+
     }
 
 }

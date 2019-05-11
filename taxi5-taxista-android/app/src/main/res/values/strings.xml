@@ -24,6 +24,8 @@
     <string name="activity_insert_cost_finish_travel">Finalizar viaje</string>
     <string name="activity_insert_cost_send_price_user">Enviando el coste al usuario&#8230;</string>
     <string name="activity_insert_cost_travel_finished">Viaje finalizado</string>
+    <string name="volver">Reenviar Precio</string>
+    <string name="fin">Desea finalizar el viaje?</string>
 
     <!-- TRAVEL -->
     <string name="origin">Origen:</string>
@@ -97,5 +99,10 @@
     <string name="activity_accept_mock_destino">Rúa do paseo, 3, Ourense</string>
     <string name="travel_active">Viaje Activo</string>
     <string name="travel_list">Lista de Viajes</string>
+    <string name="aceptacion">Confirmar recogida </string>
+    <string name="gracias_p">El pasajero está esperando su llegada!</string>
+    <string name="aceptacion_p">Desea recoger a este pasajero?</string>
+    <string name="aceptacion_si">Si </string>
+    <string name="aceptacion_no">No </string>
 
 </resources>

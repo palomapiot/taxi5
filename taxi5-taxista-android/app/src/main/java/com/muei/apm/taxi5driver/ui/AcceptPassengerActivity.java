@@ -1,31 +1,39 @@
 package com.muei.apm.taxi5driver.ui;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
+import android.media.AudioManager;
+import android.media.RingtoneManager;
+import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.muei.apm.taxi5driver.MyTravelRecyclerViewAdapter;
 import com.muei.apm.taxi5driver.R;
-import com.muei.apm.taxi5driver.TravelFragment;
 import com.muei.apm.taxi5driver.api.APIService;
 import com.muei.apm.taxi5driver.api.ApiUtils;
-import com.muei.apm.taxi5driver.api.LoginObject;
 import com.muei.apm.taxi5driver.api.RideObject;
 import com.muei.apm.taxi5driver.api.TaxiIdLogin;
-import com.muei.apm.taxi5driver.model.Travel;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AcceptPassengerActivity extends AppCompatActivity {
+public class AcceptPassengerActivity extends AppCompatActivity implements View.OnTouchListener {
+
+    private SoundPool soundPool;
+    private Vibrator vibrator;
+
+    private int soundID;
+    boolean loaded = false;
+
 
     // api
     private APIService mAPIService;
@@ -90,14 +98,55 @@ public class AcceptPassengerActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.i(TAG, "current user rides get submitted to API." + response.body().toString());
 
-                    RideObject ride = response.body();
+                    final RideObject ride = response.body();
 
-                    Intent intent = new Intent(AcceptPassengerActivity.this, InsertCostActivity.class);
 
-                    intent.putExtra("aRideId", ride.id);
-                    startActivity(intent);
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AcceptPassengerActivity.this, R.style.AppCompatAlertDialogStyle);
+                    // Configura el titulo.
+                    alertDialogBuilder.setTitle(R.string.aceptacion);
+                    // Configura el mensaje.
+                    alertDialogBuilder
+                            .setMessage(R.string.aceptacion_p)
+                            .setCancelable(false)
+                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                                    //Compruebe si dispositivo tiene un vibrador.
+                                    if (vibrator.hasVibrator()) {//Si tiene vibrador
+                                        long tiempo = 500; //en milisegundos
+                                        vibrator.vibrate(tiempo);
+                                    } else {//no tiene
+                                        Log.d("VIBRATOR", "Este dispositivo NO puede vibrar");
+                                    }
+
+                                    AcceptPassengerActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
+                                    // Load the sound
+                                    soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+                                    soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                                        @Override
+                                        public void onLoadComplete(SoundPool soundPool, int sampleId,
+                                                                   int status) {
+                                            loaded = true;
+                                        }
+                                    });
+
+                                    RingtoneManager.getRingtone(AcceptPassengerActivity.this, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).play();
+
+                                    Intent intent = new Intent(AcceptPassengerActivity.this, InsertCostActivity.class);
+
+                                    intent.putExtra("aRideId", ride.id);
+                                    startActivity(intent);
+                                    AcceptPassengerActivity.this.finish();
+
+                                }
+                            })
+                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            }).create().show();
                     //Toast.makeText(this, getString(R.string.activity_accept_passenger_accepted), Toast.LENGTH_SHORT).show();
-                    finish();
+//                    finish();
 
                 }
             }
@@ -111,6 +160,27 @@ public class AcceptPassengerActivity extends AppCompatActivity {
 
 
 
+
+
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            // Getting the user sound settings
+            AudioManager audioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+            float actualVolume = (float) audioManager
+                    .getStreamVolume(AudioManager.STREAM_MUSIC);
+            float maxVolume = (float) audioManager
+                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+            float volume = actualVolume / maxVolume;
+            // Is the sound loaded already?
+            if (loaded) {
+                soundPool.play(soundID, volume, volume, 1, 0, 1f);
+                Log.e("Test", "Played sound");
+            }
+        }
+        return false;
     }
 
     public void onClickCancel(View view) {
