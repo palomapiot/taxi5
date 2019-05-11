@@ -1,20 +1,32 @@
 package com.muei.apm.taxi5driver;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.muei.apm.taxi5driver.api.APIService;
+import com.muei.apm.taxi5driver.api.ApiUtils;
+import com.muei.apm.taxi5driver.api.RideObject;
 import com.muei.apm.taxi5driver.model.Travel;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import android.content.SharedPreferences;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A fragment representing a list of Items.
@@ -34,6 +46,13 @@ public class TravelFragment extends Fragment {
     private MyTravelRecyclerViewAdapter adapterTravels;
 
     private List<Travel> travelList;
+
+    // api
+    private APIService mAPIService;
+    private Long currentUserId = null;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private final  String TAG = TravelFragment.class.getSimpleName();
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -64,24 +83,41 @@ public class TravelFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            travelList.add(new Travel("Coruña", "Santiago", "Daniel", Calendar.getInstance()));
-            travelList.add(new Travel("Orense", "Vigo", "Carlos", Calendar.getInstance()));
-            travelList.add(new Travel("Lugo", "A Coruña", "Rodrigo", Calendar.getInstance()));
-            travelList.add(new Travel("Ferrol", "Cecebre", "Belén", Calendar.getInstance()));
-            travelList.add(new Travel("Vigo", "Ribeira", "María", Calendar.getInstance()));
-            travelList.add(new Travel("Cerceda", "Sanxenxo", "Paloma", Calendar.getInstance()));
-            travelList.add(new Travel("Culleredo", "Vigo", "Marta", Calendar.getInstance()));
-            travelList.add(new Travel("Mazaricos", "Santiago", "José", Calendar.getInstance()));
-            travelList.add(new Travel("Cee", "Santiago", "Samuel", Calendar.getInstance()));
-            travelList.add(new Travel("Corcubión", "Coruña", "Raquel", Calendar.getInstance()));
-            travelList.add(new Travel("Muros", "Cee", "Lois", Calendar.getInstance()));
-            travelList.add(new Travel("Noia", "Ferrol", "Suso", Calendar.getInstance()));
+            //travelList.add(new Travel("Coruña", "Santiago", "Daniel", Calendar.getInstance()));
+
+            mAPIService = ApiUtils.getAPIService();
+            // TODO: get user id
+
+            mAPIService = ApiUtils.getAPIService();
+            // TODO: get user id
+            mAPIService.getRides().enqueue(new Callback<List<RideObject>>() {
+                @Override
+                public void onResponse(Call<List<RideObject>> call, Response<List<RideObject>> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "current user rides get submitted to API." + response.body().toString());
+                        for(int i = 0; i < response.body().size(); i++){
+
+                            RideObject ride = response.body().get(i);
+                            // Añadimos los viajes
+                            Travel cuerpo = new Travel(ride.id.longValue(), ride.origin, ride.destination, ride.userid.toString(), ride.ridedate);
+                            travelList.add(cuerpo);
+                        }
+
+                        adapterTravels = new MyTravelRecyclerViewAdapter(travelList, mListener);
+                        recyclerView.setAdapter(adapterTravels);
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<RideObject>> call, Throwable t) {
+                    Log.i(TAG, "Unable to get current user rides from API.");
+                    System.out.println(t.getMessage());
+                }
+            });
 
 
-            adapterTravels = new MyTravelRecyclerViewAdapter(travelList, mListener);
 
-
-            recyclerView.setAdapter(adapterTravels);
         }
         return view;
     }

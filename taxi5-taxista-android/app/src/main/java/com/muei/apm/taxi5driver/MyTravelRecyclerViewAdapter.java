@@ -38,8 +38,9 @@ public class MyTravelRecyclerViewAdapter extends RecyclerView.Adapter<MyTravelRe
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.tvUser.setText(holder.mItem.getUser());
-        SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        holder.tvDate.setText(format1.format(holder.mItem.getDate().getTime()));
+        //SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        //holder.tvDate.setText(format1.format(holder.mItem.getDate().getTime()));
+        holder.tvDate.setText(Long.toString(holder.mItem.getDate()));
         holder.tvOrigin.setText(holder.mItem.getOrigin());
         holder.tvDestination.setText(holder.mItem.getDestination());
 

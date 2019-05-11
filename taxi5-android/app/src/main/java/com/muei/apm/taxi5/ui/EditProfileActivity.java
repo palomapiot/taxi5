@@ -71,6 +71,32 @@ public class EditProfileActivity extends AppCompatActivity {
 
         final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
 
+        // TODO: get user id
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        currentUserId = prefs.getLong("currentUserId", 0);
+
+        mAPIService = ApiUtils.getAPIService();
+        // TODO: get user id
+        mAPIService.getUserDetails(currentUserId).enqueue(new Callback<ApiObject>() {
+            @Override
+            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "current user get submitted to API." + response.body().toString());
+                    currentUserId = response.body().id;
+
+                    mNameView.setText(response.body().firstName);
+                    mSurnameView.setText(response.body().lastName);
+                    mEmailView.setText(response.body().email);
+                    mPhoneView.setText(response.body().phone);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiObject> call, Throwable t) {
+                Log.i(TAG, "Unable to get current user from API.");
+            }
+        });
         if (sharedPreferences.getBoolean("LOGINGOOGLE", true)) {
             String email = sharedPreferences.getString("EMAIL", "");
             mEmailView.setText(email);
@@ -88,7 +114,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     .into(mImageView);
         } else {
             // TODO: get user id
-            SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+            prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
             currentUserId = prefs.getLong("currentUserId", 0);
 
             mAPIService = ApiUtils.getAPIService();

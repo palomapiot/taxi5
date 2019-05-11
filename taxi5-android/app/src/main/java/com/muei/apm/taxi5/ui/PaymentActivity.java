@@ -33,6 +33,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
 
     private String origen;
     private String destino;
+    private float coste;
     private float finalPrice;
     boolean loaded = false;
     private SoundPool soundPool;
@@ -65,24 +66,38 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
             destino = extras.getString("DESTINO");
         }
 
-        TextView precio_label = findViewById(R.id.pago_precio);
-        TextView origen_label = findViewById(R.id.pago_origen);
-        TextView destino_label = findViewById(R.id.pago_destino);
 
-        precio_label.setText("6.75");
-        origen_label.setText(origen);
-        destino_label.setText(destino);
+        mAPIService = ApiUtils.getAPIService();
+        final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        lastRideId = prefs.getLong("lastRideId", 0);
 
-        finalPrice = Float.parseFloat(precio_label.getText().toString());
+        mAPIService.getRideById(lastRideId).enqueue(new Callback<RideObject>() {
+            @Override
+            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "ride post submitted to API." + response.body().toString());
+                    coste = response.body().cost;
+
+                    TextView precio_label = findViewById(R.id.pago_precio);
+                    TextView origen_label = findViewById(R.id.pago_origen);
+                    TextView destino_label = findViewById(R.id.pago_destino);
+
+                    precio_label.setText(String.valueOf(coste));
+                    origen_label.setText(origen);
+                    destino_label.setText(destino);
+
+                    finalPrice = Float.parseFloat(precio_label.getText().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideObject> call, Throwable t) {
+                Log.i(TAG, "Unable to post ride to API.");
+            }
+        });
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-
-
-
-
-
-
     }
 
     @Override

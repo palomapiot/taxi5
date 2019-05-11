@@ -17,9 +17,6 @@ public interface APIService {
     @POST("/login")
     Call<LoginObject> loginUser(@Body LoginObject user);
 
-    @GET("/currentuser")
-    Call<ApiObject> getCurrentUserId();
-
     @GET("/user/{id}")
     Call<ApiObject> getUserDetails(@Path("id") long id);
 
@@ -40,5 +37,8 @@ public interface APIService {
 
     @PUT("/ride/{id}")
     Call<RideObject> updateRide(@Path("id") long id, @Body RideObject ride);
+
+    @GET("/ride/{id}")
+    Call<RideObject> getRideById(@Path("id") long id);
 
 }

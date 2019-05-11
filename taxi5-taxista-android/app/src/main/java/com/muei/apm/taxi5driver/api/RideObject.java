@@ -1,4 +1,4 @@
-package com.muei.apm.taxi5.api;
+package com.muei.apm.taxi5driver.api;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -25,13 +25,17 @@ public class RideObject {
     @Expose
     public float price;
 
-    @SerializedName("cost")
-    @Expose
-    public float cost;
-
     @SerializedName("userid")
     @Expose
     public Long userid;
+
+    @SerializedName("taxiid")
+    @Expose
+    public Long taxiid;
+
+    @SerializedName("cost")
+    @Expose
+    public float cost;
 
     public RideObject(String origin, String destination, long ridedate, float price, Long userid) {
         this.origin = origin;
@@ -41,15 +45,6 @@ public class RideObject {
         this.userid = userid;
     }
 
-    public RideObject(String origin, String destination, long ridedate, float price, Long userid, float cost) {
-        this.origin = origin;
-        this.destination = destination;
-        this.ridedate = ridedate;
-        this.price = price;
-        this.userid = userid;
-        this.cost = cost;
-    }
-
     public RideObject(String origin, String destination, long ridedate, Long userid) {
         this.origin = origin;
         this.destination = destination;
@@ -57,10 +52,20 @@ public class RideObject {
         this.userid = userid;
     }
 
+    public RideObject(String origin, String destination, long ridedate, float price, Long userid, Long taxiid, float cost) {
+        this.origin = origin;
+        this.destination = destination;
+        this.ridedate = ridedate;
+        this.price = price;
+        this.userid = userid;
+        this.taxiid = taxiid;
+        this.cost = cost;
+    }
 
     public RideObject(float price) {
         this.price = price;
     }
+
 
     @Override
     public String toString() {
