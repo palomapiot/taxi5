@@ -1,5 +1,6 @@
 package com.muei.apm.taxi5driver.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -86,7 +87,10 @@ public class InsertCostActivity extends AppCompatActivity {
         Toast.makeText(this, getString(R.string.activity_insert_cost_travel_finished), Toast.LENGTH_SHORT).show();
 
         // Utilizar finish() para volver a la actividad anterior. NO CREAR un nuevo Intent
-        finish();
+        //finish();
+        // creamos un nuevo intent para obtener la lista de viajes actualizada
+        Intent intent = new Intent(InsertCostActivity.this, TravelsActiveActivity.class);
+        startActivity(intent);
     }
 
 }
