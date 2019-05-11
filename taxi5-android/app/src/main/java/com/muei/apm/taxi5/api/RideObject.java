@@ -25,6 +25,10 @@ public class RideObject {
     @Expose
     public float price;
 
+    @SerializedName("cost")
+    @Expose
+    public float cost;
+
     @SerializedName("userid")
     @Expose
     public Long userid;
@@ -35,6 +39,15 @@ public class RideObject {
         this.ridedate = ridedate;
         this.price = price;
         this.userid = userid;
+    }
+
+    public RideObject(String origin, String destination, long ridedate, float price, Long userid, float cost) {
+        this.origin = origin;
+        this.destination = destination;
+        this.ridedate = ridedate;
+        this.price = price;
+        this.userid = userid;
+        this.cost = cost;
     }
 
     public RideObject(String origin, String destination, long ridedate, Long userid) {
