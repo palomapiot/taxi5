@@ -20,8 +20,14 @@ public interface APIService {
     @PUT("/taxiride/{id}")
     Call<RideObject> asignRide(@Path("id") long id, @Body TaxiIdLogin taxiid);
 
+    @PUT("/sendcost/{id}")
+    Call<RideObject> sendRideCost(@Path("id") long id, @Body RideCostObject cost);
+
     @GET("/activeride")
     Call<List<RideObject>> getRides();
+
+    @GET("/ride/{id}")
+    Call<RideObject> getRideById(@Path("id") long id);
 
 
 

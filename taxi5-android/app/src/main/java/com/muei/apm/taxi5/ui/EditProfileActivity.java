@@ -64,8 +64,6 @@ public class EditProfileActivity extends AppCompatActivity {
 
         final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
 
-
-        mAPIService = ApiUtils.getAPIService();
         // TODO: get user id
         SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         currentUserId = prefs.getLong("currentUserId", 0);

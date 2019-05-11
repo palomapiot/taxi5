@@ -1,10 +1,12 @@
 package com.muei.apm.taxi5driver.ui;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.muei.apm.taxi5driver.MyTravelRecyclerViewAdapter;
@@ -30,25 +32,59 @@ public class AcceptPassengerActivity extends AppCompatActivity {
     private Long currentUserId = null;
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private final  String TAG = AcceptPassengerActivity.class.getSimpleName();
+    private Long extraRideId;
+
+    private TextView tvUser;
+    private TextView tvOrigin;
+    private TextView tvDestination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_accept_passenger);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras == null){
+            extraRideId = null;
+        } else {
+            extraRideId = extras.getLong("rideId");
+        }
+
+        tvUser = findViewById(R.id.textView2);
+        tvOrigin = findViewById(R.id.textView3);
+        tvDestination = findViewById(R.id.textView4);
+
+        mAPIService = ApiUtils.getAPIService();
+        mAPIService.getRideById(extraRideId.longValue()).enqueue(new Callback<RideObject>() {
+            @Override
+            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                if (response.isSuccessful()) {
+                    Log.i(TAG, "get ride details submitted to API." + response.body().toString());
+                    // TODO: recuperar nombre y apellidos usuarios, no id
+                    tvUser.setText(response.body().userid.toString());
+
+                    tvOrigin.setText(response.body().origin);
+                    tvDestination.setText(response.body().destination);
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideObject> call, Throwable t) {
+                Log.i(TAG, "Unable to get current user rides from API.");
+                System.out.println(t.getMessage());
+            }
+        });
+
     }
 
     public void onClickAcceptPassenger(View view) {
-
         mAPIService = ApiUtils.getAPIService();
-        // TODO: get user id
+        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        currentUserId = prefs.getLong("currentUserId", 0);
 
-        mAPIService = ApiUtils.getAPIService();
-        // TODO: get user id
-
-        // TODO: !!!!!!!!!!! MOCKEADO, PASAR VALORES DEL VIAJE SELECCIONADO EN LA ACTIVIDAD ANTERIOR Y GUARDAR EL ID DEL TAXISTA
-        TaxiIdLogin body = new TaxiIdLogin(new Long(1)); // el id del taxista
-        // path: id del viaje
-        mAPIService.asignRide(1, body).enqueue(new Callback<RideObject>() {
+        TaxiIdLogin body = new TaxiIdLogin(currentUserId); // el id del taxista
+        mAPIService.asignRide(extraRideId, body).enqueue(new Callback<RideObject>() {
             @Override
             public void onResponse(Call<RideObject> call, Response<RideObject> response) {
                 if (response.isSuccessful()) {
@@ -57,6 +93,8 @@ public class AcceptPassengerActivity extends AppCompatActivity {
                     RideObject ride = response.body();
 
                     Intent intent = new Intent(AcceptPassengerActivity.this, InsertCostActivity.class);
+
+                    intent.putExtra("aRideId", ride.id);
                     startActivity(intent);
                     //Toast.makeText(this, getString(R.string.activity_accept_passenger_accepted), Toast.LENGTH_SHORT).show();
                     finish();

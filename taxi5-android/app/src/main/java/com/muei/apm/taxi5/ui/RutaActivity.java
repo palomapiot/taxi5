@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -42,10 +43,17 @@ import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.EncodedPolyline;
 import com.muei.apm.taxi5.R;
+import com.muei.apm.taxi5.api.APIService;
+import com.muei.apm.taxi5.api.ApiUtils;
+import com.muei.apm.taxi5.api.RideObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RutaActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG_RUTA_ACTIVITY
@@ -61,6 +69,14 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
     Location currentLocation;
     private double currentLongitude;
     private double currentLatitude;
+
+    // api
+    private APIService mAPIService;
+    private Long currentUserId = null;
+    private Long lastRideId = null;
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+
+    private final  String TAG = RutaActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -388,12 +404,39 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .setAction(R.string.ir_pagar, new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
-                        intent.putExtra("ORIGEN", origen);
-                        intent.putExtra("DESTINO", destino);
 
-                        startActivity(intent);
-                        RutaActivity.this.finish();
+
+                        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                        currentUserId = prefs.getLong("currentUserId", 0);
+                        lastRideId = prefs.getLong("lastRideId", 0);
+
+                        mAPIService = ApiUtils.getAPIService();
+                        mAPIService.getRideById(lastRideId.longValue()).enqueue(new Callback<RideObject>() {
+                            @Override
+                            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                                if (response.isSuccessful()) {
+                                    Log.i(TAG, "get ride details submitted to API." + response.body().toString());
+
+                                    // TODO: setear coste del viaje
+
+                                    Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
+                                    intent.putExtra("ORIGEN", origen);
+                                    intent.putExtra("DESTINO", destino);
+                                    intent.putExtra("rideId", lastRideId);
+
+                                    startActivity(intent);
+                                    RutaActivity.this.finish();
+
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<RideObject> call, Throwable t) {
+                                Log.i(TAG, "Unable to get current user rides from API.");
+                                System.out.println(t.getMessage());
+                            }
+                        });
+
                     }
                 })
                 .show();

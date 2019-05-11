@@ -4,6 +4,8 @@ import java.util.Calendar;
 
 public class Travel {
 
+    public Long id;
+
     private String origin;
 
     private String destination;
@@ -13,6 +15,14 @@ public class Travel {
     private long date;
 
     public Travel(String origin, String destination, String user, long date) {
+        this.origin = origin;
+        this.destination = destination;
+        this.user = user;
+        this.date = date;
+    }
+
+    public Travel(Long id, String origin, String destination, String user, long date) {
+        this.id = id;
         this.origin = origin;
         this.destination = destination;
         this.user = user;

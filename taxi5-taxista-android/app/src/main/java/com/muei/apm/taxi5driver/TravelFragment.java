@@ -99,7 +99,7 @@ public class TravelFragment extends Fragment {
 
                             RideObject ride = response.body().get(i);
                             // Añadimos los viajes
-                            Travel cuerpo = new Travel(ride.origin, ride.destination, ride.userid.toString(), ride.ridedate);
+                            Travel cuerpo = new Travel(ride.id.longValue(), ride.origin, ride.destination, ride.userid.toString(), ride.ridedate);
                             travelList.add(cuerpo);
                         }
 
