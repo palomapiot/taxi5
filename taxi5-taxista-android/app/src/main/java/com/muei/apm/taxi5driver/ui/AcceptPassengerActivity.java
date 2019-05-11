@@ -100,53 +100,11 @@ public class AcceptPassengerActivity extends AppCompatActivity implements View.O
 
                     final RideObject ride = response.body();
 
+                    Intent intent = new Intent(AcceptPassengerActivity.this, InsertCostActivity.class);
 
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(AcceptPassengerActivity.this, R.style.AppCompatAlertDialogStyle);
-                    // Configura el titulo.
-                    alertDialogBuilder.setTitle(R.string.aceptacion);
-                    // Configura el mensaje.
-                    alertDialogBuilder
-                            .setMessage(R.string.aceptacion_p)
-                            .setCancelable(false)
-                            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                                    //Compruebe si dispositivo tiene un vibrador.
-                                    if (vibrator.hasVibrator()) {//Si tiene vibrador
-                                        long tiempo = 500; //en milisegundos
-                                        vibrator.vibrate(tiempo);
-                                    } else {//no tiene
-                                        Log.d("VIBRATOR", "Este dispositivo NO puede vibrar");
-                                    }
-
-                                    AcceptPassengerActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
-                                    // Load the sound
-                                    soundPool = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
-                                    soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-                                        @Override
-                                        public void onLoadComplete(SoundPool soundPool, int sampleId,
-                                                                   int status) {
-                                            loaded = true;
-                                        }
-                                    });
-
-                                    RingtoneManager.getRingtone(AcceptPassengerActivity.this, RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)).play();
-
-                                    Intent intent = new Intent(AcceptPassengerActivity.this, InsertCostActivity.class);
-
-                                    intent.putExtra("aRideId", ride.id);
-                                    startActivity(intent);
-                                    AcceptPassengerActivity.this.finish();
-
-                                }
-                            })
-                            .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            }).create().show();
-                    //Toast.makeText(this, getString(R.string.activity_accept_passenger_accepted), Toast.LENGTH_SHORT).show();
-//                    finish();
+                    intent.putExtra("aRideId", ride.id);
+                    startActivity(intent);
+                    AcceptPassengerActivity.this.finish();
 
                 }
             }

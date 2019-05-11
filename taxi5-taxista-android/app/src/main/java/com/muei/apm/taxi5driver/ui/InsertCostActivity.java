@@ -104,7 +104,6 @@ public class InsertCostActivity extends AppCompatActivity {
         // Configura el titulo.
         alertDialogBuilder.setTitle(R.string.fin);
         alertDialogBuilder
-                .setMessage(R.string.aceptacion_p)
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
