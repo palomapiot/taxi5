@@ -6,6 +6,7 @@
         android:id="@+id/action_log_out"
         android:drawable="@android:drawable/ic_menu_delete"
         app:showAsAction="ifRoom"
+        app:titleTextColor="@android:color/white"
         android:title="Logout">
     </item>
 </menu>
