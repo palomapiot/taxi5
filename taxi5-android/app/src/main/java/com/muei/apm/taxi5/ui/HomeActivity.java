@@ -3,6 +3,7 @@ package com.muei.apm.taxi5.ui;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -47,6 +48,9 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected Context context;
 
     private FirebaseAuth mAuth;
+
+    public static final String MY_PREFS_NAME = "MyPrefsFile";
+    private SharedPreferences.Editor mEditor;
 
 
     @Override
@@ -224,6 +228,11 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.action_log_out:
                 mAuth.signOut();
                 Intent intentLogout = new Intent(HomeActivity.this, MainActivity.class);
+                final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                mEditor = prefs.edit();
+                mEditor.clear();
+                mEditor = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE).edit();
+                mEditor.clear();
                 startActivity(intentLogout);
                 return true;
 
