@@ -1,21 +1,18 @@
 package com.muei.apm.taxi5driver.ui;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
 import android.media.SoundPool;
+import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.muei.apm.taxi5driver.R;
 
@@ -45,7 +42,14 @@ public class AcceptPassengerActivity extends AppCompatActivity implements View.O
                 .setCancelable(false)
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-
+                        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        //Compruebe si dispositivo tiene un vibrador.
+                        if (vibrator.hasVibrator()) {//Si tiene vibrador
+                            long tiempo = 500; //en milisegundos
+                            vibrator.vibrate(tiempo);
+                        } else {//no tiene
+                            Log.d("VIBRATOR", "Este dispositivo NO puede vibrar");
+                        }
 
                         AcceptPassengerActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
                         // Load the sound
