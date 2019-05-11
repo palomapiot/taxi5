@@ -22,4 +22,9 @@ public class TravelsActiveActivity extends AppCompatActivity implements TravelFr
         Intent intent = new Intent(TravelsActiveActivity.this, AcceptPassengerActivity.class);
         startActivity(intent);
     }
+
+
+    public void onBackPressed() {
+
+    }
 }

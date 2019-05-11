@@ -42,7 +42,7 @@
         <activity android:name=".ui.AcceptPassengerActivity"
             android:label="@string/activity_accept_passenger_label"
             android:screenOrientation="portrait"
-            android:parentActivityName=".ui.MainActivity"/> <!-- MODIFICAR ESTO PRUEBAS MAIN -->
+            android:parentActivityName=".ui.TravelsActiveActivity"/> <!-- MODIFICAR ESTO PRUEBAS MAIN -->
 
     </application>
 
