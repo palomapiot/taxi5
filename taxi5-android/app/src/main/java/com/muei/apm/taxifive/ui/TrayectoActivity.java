@@ -163,12 +163,12 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         //Define list to get all latlng for the route
         List<LatLng> path = new ArrayList();
 
-
         //Execute Directions API request
         GeoApiContext context = new GeoApiContext.Builder()
                 .apiKey("AIzaSyAy6azXMUfKwGJf-vsVHlFF54q6GQNnJ6M")
                 .build();
         DirectionsApiRequest req = DirectionsApi.getDirections(context, origenStr, destinoStr);
+        req.alternatives(true);
 
         try {
             DirectionsResult res = req.await();
@@ -209,6 +209,58 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                         }
                     }
                 }
+                // si hay más de una ruta
+                if (1 < res.routes.length) {
+                    // rutas alternativas
+                    // recorremos el array de routes desde la posición 1 (es decir, la segunda)
+                    for (int m = 1; m < res.routes.length; m++) {
+                        //Define list to get all latlng for the alternative routes
+                        List<LatLng> altPath = new ArrayList();
+
+                        DirectionsRoute altRoute = res.routes[m];
+
+                        if (altRoute.legs != null) {
+                            for (int n = 0; n < altRoute.legs.length; n++) {
+                                DirectionsLeg altLeg = altRoute.legs[n];
+                                if (altLeg.steps != null) {
+                                    for (int h = 0; h < altLeg.steps.length; h++) {
+                                        DirectionsStep altStep = altLeg.steps[h];
+                                        if (altStep.steps != null && altStep.steps.length > 0) {
+                                            for (int l = 0; l < altStep.steps.length; l++) {
+                                                DirectionsStep altStep1 = altStep.steps[l];
+                                                EncodedPolyline altPoints1 = altStep1.polyline;
+                                                if (altPoints1 != null) {
+                                                    //Decode polyline and add points to list of route coordinates
+                                                    List<com.google.maps.model.LatLng> altCoords1 = altPoints1.decodePath();
+                                                    for (com.google.maps.model.LatLng altCord1 : altCoords1) {
+                                                        altPath.add(new LatLng(altCord1.lat, altCord1.lng));
+                                                    }
+                                                }
+                                            }
+                                        } else {
+                                            EncodedPolyline altPoints = altStep.polyline;
+                                            if (altPoints != null) {
+                                                //Decode polyline and add points to list of route coordinates
+                                                List<com.google.maps.model.LatLng> altCoords = altPoints.decodePath();
+                                                for (com.google.maps.model.LatLng altCoord : altCoords) {
+                                                    altPath.add(new LatLng(altCoord.lat, altCoord.lng));
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        //Draw the polyline for alt routes
+                        if (altPath.size() > 0) {
+                            PolylineOptions opts2 = new PolylineOptions().addAll(altPath).color(Color.GRAY).width(20);
+                            mMap.addPolyline(opts2);
+                        }
+                    }
+                }
+
+
+
             } else {
                 AlertDialog.Builder ad = new AlertDialog.Builder(TrayectoActivity.this, R.style.AppCompatAlertDialogStyle);
                 ad.setTitle("Imposible calcular la ruta");
@@ -226,9 +278,11 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
         }
 
+
         //Draw the polyline
         if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20);
+            PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20)
+                    .zIndex(2000);
             mMap.addPolyline(opts);
         }
 
@@ -238,6 +292,18 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(barcelona, zoomLevel));
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     public void onConfirmButtonClick(View view) {
 
