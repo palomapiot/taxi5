@@ -61,10 +61,8 @@ public class TravelsActiveActivity extends AppCompatActivity implements TravelFr
     }
 
 
-    public void onReloadClick(View view) {
 
-
-    }
+    
 
 
     public void onBackPressed() {
