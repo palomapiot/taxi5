@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.muei.apm.taxi5driver.TravelFragment.OnListFragmentInteractionListener;
 import com.muei.apm.taxi5driver.model.Travel;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,9 +42,13 @@ public class MyTravelRecyclerViewAdapter extends RecyclerView.Adapter<MyTravelRe
         holder.tvUser.setText(holder.mItem.getUser());
         //SimpleDateFormat format1 = new SimpleDateFormat("dd-MM-yyyy HH:mm");
         //holder.tvDate.setText(format1.format(holder.mItem.getDate().getTime()));
-        holder.tvDate.setText(Long.toString(holder.mItem.getDate()));
+
+        holder.tvDate.setText(DateFormat.getDateTimeInstance().format(new Date(holder.mItem.getDate())));
         holder.tvOrigin.setText(holder.mItem.getOrigin());
         holder.tvDestination.setText(holder.mItem.getDestination());
+
+
+
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
