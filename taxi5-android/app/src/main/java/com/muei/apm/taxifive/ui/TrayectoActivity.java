@@ -145,6 +145,8 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
 
             Marker destino = mMap.addMarker(new MarkerOptions().position(barcelona).title(direccionesDestino.get(0).getAddressLine(0)));
 
+
+
             //destino.showInfoWindow();
 
 

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -32,6 +34,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.muei.apm.taxifive.R;
 
 import java.util.List;
+import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -151,11 +154,19 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        final Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+        Address add = null;
+
         LatLng sydney = new LatLng(latitude, longitude);
         if (marker != null) {
             marker.remove();
         }
-        marker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in current position").draggable(true).visible(true));
+        try {
+            add = geocoder.getFromLocation(sydney.latitude, sydney.longitude,1).get(0);
+        } catch (Exception e) {
+
+        }
+        marker = mMap.addMarker(new MarkerOptions().position(sydney).title(add.getAddressLine(0)).draggable(true).visible(true));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         float zoomLevel = 16.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
@@ -164,6 +175,8 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     public void onDirectionsClick(View view) {
         Log.d(TAG_HOME_ACTIVITY, "Boton direceciones pulsado en Maps");
         Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+        intent.putExtra("origenLat", latitude);
+        intent.putExtra("origenLong", longitude);
         startActivity(intent);
     }
 
