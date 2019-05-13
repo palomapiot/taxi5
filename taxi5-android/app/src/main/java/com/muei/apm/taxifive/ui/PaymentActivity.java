@@ -34,12 +34,11 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
     private String origen;
     private String destino;
     private float coste;
-    private float finalPrice;
+    private float finalPrice = 0.0f;
     boolean loaded = false;
     private SoundPool soundPool;
     private Vibrator vibrator;
     private int soundID;
-
 
 
     private static final String PAGO_ACTIVITY_TAG = PaymentActivity.class.getSimpleName();
@@ -71,30 +70,36 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         lastRideId = prefs.getLong("lastRideId", 0);
 
-        mAPIService.getRideById(lastRideId).enqueue(new Callback<RideObject>() {
-            @Override
-            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "ride post submitted to API." + response.body().toString());
-                    coste = response.body().cost;
 
-                    TextView precio_label = findViewById(R.id.pago_precio);
-                    TextView origen_label = findViewById(R.id.pago_origen);
-                    TextView destino_label = findViewById(R.id.pago_destino);
+        do {
+            mAPIService.getRideById(lastRideId).enqueue(new Callback<RideObject>() {
 
-                    precio_label.setText(String.valueOf(coste));
-                    origen_label.setText(origen);
-                    destino_label.setText(destino);
+                @Override
+                public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "ride post submitted to API." + response.body().toString());
+                        coste = response.body().cost;
 
-                    finalPrice = Float.parseFloat(precio_label.getText().toString());
+                        TextView precio_label = findViewById(R.id.pago_precio);
+                        TextView origen_label = findViewById(R.id.pago_origen);
+                        TextView destino_label = findViewById(R.id.pago_destino);
+
+                        precio_label.setText(String.valueOf(coste));
+                        origen_label.setText(origen);
+                        destino_label.setText(destino);
+
+                        finalPrice = Float.parseFloat(precio_label.getText().toString());
+                        Log.d("Precio", String.valueOf(finalPrice));
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<RideObject> call, Throwable t) {
-                Log.i(TAG, "Unable to post ride to API.");
-            }
-        });
+                @Override
+                public void onFailure(Call<RideObject> call, Throwable t) {
+                    Log.i(TAG, "Unable to post ride to API.");
+                }
+
+            });
+        } while(Float.compare(finalPrice, 0.0f) == 0);
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
@@ -120,7 +125,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         }
 
 
-
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(PaymentActivity.this, R.style.AppCompatAlertDialogStyle);
         // Configura el titulo.
         alertDialogBuilder.setTitle(R.string.payment);
@@ -131,7 +135,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
 
-                        Button botonPagar= findViewById(R.id.btnMakePayment);
+                        Button botonPagar = findViewById(R.id.btnMakePayment);
                         botonPagar.setVisibility(View.INVISIBLE);
 
                         PaymentActivity.this.setVolumeControlStream(AudioManager.STREAM_MUSIC);
@@ -180,7 +184,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
 
                         //Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
                         //startActivity(intent);
-                       // PaymentActivity.this.finish();
+                        // PaymentActivity.this.finish();
 
                         Snackbar.make(findViewById(R.id.btnMakePayment), R.string.activity_pago_paid, Snackbar.LENGTH_INDEFINITE).setActionTextColor(getResources().getColor(R.color.colorPrimary))
                                 .setAction(R.string.undo_string, new View.OnClickListener() {
@@ -193,8 +197,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                                     }
                                 })
                                 .show();
-
-
 
 
                         //Intent intent = new Intent(PaymentActivity.this, HomeActivity.class);
@@ -227,10 +229,6 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
                         dialog.cancel();
                     }
                 }).create().show();
-
-
-
-
 
 
     }
