@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -49,6 +50,14 @@ public class InsertCostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert_cost);
+
+
+
+        // Find the toolbar view inside the activity layout
+        Toolbar toolbar = findViewById(R.id.my_toolbar);
+        // Sets the Toolbar to act as the ActionBar for this Activity window.
+        // Make sure the toolbar exists in the activity and is not null
+        setSupportActionBar(toolbar);
 
         Bundle extras = getIntent().getExtras();
         if (extras == null){
