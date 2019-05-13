@@ -34,7 +34,7 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
     private String origen;
     private String destino;
     private float coste;
-    private float finalPrice;
+    private float finalPrice = 0.0f;
     boolean loaded = false;
     private SoundPool soundPool;
     private Vibrator vibrator;
@@ -71,30 +71,36 @@ public class PaymentActivity extends AppCompatActivity implements View.OnTouchLi
         final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
         lastRideId = prefs.getLong("lastRideId", 0);
 
-        mAPIService.getRideById(lastRideId).enqueue(new Callback<RideObject>() {
-            @Override
-            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "ride post submitted to API." + response.body().toString());
-                    coste = response.body().cost;
+        do {
+            mAPIService.getRideById(lastRideId).enqueue(new Callback<RideObject>() {
 
-                    TextView precio_label = findViewById(R.id.pago_precio);
-                    TextView origen_label = findViewById(R.id.pago_origen);
-                    TextView destino_label = findViewById(R.id.pago_destino);
+                @Override
+                public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                    if (response.isSuccessful()) {
+                        Log.i(TAG, "ride post submitted to API." + response.body().toString());
+                        coste = response.body().cost;
 
-                    precio_label.setText(String.valueOf(coste));
-                    origen_label.setText(origen);
-                    destino_label.setText(destino);
+                        TextView precio_label = findViewById(R.id.pago_precio);
+                        TextView origen_label = findViewById(R.id.pago_origen);
+                        TextView destino_label = findViewById(R.id.pago_destino);
 
-                    finalPrice = Float.parseFloat(precio_label.getText().toString());
+                        precio_label.setText(String.valueOf(coste));
+                        origen_label.setText(origen);
+                        destino_label.setText(destino);
+
+                        finalPrice = Float.parseFloat(precio_label.getText().toString());
+                        Log.d("Precio", String.valueOf(finalPrice));
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<RideObject> call, Throwable t) {
-                Log.i(TAG, "Unable to post ride to API.");
-            }
-        });
+                @Override
+                public void onFailure(Call<RideObject> call, Throwable t) {
+                    Log.i(TAG, "Unable to post ride to API.");
+                }
+
+            });
+        } while(Float.compare(finalPrice, 0.0f) == 0);
+
 
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
