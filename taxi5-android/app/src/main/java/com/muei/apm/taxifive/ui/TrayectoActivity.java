@@ -22,7 +22,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
@@ -141,7 +143,11 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             String coordl4 = l4.toString();
             destinoStr = coordl3+","+coordl4;
 
-            mMap.addMarker(new MarkerOptions().position(barcelona).title("Marker in Destination"));
+            Marker destino = mMap.addMarker(new MarkerOptions().position(barcelona).title(direccionesDestino.get(0).getAddressLine(0)));
+
+            //destino.showInfoWindow();
+
+
         } catch (Exception ex) {
             Log.e(TAG_TRAYECTO_ACTIVITY, ex.getLocalizedMessage());
         }
@@ -254,7 +260,7 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
                         //Draw the polyline for alt routes
                         if (altPath.size() > 0) {
                             PolylineOptions opts2 = new PolylineOptions().addAll(altPath).color(Color.GRAY).width(20);
-                            mMap.addPolyline(opts2);
+                            Polyline mainLine2 = mMap.addPolyline(opts2);
                         }
                     }
                 }
@@ -283,7 +289,18 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         if (path.size() > 0) {
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20)
                     .zIndex(2000);
-            mMap.addPolyline(opts);
+            Polyline mainLine =  mMap.addPolyline(opts);
+
+            /*LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for(int i = 0; i < mainLine.getPoints().size(); i++){
+                builder.include(mainLine.getPoints().get(i));
+            }
+
+            LatLngBounds bounds = builder.build();
+
+            LatLng centro =  bounds.getCenter();
+            Marker mainRoute = mMap.addMarker(new MarkerOptions().position(centro).title("Ruta principal").icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
+            mainRoute.showInfoWindow();*/
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);

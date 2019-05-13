@@ -36,6 +36,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/taxi5"
         android:textSize="45sp"
+        android:fontFamily="@font/lobster"
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="@+id/ivLanding"
         app:layout_constraintStart_toStartOf="@+id/ivLanding"
