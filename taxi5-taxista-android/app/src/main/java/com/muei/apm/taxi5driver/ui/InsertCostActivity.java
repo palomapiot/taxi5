@@ -101,6 +101,12 @@ public class InsertCostActivity extends AppCompatActivity {
         pago.setText(R.string.volver);
     }
 
+    @Override
+    public void onBackPressed() {
+
+
+    }
+    
     public void onClickFinishTravel(View view) {
         btnFinishTravel = findViewById(R.id.btnLogin);
 
