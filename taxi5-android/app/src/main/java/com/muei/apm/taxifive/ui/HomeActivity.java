@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -27,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -34,7 +33,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.muei.apm.taxifive.R;
 
 import java.util.List;
-import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -189,6 +187,14 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
             marker.remove();
         }
         marker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in current position").draggable(true).visible(true));
+
+        // añadimos taxis aleatorios según la ubicación actual del usuario
+        mMap.addMarker(new MarkerOptions().position(new LatLng(sydney.latitude+0.0025, sydney.longitude-0.0025)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_taxi)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(sydney.latitude+0.0015, sydney.longitude+0.0015)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_taxi)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(sydney.latitude-0.0015, sydney.longitude-0.0015)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_taxi)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(sydney.latitude+0.0015, sydney.longitude-0.0025)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_taxi)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(sydney.latitude-0.0035, sydney.longitude-0.0015)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_taxi)));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(sydney.latitude-0.0035, sydney.longitude+0.0015)).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_car_taxi)));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
         float zoomLevel = 16.0f; //This goes up to 21
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));

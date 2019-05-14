@@ -22,6 +22,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -292,6 +293,15 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20)
                     .zIndex(2000).geodesic(true);
             Polyline mainLine =  mMap.addPolyline(opts);
+
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            for(int i = 0; i < mainLine.getPoints().size(); i++){
+                builder.include(mainLine.getPoints().get(i));
+            }
+
+            LatLngBounds bounds = builder.build();
+
+            //mMap.addMarker(new MarkerOptions().position(bounds.getCenter()).icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_infofilter)));
 
             //Marker mainRoute = mMap.addMarker(new MarkerOptions().position(centro).title("Ruta principal").icon(BitmapDescriptorFactory.defaultMarker()));
             //mainRoute.showInfoWindow();
