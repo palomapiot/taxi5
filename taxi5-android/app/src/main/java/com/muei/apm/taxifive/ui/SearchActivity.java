@@ -83,7 +83,8 @@ public class SearchActivity extends AppCompatActivity {
             }
 
 
-            List<Address> addresses = geocoder.getFromLocation(origenLatitud, origenLongitud,1);
+            //List<Address> addresses = geocoder.getFromLocation(origenLatitud, origenLongitud,1);
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude,1);
             String address = addresses.get(0).getAddressLine(0);
             String city = addresses.get(0).getAddressLine(1) != null ? addresses.get(0).getAddressLine(1) : "";
             String country = addresses.get(0).getAddressLine(2) != null ? addresses.get(0).getAddressLine(2) : "";
