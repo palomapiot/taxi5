@@ -11,6 +11,8 @@ import android.widget.Button;
 
 import com.muei.apm.taxi5driver.R;
 
+import static com.muei.apm.taxi5driver.ui.LoginActivity.MY_PREFS_NAME;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button btnLogin;
@@ -18,7 +20,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        SharedPreferences editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        if(editor.getLong("currentUserId", 0)!=0){
+            startActivity(new Intent(MainActivity.this, TravelsActiveActivity.class));
+        }
         final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
         if (!sharedPreferences.getBoolean("EULA", false)) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(MainActivity.this,  R.style.AppCompatAlertDialogStyle);

@@ -85,8 +85,10 @@ public class TravelsActiveActivity extends AppCompatActivity implements TravelFr
                 final SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
                 mEditor = prefs.edit();
                 mEditor.clear();
+                mEditor.apply();
                 mEditor = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE).edit();
                 mEditor.clear();
+                mEditor.apply();
                 startActivity(intentLogout);
                 return true;
 

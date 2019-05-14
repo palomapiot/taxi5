@@ -14,6 +14,8 @@ import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 import com.muei.apm.taxifive.R;
 
+import static com.muei.apm.taxifive.ui.LoginActivity.MY_PREFS_NAME;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -33,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         //final SharedPreferences sharedPreferences = getActi().getPreferences(getActivity().getApplicationContext().MODE_PRIVATE);
+        SharedPreferences editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        if (editor.getLong("currentUserId", 0) != 0) {
+            startActivity(new Intent(MainActivity.this, HomeActivity.class));
+        }
 
 
         final SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
