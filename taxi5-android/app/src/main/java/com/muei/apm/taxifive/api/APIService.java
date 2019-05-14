@@ -17,6 +17,9 @@ public interface APIService {
     @POST("/login")
     Call<LoginObject> loginUser(@Body LoginObject user);
 
+    @GET("/googlelogin")
+    Call<EmailObject>googleLoginUser (EmailObject user);
+
     @GET("/user/{id}")
     Call<ApiObject> getUserDetails(@Path("id") long id);
 

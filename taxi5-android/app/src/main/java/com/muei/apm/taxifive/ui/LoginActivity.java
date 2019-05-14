@@ -49,6 +49,7 @@ import com.muei.apm.taxifive.R;
 import com.muei.apm.taxifive.api.APIService;
 import com.muei.apm.taxifive.api.ApiObject;
 import com.muei.apm.taxifive.api.ApiUtils;
+import com.muei.apm.taxifive.api.EmailObject;
 import com.muei.apm.taxifive.api.LoginObject;
 
 import java.util.ArrayList;
@@ -227,9 +228,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                 public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
                                     if (response.isSuccessful()) {
                                         Log.i(TAG, "post submitted to API." + response.body().toString());
-                                        mAPIService.loginUser(new LoginObject(email, token)).enqueue(new Callback<LoginObject>() {
+                                        mAPIService.googleLoginUser(new EmailObject(email)).enqueue(new Callback<EmailObject>() {
                                             @Override
-                                            public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
+                                            public void onResponse(Call<EmailObject> call, Response<EmailObject> response) {
                                                 if (response.isSuccessful()) {
                                                     Log.i(TAG, "login submitted to API." + response.body().toString());
                                                     SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
@@ -242,7 +243,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                             }
 
                                             @Override
-                                            public void onFailure(Call<LoginObject> call, Throwable t) {
+                                            public void onFailure(Call<EmailObject> call, Throwable t) {
                                                 Log.i(TAG, "Unable to submit post to API.");
                                             }
                                         });
