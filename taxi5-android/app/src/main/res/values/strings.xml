@@ -80,13 +80,13 @@
     <!-- PAYMENT ACTIVITY -->
     <string name="activity_pago_label">Pago</string>
     <string name="activity_pago_pago_a_realizar">Realizar pago</string>
-    <string name="activity_pago_pay">Pagar</string>
+    <string name="activity_pago_pay">Pagar y Finalizar</string>
     <string name="activity_pago_paid">Pago realizado, ¡Gracias por viajar con Taxi5! : )</string>
     <string name="activity_pago_price">Precio</string>
     <string name="activity_pago_origen">Origen: </string>
     <string name="activity_pago_destination">Destino: </string>
     <string name="payment">Confirmación del pago</string>
-    <string name="payment_dialog">¿Desea realizar el pago?</string>
+    <string name="payment_dialog">¿Desea finalizar el viaje?</string>
     <string name="agradecimiento">¡Gracias por viajar con Taxi5! : )</string>
 
     <string name="yes">Si</string>
@@ -101,7 +101,7 @@
     <string name="viaje_cancelado">Viaje cancelado</string>
     <string name="cancelar_viaje_menu">Cancelar viaje</string>
     <string name="calculando_ruta">Calculando ruta</string>
-    <string name="ir_pagar">Aceptar pago</string>
+    <string name="ir_pagar">Detalles pago</string>
     <string name="llegada_dest">LLegada a destino confirmada</string>
 
     <!-- RUTA ACTIVITY -->
