@@ -150,7 +150,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
     }
 
-    @Override
+    /*@Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
@@ -177,6 +177,26 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
         intent.putExtra("origenLat", latitude);
         intent.putExtra("origenLong", longitude);
+        startActivity(intent);
+    }*/
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng sydney = new LatLng(latitude, longitude);
+        if (marker != null) {
+            marker.remove();
+        }
+        marker = mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in current position").draggable(true).visible(true));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        float zoomLevel = 16.0f; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
+    }
+
+    public void onDirectionsClick(View view) {
+        Log.d(TAG_HOME_ACTIVITY, "Boton direceciones pulsado en Maps");
+        Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
         startActivity(intent);
     }
 
