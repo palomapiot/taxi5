@@ -405,37 +405,49 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onClick(View view) {
 
+                        AlertDialog.Builder ad = new AlertDialog.Builder(RutaActivity.this, R.style.AppCompatAlertDialogStyle);
+                        ad.setTitle("Esperando a que el taxista indique el coste...");
+                        ad.setMessage("Espere hasta que le indique el taxista, gracias.");
+                        ad.setCancelable(false);
+                        ad.setPositiveButton("Pagar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface ad, int id) {
+                                SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+                                currentUserId = prefs.getLong("currentUserId", 0);
+                                lastRideId = prefs.getLong("lastRideId", 0);
 
-                        SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
-                        currentUserId = prefs.getLong("currentUserId", 0);
-                        lastRideId = prefs.getLong("lastRideId", 0);
+                                mAPIService = ApiUtils.getAPIService();
+                                mAPIService.getRideById(lastRideId.longValue()).enqueue(new Callback<RideObject>() {
+                                    @Override
+                                    public void onResponse(Call<RideObject> call, Response<RideObject> response) {
+                                        if (response.isSuccessful()) {
+                                            Log.i(TAG, "get ride details submitted to API." + response.body().toString());
 
-                        mAPIService = ApiUtils.getAPIService();
-                        mAPIService.getRideById(lastRideId.longValue()).enqueue(new Callback<RideObject>() {
-                            @Override
-                            public void onResponse(Call<RideObject> call, Response<RideObject> response) {
-                                if (response.isSuccessful()) {
-                                    Log.i(TAG, "get ride details submitted to API." + response.body().toString());
+                                            // TODO: setear coste del viaje
 
-                                    // TODO: setear coste del viaje
+                                            Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
+                                            intent.putExtra("ORIGEN", origen);
+                                            intent.putExtra("DESTINO", destino);
+                                            intent.putExtra("rideId", lastRideId);
 
-                                    Intent intent = new Intent(RutaActivity.this, PaymentActivity.class);
-                                    intent.putExtra("ORIGEN", origen);
-                                    intent.putExtra("DESTINO", destino);
-                                    intent.putExtra("rideId", lastRideId);
+                                            startActivity(intent);
+                                            RutaActivity.this.finish();
 
-                                    startActivity(intent);
-                                    RutaActivity.this.finish();
+                                        }
+                                    }
 
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<RideObject> call, Throwable t) {
-                                Log.i(TAG, "Unable to get current user rides from API.");
-                                System.out.println(t.getMessage());
+                                    @Override
+                                    public void onFailure(Call<RideObject> call, Throwable t) {
+                                        Log.i(TAG, "Unable to get current user rides from API.");
+                                        System.out.println(t.getMessage());
+                                    }
+                                });
                             }
                         });
+                        ad.show();
+
+
+
+
 
                     }
                 })

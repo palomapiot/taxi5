@@ -290,19 +290,11 @@ public class TrayectoActivity extends AppCompatActivity implements OnMapReadyCal
         //Draw the polyline
         if (path.size() > 0) {
             PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(20)
-                    .zIndex(2000);
+                    .zIndex(2000).geodesic(true);
             Polyline mainLine =  mMap.addPolyline(opts);
 
-            /*LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            for(int i = 0; i < mainLine.getPoints().size(); i++){
-                builder.include(mainLine.getPoints().get(i));
-            }
-
-            LatLngBounds bounds = builder.build();
-
-            LatLng centro =  bounds.getCenter();
-            Marker mainRoute = mMap.addMarker(new MarkerOptions().position(centro).title("Ruta principal").icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker)));
-            mainRoute.showInfoWindow();*/
+            //Marker mainRoute = mMap.addMarker(new MarkerOptions().position(centro).title("Ruta principal").icon(BitmapDescriptorFactory.defaultMarker()));
+            //mainRoute.showInfoWindow();
         }
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
