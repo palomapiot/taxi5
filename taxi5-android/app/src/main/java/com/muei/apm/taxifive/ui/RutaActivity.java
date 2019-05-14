@@ -409,7 +409,7 @@ public class RutaActivity extends AppCompatActivity implements OnMapReadyCallbac
                         ad.setTitle("Esperando a que el taxista indique el coste...");
                         ad.setMessage("Espere hasta que le indique el taxista, gracias.");
                         ad.setCancelable(false);
-                        ad.setPositiveButton("Pagar", new DialogInterface.OnClickListener() {
+                        ad.setPositiveButton(R.string.ir_pagar, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface ad, int id) {
                                 SharedPreferences prefs = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
                                 currentUserId = prefs.getLong("currentUserId", 0);

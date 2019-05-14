@@ -101,7 +101,7 @@
     <string name="viaje_cancelado">Viaje cancelado</string>
     <string name="cancelar_viaje_menu">Cancelar viaje</string>
     <string name="calculando_ruta">Calculando ruta</string>
-    <string name="ir_pagar">Realizar Pago</string>
+    <string name="ir_pagar">Aceptar pago</string>
     <string name="llegada_dest">LLegada a destino confirmada</string>
 
     <!-- RUTA ACTIVITY -->
