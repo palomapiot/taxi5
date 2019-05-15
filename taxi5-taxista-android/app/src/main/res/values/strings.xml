@@ -108,5 +108,6 @@
     <string name="aceptacion_p">¿Desea recoger a este pasajero?</string>
     <string name="aceptacion_si">Sí </string>
     <string name="aceptacion_no">No </string>
+    <string name="logout">Logout</string>
 
 </resources>

@@ -4,8 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_log_out"
-        android:drawable="@android:drawable/ic_menu_delete"
+        android:title="@string/logout"
+        android:visible="true"
         app:showAsAction="ifRoom"
-        app:titleTextColor="@android:color/white"
-        android:title="Logout"></item>
+
+        app:titleTextColor="@android:color/white"></item>
 </menu>

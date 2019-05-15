@@ -2,12 +2,15 @@ package com.muei.apm.taxi5driver.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -119,6 +122,11 @@ public class TravelsActiveActivity extends AppCompatActivity implements TravelFr
     // Método para mostrar y ocultar el menú
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_home, menu);
+        int positionOfMenuItem = 0;
+        MenuItem item = menu.getItem(positionOfMenuItem);
+        SpannableString s = new SpannableString(getString(R.string.logout));
+        s.setSpan(new ForegroundColorSpan(Color.WHITE), 0, s.length(), 0);
+        item.setTitle(s);
         return true;
     }
 
