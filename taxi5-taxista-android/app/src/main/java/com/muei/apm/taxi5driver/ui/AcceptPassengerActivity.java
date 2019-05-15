@@ -62,7 +62,7 @@ public class AcceptPassengerActivity extends AppCompatActivity implements View.O
             extraRideId = extras.getLong("rideId");
         }
 
-        tvUser = findViewById(R.id.textView2);
+        tvUser = findViewById(R.id.tvUser);
         tvOrigin = findViewById(R.id.textView3);
         tvDestination = findViewById(R.id.textView4);
 

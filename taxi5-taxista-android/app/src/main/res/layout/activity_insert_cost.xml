@@ -49,10 +49,13 @@
         android:ems="10"
         android:hint="@string/activity_insert_cost_eur"
         android:inputType="numberDecimal"
+        android:textColorHighlight="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        android:autofillHints="" />
 
 
     <Button

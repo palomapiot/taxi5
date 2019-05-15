@@ -8,35 +8,35 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="8dp">
-    <TextView
-        android:id="@+id/tvUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="8dp"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="21dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.7"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvOrigin"
             android:layout_width="110dp"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -53,15 +53,15 @@
             app:layout_constraintStart_toEndOf="@+id/tvLabelDestination"
             app:layout_constraintTop_toBottomOf="@+id/tvDate" />
 
-    <TextView
-        android:id="@+id/tvLabelOrigin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/origin"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/tvUser"
-        app:layout_constraintTop_toBottomOf="@+id/tvUser" />
+        <TextView
+            android:id="@+id/tvLabelOrigin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/origin"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/tvUser"
+            app:layout_constraintTop_toBottomOf="@+id/tvUser" />
 
         <TextView
             android:id="@+id/tvLabelDestination"
