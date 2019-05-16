@@ -217,16 +217,22 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             String name = (acct.getDisplayName() != null) ? acct.getDisplayName() : "";
                             final String email = acct.getEmail();
                             final String token = acct.getIdToken();
+                            final String phone = String.valueOf(acct.hashCode());
                             sharedPreferences.edit().putString("NAME", name).commit();
                             sharedPreferences.edit().putString("EMAIL", email).commit();
 
                             mAPIService = ApiUtils.getAPIService();
-                            ApiObject body = new ApiObject(name, "", email, null, token);
+                            ApiObject body = new ApiObject("name", "", email, phone, token);
                             mAPIService.createUser(body).enqueue(new Callback<ApiObject>() {
                                 @Override
                                 public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
                                     if (response.isSuccessful()) {
                                         Log.i(TAG, "post submitted to API." + response.body().toString());
+                                        SharedPreferences.Editor editor = getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE).edit();
+                                        editor.putLong("currentUserId", response.body().id);
+                                        editor.apply();
+                                    } else {
+                                        Log.i(TAG, "Intenta loguear");
                                         mAPIService.loginUser(new LoginObject(email, token)).enqueue(new Callback<LoginObject>() {
                                             @Override
                                             public void onResponse(Call<LoginObject> call, Response<LoginObject> response) {
@@ -237,7 +243,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                                                     editor.apply();
                                                 } else {
                                                     Log.i(TAG, "FAILED TO LOG." + response.body().toString());
-
                                                 }
                                             }
 

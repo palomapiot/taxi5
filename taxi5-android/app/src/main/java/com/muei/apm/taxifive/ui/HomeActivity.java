@@ -31,15 +31,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.muei.apm.taxifive.R;
-import com.muei.apm.taxifive.api.APIService;
-import com.muei.apm.taxifive.api.ApiObject;
-import com.muei.apm.taxifive.api.ApiUtils;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -59,14 +52,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private SharedPreferences.Editor mEditor;
-
-    private String name;
-    private String email;
-    private String token;
-    private Long id;
-    private APIService mAPIService;
-    private static final String TAG = "SignInActivity";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,26 +94,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         };
-        final SharedPreferences sharedPreferences = getSharedPreferences("LOGINGOOGLE", MODE_PRIVATE);
-        name = sharedPreferences.getString("NAME", "");
-        email = sharedPreferences.getString("EMAIL", "");
-
-        mAPIService = ApiUtils.getAPIService();
-        ApiObject body = new ApiObject("fabian", "lema", "f@udc.es", "78490123", "1234");
-        mAPIService.createUser(body).enqueue(new Callback<ApiObject>() {
-            @Override
-            public void onResponse(Call<ApiObject> call, Response<ApiObject> response) {
-                if (response.isSuccessful()) {
-                    Log.i(TAG, "post submitted to API." + response.body().toString());
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApiObject> call, Throwable t) {
-                Log.i(TAG, "Unable to submit post to API.");
-            }
-        });
 
     }
 
