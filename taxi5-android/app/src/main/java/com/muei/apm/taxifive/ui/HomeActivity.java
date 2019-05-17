@@ -53,7 +53,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     public static final String MY_PREFS_NAME = "MyPrefsFile";
     private SharedPreferences.Editor mEditor;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -95,7 +94,6 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
                 }
             }
         };
-
 
     }
 
