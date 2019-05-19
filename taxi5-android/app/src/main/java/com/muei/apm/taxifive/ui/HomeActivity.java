@@ -181,7 +181,7 @@ public class HomeActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        mMap.clear();
         LatLng sydney = new LatLng(latitude, longitude);
         if (marker != null) {
             marker.remove();
